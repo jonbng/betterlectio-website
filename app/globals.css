@@ -145,39 +145,37 @@
 }
 
 /* =========================================================================
-   BetterLectio marketing site — "Student OS" design system
-   Aligned to the browser extension: Geist type, indigo-265 primary, neutrals
-   subtly tinted with the same hue, soft rounded surfaces, glass chrome, and one
-   memorable 3D device mockup.
+   BetterLectio marketing site — monochrome design system
+   Black / grey / white foundation. Blue survives only as a restrained accent
+   for links and focus rings; the real colour on the page comes from product
+   screenshots. Brand tokens are defined here and surfaced to Tailwind via the
+   `@theme inline` block above (bg-brand, text-ink, border-line, …).
 
-   The bulk of the site is now styled with Tailwind utility classes directly in
-   the `.tsx` components (see `components/site/styles.ts` for the shared button/
-   eyebrow helpers). What remains here is platform-level and "hard" CSS that
-   doesn't translate cleanly to utilities: the `.site` root (gradient + base
-   typography), the 3D device mockup, keyframe animations (ticker, dark-mode
-   knob), clip-path shapes (diagonal ground, angled footer), and the native
-   `<details>` accordion chevron. Brand tokens are defined here and surfaced to
-   Tailwind via `@theme inline` above.
+   Marketing pages are always light — `.site` fixes its own palette so the
+   `next-themes` dark toggle (used elsewhere) never flips the landing page.
    ========================================================================= */
 
 .site {
-  /* Palette aligned to the extension's design system: indigo-265 primary,
-     neutrals subtly tinted with the same hue, OKLCH throughout. */
-  --blue: oklch(0.54 0.2 265);
-  --blue-deep: oklch(0.47 0.21 265);
-  --brand-soft: oklch(0.93 0.05 265);
+  /* Neutral foundation — zero chroma across the greyscale. */
+  --ink: oklch(0.18 0 0);
+  --ink-muted: oklch(0.47 0 0);
+  --grey: oklch(0.967 0 0);
+  --line: oklch(0.9 0 0);
+
+  /* Restrained blue accent (links + focus rings only). Never a large fill. */
+  --blue: oklch(0.55 0.16 258);
+  --blue-deep: oklch(0.48 0.16 258);
+  --brand-soft: oklch(0.955 0.016 258);
+
+  /* Kept for the few niche surfaces that still opt in. Used sparingly. */
   --orange: oklch(0.72 0.16 55);
-  --volt: oklch(0.72 0.15 150);
-  --ink: oklch(0.17 0.013 265);
-  --grey: oklch(0.965 0.008 265);
-  --ink-muted: oklch(0.55 0.02 265);
-  --line: oklch(0.912 0.008 265);
+  --volt: oklch(0.68 0.13 150);
 
   position: relative;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: radial-gradient(circle at 50% 0%, oklch(1 0 0) 0%, oklch(0.975 0.006 265) 100%);
+  background: radial-gradient(1200px 640px at 50% -8%, #fff 0%, oklch(0.98 0 0) 60%, oklch(0.972 0 0) 100%);
   color: var(--ink);
   font-family: var(--font-sans), "Geist", system-ui, sans-serif;
   font-size: 15px;
@@ -185,275 +183,115 @@
   overflow-x: clip;
 }
 
-.site ::selection { background: var(--blue); color: #fff; }
+.site ::selection { background: var(--ink); color: #fff; }
 
-/* --- diagonal ground (clip-path) ----------------------------------------- */
+/* --- soft top wash (replaces the old blue diagonal) --------------------- */
 .site-diagonal {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 82vh;
-  background: linear-gradient(135deg, #f2f2f5 0%, #e9eef6 100%);
-  clip-path: polygon(0 0, 100% 0, 100% 70%, 0% 100%);
+  height: 88vh;
+  background: radial-gradient(900px 460px at 50% -10%, oklch(0.955 0 0) 0%, transparent 72%);
   z-index: 0;
   pointer-events: none;
-  will-change: transform;
 }
 
-/* --- hero avatar stack (gradient chips) ---------------------------------- */
-.site-avatars { display: flex; }
-.site-avatars span {
-  width: 32px;
-  height: 32px;
-  border-radius: 999px;
-  border: 2px solid #fff;
-  margin-left: -8px;
-}
-.site-avatars span:first-child { margin-left: 0; }
-.site-avatars span:nth-child(1) { background: linear-gradient(135deg, var(--blue), oklch(0.72 0.14 265)); }
-.site-avatars span:nth-child(2) { background: linear-gradient(135deg, var(--volt), oklch(0.86 0.1 150)); }
-.site-avatars span:nth-child(3) { background: linear-gradient(135deg, var(--orange), oklch(0.84 0.1 55)); }
-
-/* --- device mockup + floating cards -------------------------------------- */
-.site-visual { position: relative; perspective: 1000px; }
-.site-mockup {
+/* --- before / after comparison slider ----------------------------------- */
+.ba {
+  position: relative;
   width: 100%;
-  max-width: 540px;
-  margin-left: auto;
-  background: #fff;
-  border-radius: 22px;
-  box-shadow: 0 80px 90px -30px rgba(0, 0, 0, 0.28);
+  aspect-ratio: 16 / 10;
+  border-radius: 18px;
   overflow: hidden;
-  transform: rotateY(-15deg) rotateX(5deg);
-  border: 8px solid var(--ink);
-  will-change: transform;
+  background: var(--grey);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
-
-/* The device screen: a faithful mini of the real BetterLectio app —
-   sidebar rail + week schedule with hold-coloured bricks. */
-.site-app { display: flex; height: 400px; background: #fff; }
-.site-app__rail {
-  width: 104px;
-  flex-shrink: 0;
-  background: oklch(0.97 0.006 265);
-  border-right: 1px solid var(--line);
-  padding: 12px 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.ba__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
 }
-.site-app__brand { display: flex; align-items: center; gap: 7px; }
-.site-app__logo { width: 20px; height: 20px; border-radius: 6px; background: var(--blue); flex-shrink: 0; }
-.site-app__brandname {
+/* Top layer = plain Lectio ("before"), revealed from the left up to --pos. */
+.ba__before { clip-path: inset(0 calc(100% - var(--pos, 50%)) 0 0); }
+.ba__tag {
+  position: absolute;
+  top: 14px;
+  z-index: 3;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-family: var(--font-mono), monospace;
   font-size: 11px;
-  font-weight: 800;
-  letter-spacing: -0.3px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.site-app__nav { display: flex; flex-direction: column; gap: 2px; }
-.site-app__navitem {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 8px;
-  border-radius: 8px;
-  font-size: 11px;
-  font-weight: 600;
-  color: #4b4b50;
-  white-space: nowrap;
-}
-.site-app__navitem svg { width: 14px; height: 14px; flex-shrink: 0; }
-.site-app__navitem.is-active { background: var(--brand-soft); color: var(--blue); }
-.site-app__badge {
-  margin-left: auto;
-  min-width: 15px;
-  height: 15px;
-  padding: 0 4px;
-  border-radius: 99px;
-  background: var(--blue);
-  color: #fff;
-  font-size: 9px;
   font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.ba__tag--before { left: 14px; background: rgba(0, 0, 0, 0.62); color: #fff; }
+.ba__tag--after { right: 14px; background: rgba(255, 255, 255, 0.82); color: var(--ink); }
+.ba__handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos, 50%);
+  width: 2px;
+  margin-left: -1px;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.14);
+  z-index: 4;
+  cursor: ew-resize;
+}
+.ba__grip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 6px 20px -6px rgba(0, 0, 0, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
+  color: var(--ink);
 }
-.site-app__me {
-  margin-top: auto;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding-top: 10px;
-  border-top: 1px solid var(--line);
-}
-.site-app__avatar {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--blue), var(--volt));
-  flex-shrink: 0;
-}
-.site-app__mename { font-size: 10px; font-weight: 700; line-height: 1.2; }
-.site-app__meta { font-size: 9px; color: var(--ink-muted); }
+.ba__handle:focus-visible { outline: none; }
+.ba__handle:focus-visible .ba__grip { outline: 3px solid var(--blue); outline-offset: 3px; }
 
-.site-app__main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
-.site-app__bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px 14px;
-  border-bottom: 1px solid var(--line);
-}
-.site-app__week { font-size: 12px; font-weight: 700; }
-.site-app__today {
-  font-family: var(--font-mono), monospace;
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--blue);
-  background: var(--brand-soft);
-  padding: 3px 8px;
-  border-radius: 99px;
-}
-.site-app__grid {
-  flex: 1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--line);
+/* --- subtle marquee (schools / proof strip) ----------------------------- */
+.marquee {
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
 }
-.site-app__col {
-  min-width: 0;
-  background: #fff;
-  padding: 8px 7px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.site-app__col.is-today { background: oklch(0.975 0.014 265); }
-.site-app__day { font-size: 10px; font-weight: 700; color: var(--ink-muted); text-align: center; padding-bottom: 2px; }
-.site-app__col.is-today .site-app__day { color: var(--blue); }
-
-.site-brick {
-  position: relative;
-  border-radius: 8px;
-  padding: 7px 8px;
-  background: var(--bk-bg, var(--grey));
-  border-left: 4px solid var(--bk-bd, #d2d2d7);
-  overflow: hidden;
-}
-.site-brick b { display: block; font-size: 11.5px; font-weight: 700; color: var(--ink); line-height: 1.25; padding-right: 22px; }
-.site-brick__teacher {
-  display: block;
-  font-size: 10px;
-  color: var(--ink-muted);
+.marquee__track {
+  display: inline-flex;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.site-brick__badge {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  font-family: var(--font-mono), monospace;
-  font-size: 9px;
-  font-weight: 700;
-  color: #6b6b70;
-  background: rgba(0, 0, 0, 0.05);
-  padding: 1px 5px;
-  border-radius: 5px;
-}
-.site-brick__badge--amber { background: #fde68a; color: #8a5a00; }
-.site-brick--blue { --bk-bg: #eaf1fe; --bk-bd: #2f7bf5; }
-.site-brick--orange { --bk-bg: #fdf1df; --bk-bd: #f5a524; }
-.site-brick--teal { --bk-bg: #e4f5f2; --bk-bd: #0e9c8e; }
-.site-brick--green { --bk-bg: #e8f6ee; --bk-bd: #2fa869; }
-.site-brick--red { --bk-bg: #fdeceb; --bk-bd: #e5544b; }
-.site-brick--purple { --bk-bg: #f3ebfb; --bk-bd: #9256c9; }
-
-.site-float {
-  position: absolute;
-  background: rgba(255, 255, 255, 0.65);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  padding: 18px 20px;
-  box-shadow: 0 30px 50px rgba(0, 0, 0, 0.12);
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
   will-change: transform;
+  animation: site-scroll 42s linear infinite;
 }
-.site-float--gpa { top: -30px; right: -10px; transform: rotate(5deg); }
-.site-float--gpa .site-float__val { font-size: 30px; font-weight: 800; letter-spacing: -1px; }
-.site-float--dark { bottom: -26px; left: -30px; transform: rotate(-4deg); }
-.site-float__row { display: flex; align-items: center; gap: 12px; }
-.site-toggle {
-  width: 42px;
-  height: 24px;
-  background: #d2d2d7;
-  border-radius: 100px;
-  display: flex;
-  align-items: center;
-  padding: 0 2px;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-.site-knob {
-  width: 20px;
-  height: 20px;
-  background: #fff;
-  border-radius: 50%;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  animation: site-knob 1.8s infinite ease-in-out;
-}
-.site-float__hint { font-size: 13px; color: var(--ink-muted); }
-@keyframes site-knob {
-  0% { width: 20px; transform: translateX(0); border-radius: 50%; }
-  50% { width: 26px; transform: translateX(2px); border-radius: 10px; }
-  100% { width: 20px; transform: translateX(0); border-radius: 50%; }
+@keyframes site-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
 }
 
-/* --- ticker (rotated marquee) -------------------------------------------- */
-.site-ticker {
-  background: var(--ink);
-  padding: 18px 0;
-  overflow: hidden;
-  white-space: nowrap;
-  transform: rotate(-2deg);
-  width: 106%;
-  margin-left: -3%;
-  position: relative;
-  z-index: 2;
-}
-.site-ticker__track { display: inline-block; animation: site-scroll 24s linear infinite; }
-.site-ticker__item {
-  display: inline-block;
-  color: #fff;
-  font-weight: 800;
-  font-size: 22px;
-  margin: 0 36px;
-  text-transform: uppercase;
-}
-.site-ticker__item b { color: oklch(0.8 0.11 265); font-weight: 800; }
-@keyframes site-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-/* --- footer shell (angled clip-path) ------------------------------------- */
+/* --- footer shell (near-black, flat) ------------------------------------ */
 .site-footer {
-  background: var(--blue);
+  background: var(--ink);
   color: #fff;
-  clip-path: polygon(0 12%, 100% 0, 100% 100%, 0 100%);
-  margin-top: -40px;
   flex-shrink: 0;
 }
 
-/* --- native <details> accordion (pseudo-element chevron + bullets) --------
-   Kept in CSS in full: the disclosure chevron and list bullets are ::after /
-   ::before pseudo-elements that don't translate to utility classes. */
+/* --- native <details> accordion (used on the privacy page) ---------------
+   The disclosure chevron and list bullets are ::after / ::before
+   pseudo-elements that don't translate cleanly to utility classes. */
 .site-details { margin-top: 22px; display: flex; flex-direction: column; gap: 12px; }
 .site-detail {
   border: 1px solid var(--line);
@@ -485,7 +323,7 @@
   transition: transform 0.25s ease;
 }
 .site-detail[open] summary::after { transform: rotate(-135deg); }
-.site-detail summary:focus-visible { outline: 3px solid var(--blue); outline-offset: -3px; border-radius: 18px; }
+.site-detail summary:focus-visible { outline: 3px solid var(--ink); outline-offset: -3px; border-radius: 18px; }
 .site-detail__body { padding: 0 24px 22px; font-size: 15px; line-height: 1.65; color: #3a3a3c; }
 .site-detail__body p { margin: 0 0 12px; }
 .site-detail__body ul { list-style: none; display: flex; flex-direction: column; gap: 10px; margin: 0; }
@@ -495,12 +333,12 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--blue);
+  background: var(--ink);
   flex-shrink: 0;
   margin-top: 8px;
 }
 .site-detail__body strong { color: var(--ink); font-weight: 700; }
-.site-detail__body a { color: var(--blue); text-decoration: underline; text-underline-offset: 3px; }
+.site-detail__body a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
 .site-detail__body code {
   font-family: var(--font-mono), monospace;
   font-size: 0.9em;
@@ -509,26 +347,8 @@
   border-radius: 6px;
 }
 
-/* --- responsive (kept selectors only) ------------------------------------ */
-@media (max-width: 1024px) {
-  .site-visual { max-width: 460px; margin: 0 auto; }
-  .site-diagonal { height: 100vh; clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%); }
-}
-
-@media (max-width: 720px) {
-  .site-mockup { transform: none; margin: 0 auto; max-width: 100%; }
-  .site-app { height: 360px; }
-  .site-app__rail { display: none; }
-  .site-app__grid { grid-template-columns: repeat(2, 1fr); }
-  .site-app__col:last-child { display: none; }
-  .site-float--gpa { top: -20px; right: 0; }
-  .site-float--dark { bottom: -18px; left: 0; }
-  .site-ticker__item { font-size: 18px; margin: 0 24px; }
-}
-
+/* --- reduced motion ------------------------------------------------------ */
 @media (prefers-reduced-motion: reduce) {
-  .site-ticker__track { animation: none; }
-  .site-knob { animation: none; }
-  .site-mockup, .site-float, .site-diagonal { transition: none !important; }
+  .marquee__track { animation: none; }
   .site-detail summary::after { transition: none; }
 }

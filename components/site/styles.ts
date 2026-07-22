@@ -23,11 +23,11 @@ const BUTTON_BASE =
 
 const BUTTON_VARIANTS: Record<SiteButtonVariant, string> = {
   primary:
-    "bg-brand text-white shadow-[0_10px_26px_-10px_color-mix(in_oklch,var(--blue)_42%,transparent)] hover:-translate-y-px hover:scale-[1.01] hover:opacity-[0.92]",
+    "bg-ink text-white shadow-[0_12px_28px_-14px_rgba(0,0,0,0.55)] hover:-translate-y-px hover:scale-[1.01] hover:opacity-[0.92]",
   secondary:
-    "border-[#d2d2d7] bg-white text-ink hover:-translate-y-px hover:scale-[1.01] hover:border-[#b9b9c0]",
+    "border-line bg-white text-ink hover:-translate-y-px hover:scale-[1.01] hover:border-ink/25",
   ghost:
-    "bg-white/[0.16] text-white hover:bg-white/[0.26] focus-visible:outline-white",
+    "bg-white/[0.12] text-white hover:bg-white/[0.2] focus-visible:outline-white",
 }
 
 export function siteButton(

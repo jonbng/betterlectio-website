@@ -1,5 +1,7 @@
 export const DOWNLOAD_LINKS = {
   ios: "https://apps.apple.com/dk/app/betterlectio/id6761808963",
+  android:
+    "https://play.google.com/store/apps/details?id=dk.betterlectio.android",
   chrome:
     "https://chromewebstore.google.com/detail/betterlectio/cbopfnaegoknpplkngoppmmomppimhkh?authuser=0&hl=en",
   firefox: "https://addons.mozilla.org/en-US/firefox/addon/betterlectio/",
