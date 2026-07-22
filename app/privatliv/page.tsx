@@ -145,7 +145,7 @@ export default function PrivatlivPage() {
         <section className="mx-auto max-w-[780px] pt-5 pb-2 text-center">
           <span className={siteEyebrow()}>Privatliv, på almindeligt dansk</span>
           <h1 className="mt-4 mb-5 text-[clamp(44px,6.4vw,76px)] font-extrabold leading-none tracking-[-0.045em]">
-            Dine data er <mark className="bg-transparent text-brand">dine.</mark>
+            Dine data er <mark className="bg-transparent text-ink-muted">dine.</mark>
           </h1>
           <p className="mx-auto max-w-[58ch] text-[clamp(18px,2.2vw,21px)] font-medium leading-[1.5] text-ink-muted">
             BetterLectio er lavet af elever, der selv bruger Lectio hver dag. Vi
@@ -161,7 +161,7 @@ export default function PrivatlivPage() {
             ].map((chip) => (
               <span
                 key={chip.label}
-                className="inline-flex items-center gap-2 rounded-full border border-line bg-white/75 py-[9px] pr-4 pl-[13px] text-sm font-bold text-ink backdrop-blur-[10px] [&_svg]:size-4 [&_svg]:text-brand"
+                className="inline-flex items-center gap-2 rounded-full border border-line bg-white/75 py-[9px] pr-4 pl-[13px] text-sm font-bold text-ink backdrop-blur-[10px] [&_svg]:size-4 [&_svg]:text-ink"
               >
                 {chip.icon} {chip.label}
               </span>
@@ -180,7 +180,7 @@ export default function PrivatlivPage() {
               key={p.title}
               className="rounded-[26px] border border-line bg-grey px-[30px] py-8 transition-[transform,box-shadow] duration-[350ms] hover:-translate-y-1 hover:shadow-[0_24px_44px_-28px_rgba(0,0,0,0.28)] motion-reduce:transition-none"
             >
-              <div className="mb-5 flex size-[52px] items-center justify-center rounded-[15px] bg-brand-soft text-brand [&_svg]:size-[26px]">
+              <div className="mb-5 flex size-[52px] items-center justify-center rounded-[15px] bg-ink text-white [&_svg]:size-[26px]">
                 {p.icon}
               </div>
               <h3 className="mb-2.5 text-[21px] font-extrabold tracking-[-0.02em] text-ink">
@@ -203,9 +203,9 @@ export default function PrivatlivPage() {
         </div>
 
         <section className="mt-[30px] grid grid-cols-1 gap-5 min-[900px]:grid-cols-2">
-          <div className="rounded-[26px] border border-[oklch(0.9_0.05_150)] bg-[oklch(0.975_0.02_150)] p-8">
+          <div className="rounded-[26px] border border-line bg-grey p-8">
             <div className="mb-[22px] flex items-center gap-3">
-              <span className="flex size-[34px] shrink-0 items-center justify-center rounded-[11px] bg-[oklch(0.72_0.15_150)] text-white [&_svg]:size-5">
+              <span className="flex size-[34px] shrink-0 items-center justify-center rounded-[11px] bg-ink text-white [&_svg]:size-5">
                 <Check />
               </span>
               <h3 className="text-[19px] font-extrabold tracking-[-0.02em] text-ink">
@@ -216,7 +216,7 @@ export default function PrivatlivPage() {
               {DO.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-[11px] text-[15px] font-medium leading-[1.45] text-[#3a3a3c] [&_svg]:mt-px [&_svg]:size-[18px] [&_svg]:shrink-0 [&_svg]:text-[oklch(0.6_0.15_150)]"
+                  className="flex items-start gap-[11px] text-[15px] font-medium leading-[1.45] text-[#3a3a3c] [&_svg]:mt-px [&_svg]:size-[18px] [&_svg]:shrink-0 [&_svg]:text-ink"
                 >
                   <Check />
                   {item}
@@ -225,9 +225,9 @@ export default function PrivatlivPage() {
             </ul>
           </div>
 
-          <div className="rounded-[26px] border border-[oklch(0.9_0.04_25)] bg-[oklch(0.975_0.014_25)] p-8">
+          <div className="rounded-[26px] border border-line bg-white p-8">
             <div className="mb-[22px] flex items-center gap-3">
-              <span className="flex size-[34px] shrink-0 items-center justify-center rounded-[11px] bg-[oklch(0.62_0.2_25)] text-white [&_svg]:size-5">
+              <span className="flex size-[34px] shrink-0 items-center justify-center rounded-[11px] bg-ink-muted text-white [&_svg]:size-5">
                 <Cross />
               </span>
               <h3 className="text-[19px] font-extrabold tracking-[-0.02em] text-ink">
@@ -238,7 +238,7 @@ export default function PrivatlivPage() {
               {DONT.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-[11px] text-[15px] font-medium leading-[1.45] text-[#3a3a3c] [&_svg]:mt-px [&_svg]:size-[18px] [&_svg]:shrink-0 [&_svg]:text-[oklch(0.62_0.2_25)]"
+                  className="flex items-start gap-[11px] text-[15px] font-medium leading-[1.45] text-[#3a3a3c] [&_svg]:mt-px [&_svg]:size-[18px] [&_svg]:shrink-0 [&_svg]:text-ink-muted"
                 >
                   <Cross />
                   {item}
@@ -254,7 +254,7 @@ export default function PrivatlivPage() {
             <Lock />
           </div>
           <div>
-            <span className={cn(siteEyebrow(), "text-[oklch(0.8_0.11_265)]")}>
+            <span className={cn(siteEyebrow(), "text-white/60")}>
               Det vigtigste først
             </span>
             <h2 className="mt-2 mb-3 text-[clamp(26px,3.4vw,38px)] font-extrabold tracking-[-0.03em]">
@@ -290,7 +290,7 @@ export default function PrivatlivPage() {
                 {s.name}
               </span>
               <p className="text-[15px] leading-[1.5] text-ink-muted">{s.desc}</p>
-              <span className="justify-self-start whitespace-nowrap rounded-full bg-brand-soft px-3 py-1.5 text-center font-mono text-[11px] font-bold uppercase tracking-[0.04em] text-brand">
+              <span className="justify-self-start whitespace-nowrap rounded-full bg-grey px-3 py-1.5 text-center font-mono text-[11px] font-bold uppercase tracking-[0.04em] text-ink">
                 {s.tag}
               </span>
             </article>
@@ -434,8 +434,8 @@ export default function PrivatlivPage() {
         </section>
 
         {/* Open source + contact ---------------------------------------- */}
-        <section className="mt-[30px] rounded-[30px] bg-brand p-[clamp(40px,5vw,64px)] text-center text-white">
-          <span className={cn(siteEyebrow(), "text-white/80")}>
+        <section className="mt-[30px] rounded-[30px] bg-ink p-[clamp(40px,5vw,64px)] text-center text-white">
+          <span className={cn(siteEyebrow(), "text-white/70")}>
             Tro os ikke på ordet
           </span>
           <h2 className="mt-2.5 mb-3 text-[clamp(28px,3.6vw,40px)] font-extrabold tracking-[-0.03em]">

@@ -92,7 +92,7 @@ export function UninstallForm({ studentId }: { studentId: string }) {
         role="status"
         aria-live="polite"
       >
-        <div className="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-volt">
+        <div className="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-ink-muted">
           TAK
         </div>
         <p className="my-1.5 text-[26px] font-extrabold tracking-[-0.02em]">
@@ -121,9 +121,9 @@ export function UninstallForm({ studentId }: { studentId: string }) {
                 role="radio"
                 aria-checked={active}
                 className={cn(
-                  "rounded-full border border-line bg-white px-4 py-2.5 text-sm font-semibold text-ink transition-[border-color,color,background] hover:border-brand hover:text-brand",
+                  "rounded-full border border-line bg-white px-4 py-2.5 text-sm font-semibold text-ink transition-[border-color,color,background] hover:border-ink/30 hover:text-ink",
                   active &&
-                    "border-brand bg-brand text-white hover:border-brand hover:text-white",
+                    "border-ink bg-ink text-white hover:border-ink hover:text-white",
                 )}
                 onClick={() => {
                   setReason(r.key)
@@ -150,7 +150,7 @@ export function UninstallForm({ studentId }: { studentId: string }) {
         </label>
         <textarea
           id="uninstall-feedback"
-          className="min-h-[120px] w-full resize-y rounded-2xl border border-line bg-white px-4 py-3.5 text-[15px] leading-[1.5] text-ink transition-[border-color,box-shadow] focus:border-brand focus:shadow-[0_0_0_3px_color-mix(in_oklch,var(--blue)_22%,transparent)] focus:outline-none"
+          className="min-h-[120px] w-full resize-y rounded-2xl border border-line bg-white px-4 py-3.5 text-[15px] leading-[1.5] text-ink transition-[border-color,box-shadow] focus:border-ink focus:shadow-[0_0_0_3px_color-mix(in_oklch,var(--ink)_16%,transparent)] focus:outline-none"
           rows={4}
           maxLength={2000}
           required={feedbackRequired}

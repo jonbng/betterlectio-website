@@ -5,9 +5,10 @@ import { siteButton, siteContainerClass } from "@/components/site/styles"
 import { cn } from "@/lib/utils"
 
 const NAV_LINKS = [
+  { href: "/#overalt", label: "Overalt", external: false },
   { href: "/#funktioner", label: "Funktioner", external: false },
-  { href: "/#skema", label: "Skema", external: false },
   { href: "/privatliv", label: "Privatliv", external: false },
+  { href: "/roadmap", label: "Roadmap", external: false },
   {
     href: "https://github.com/jonbng/betterlectio",
     label: "Kildekode",
@@ -37,7 +38,7 @@ export function SiteNav() {
           className="block shrink-0 rounded-[9px] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-rotate-6 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:rotate-0 motion-reduce:group-hover:scale-100"
         />
         <span>
-          Better<span className="text-brand">Lectio</span>
+          Better<span className="text-ink-muted">Lectio</span>
         </span>
       </Link>
 

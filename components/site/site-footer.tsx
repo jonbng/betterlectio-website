@@ -3,21 +3,20 @@ import Link from "next/link"
 import { SiteLogoMark } from "@/components/site/site-logo"
 import { siteContainerClass } from "@/components/site/styles"
 import { DOWNLOAD_LINKS } from "@/lib/download-links"
-import { cn } from "@/lib/utils"
 
 const FOOTER_LINK_CLASS =
   "font-semibold text-white no-underline opacity-80 transition-[opacity,padding-left] hover:pl-1.5 hover:opacity-100"
 
 export function SiteFooter() {
   return (
-    <footer className="site-footer shrink-0 pt-[100px] pb-10 min-[720px]:pt-[130px] min-[720px]:pb-11">
+    <footer className="site-footer shrink-0 pt-16 pb-10 min-[720px]:pt-20 min-[720px]:pb-11">
       <div className={siteContainerClass}>
         <div className="mb-12 grid grid-cols-1 gap-10 min-[720px]:mb-[70px] min-[720px]:grid-cols-[2fr_1fr_1fr] min-[720px]:gap-[60px]">
           <div>
             <h2 className="mb-4 flex items-center gap-3 text-[32px] font-extrabold tracking-[-1px] min-[720px]:text-[40px]">
               <SiteLogoMark
                 size={40}
-                className="block shrink-0 rounded-xl [--logo-badge:#fff] [--logo-glyph:var(--blue)]"
+                className="block shrink-0 rounded-xl [--logo-badge:#fff] [--logo-glyph:var(--ink)]"
               />
               BetterLectio
             </h2>
@@ -28,19 +27,34 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h4 className="mb-5 text-[13px] uppercase tracking-[2px] text-volt">
+            <h4 className="mb-5 text-[13px] uppercase tracking-[2px] text-white/45">
               Produkt
             </h4>
             <ul className="list-none">
               <li className="mb-3">
                 <Link href="/download" className={FOOTER_LINK_CLASS}>
-                  Browser-udvidelse
+                  Hent BetterLectio
                 </Link>
               </li>
               <li className="mb-3">
-                <Link href="/download/ios" className={FOOTER_LINK_CLASS}>
+                <a
+                  href={DOWNLOAD_LINKS.ios}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className={FOOTER_LINK_CLASS}
+                >
                   iOS-app
-                </Link>
+                </a>
+              </li>
+              <li className="mb-3">
+                <a
+                  href={DOWNLOAD_LINKS.android}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className={FOOTER_LINK_CLASS}
+                >
+                  Android-app
+                </a>
               </li>
               <li className="mb-3">
                 <a
@@ -49,30 +63,25 @@ export function SiteFooter() {
                   rel="noreferrer noopener"
                   className={FOOTER_LINK_CLASS}
                 >
-                  Chrome
-                </a>
-              </li>
-              <li className="mb-3">
-                <a
-                  href={DOWNLOAD_LINKS.firefox}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className={FOOTER_LINK_CLASS}
-                >
-                  Firefox
+                  Browser-udvidelse
                 </a>
               </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="mb-5 text-[13px] uppercase tracking-[2px] text-volt">
+            <h4 className="mb-5 text-[13px] uppercase tracking-[2px] text-white/45">
               Info
             </h4>
             <ul className="list-none">
               <li className="mb-3">
                 <Link href="/privatliv" className={FOOTER_LINK_CLASS}>
                   Privatliv
+                </Link>
+              </li>
+              <li className="mb-3">
+                <Link href="/roadmap" className={FOOTER_LINK_CLASS}>
+                  Roadmap
                 </Link>
               </li>
               <li className="mb-3">

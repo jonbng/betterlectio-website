@@ -69,7 +69,7 @@ export default async function UninstallPage({
             Fortryder du? Du kan altid hente BetterLectio igen på{" "}
             <Link
               href="/download"
-              className="text-brand underline underline-offset-[3px]"
+              className="font-semibold text-ink underline underline-offset-[3px]"
             >
               betterlectio.dk/download
             </Link>
