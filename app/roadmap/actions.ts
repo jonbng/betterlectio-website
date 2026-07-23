@@ -115,3 +115,69 @@ export async function toggleVote(feedbackId: string): Promise<VoteResult> {
   const count = await currentVoteCount(supabase, feedbackId)
   return { ok: true, voted: !existing, count }
 }
+
+export type SubmitIdeaResult =
+  | { ok: true }
+  | { ok: false; error: string }
+
+export async function submitRoadmapIdea(input: {
+  message: string
+  title?: string
+}): Promise<SubmitIdeaResult> {
+  const message = input.message?.trim() ?? ""
+  if (!message) return { ok: false, error: "empty" }
+  if (message.length > 4000) return { ok: false, error: "too_long" }
+
+  const title = input.title?.trim().slice(0, 200) || null
+
+  try {
+    const {
+      createSupabaseServerClient,
+      getLinkedStudent,
+    } = await import("@/lib/supabase-auth")
+    const supabase = await createSupabaseServerClient()
+    const { data: userData, error: userErr } = await supabase.auth.getUser()
+    if (userErr || !userData.user) {
+      return { ok: false, error: "not_signed_in" }
+    }
+
+    const student = await getLinkedStudent(userData.user.id)
+    if (!student) return { ok: false, error: "no_student" }
+
+    const { error } = await supabase.rpc("submit_feedback", {
+      p_student_id: student.id,
+      p_school_id: student.schoolId,
+      p_category: "idea",
+      p_message: message,
+      p_platform: "web",
+      p_context: {
+        title,
+        locale: "da",
+        app_version: "website",
+      },
+    })
+
+    if (error) {
+      console.error("[roadmap/actions] submitRoadmapIdea", error.message)
+      if (/rate limit/i.test(error.message)) {
+        return { ok: false, error: "rate_limited" }
+      }
+      return { ok: false, error: "submit_failed" }
+    }
+
+    return { ok: true }
+  } catch (err) {
+    console.error("[roadmap/actions] submitRoadmapIdea failed", err)
+    return { ok: false, error: "submit_failed" }
+  }
+}
+
+export async function signOutWebsite(): Promise<void> {
+  try {
+    const { createSupabaseServerClient } = await import("@/lib/supabase-auth")
+    const supabase = await createSupabaseServerClient()
+    await supabase.auth.signOut()
+  } catch (err) {
+    console.error("[roadmap/actions] signOutWebsite failed", err)
+  }
+}

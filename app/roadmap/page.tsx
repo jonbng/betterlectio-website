@@ -1,17 +1,22 @@
 import type { Metadata } from "next"
 
 import { readVoterId } from "@/app/roadmap/actions"
-import { GitHub, Sparkles } from "@/components/site/icons"
+import { Sparkles } from "@/components/site/icons"
 import { RoadmapBoard } from "@/components/site/roadmap-board"
+import { RoadmapIdeaCta } from "@/components/site/roadmap-idea-cta"
+import { LoginPopupCloser } from "@/components/site/login-popup-closer"
 import { SiteFooter } from "@/components/site/site-footer"
 import { SiteNav } from "@/components/site/site-nav"
 import {
-  siteButton,
   siteContainerClass,
   siteEyebrow,
   siteMainClass,
 } from "@/components/site/styles"
 import { getRoadmap, getVotedIds } from "@/lib/roadmap"
+import {
+  getLinkedStudent,
+  getWebsiteSession,
+} from "@/lib/supabase-auth"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
@@ -25,13 +30,31 @@ export const metadata: Metadata = {
 // counts stay fresh per request.
 export const dynamic = "force-dynamic"
 
-export default async function RoadmapPage() {
-  const [columns, voterId] = await Promise.all([getRoadmap(), readVoterId()])
+export default async function RoadmapPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ login?: string; reason?: string }>
+}) {
+  const sp = await searchParams
+  const [columns, voterId, user] = await Promise.all([
+    getRoadmap(),
+    readVoterId(),
+    getWebsiteSession(),
+  ])
   const votedIds = [...(await getVotedIds(voterId))]
   const hasItems = columns.some((c) => c.items.length > 0)
 
+  const student = user ? await getLinkedStudent(user.id) : null
+  const displayName = student
+    ? [student.firstName, student.lastName].filter(Boolean).join(" ") || null
+    : null
+
+  const loginStatus =
+    sp.login === "ok" ? "ok" : sp.login === "error" ? "error" : null
+
   return (
     <div className="site">
+      <LoginPopupCloser active={loginStatus === "ok"} />
       <SiteNav />
 
       <main className={cn(siteMainClass, siteContainerClass, "pt-6 pb-24")}>
@@ -57,31 +80,18 @@ export default async function RoadmapPage() {
               Roadmappet er lige på trapperne.
             </p>
             <p className="mt-2 text-sm leading-[1.5] text-ink-muted">
-              Vi er ved at kuratere, hvad der skal vises her. Indtil da kan du
-              komme med ønsker på GitHub.
+              Vi er ved at kuratere, hvad der skal vises her. Log ind nedenfor
+              for at sende en idé imens.
             </p>
           </div>
         )}
 
-        <section className="mx-auto mt-16 max-w-[620px] rounded-[24px] border border-line bg-grey/50 p-8 text-center">
-          <h2 className="text-[20px] font-extrabold tracking-[-0.02em] text-ink">
-            Mangler du noget?
-          </h2>
-          <p className="mx-auto mt-2 max-w-[46ch] text-sm leading-[1.5] text-ink-muted">
-            Har du en idé eller fundet en fejl? Send os et ønske direkte i appen
-            eller på GitHub — det ender her, hvis vi tager det med.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <a
-              href="https://github.com/jonbng/betterlectio/issues"
-              target="_blank"
-              rel="noreferrer noopener"
-              className={siteButton("secondary")}
-            >
-              <GitHub /> Kom med et ønske
-            </a>
-          </div>
-        </section>
+        <RoadmapIdeaCta
+          signedIn={Boolean(user && student)}
+          displayName={displayName}
+          loginStatus={loginStatus}
+          loginReason={sp.reason ?? null}
+        />
       </main>
 
       <SiteFooter />

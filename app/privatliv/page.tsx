@@ -114,7 +114,7 @@ const DONT = [
   "Deler data med annoncører eller datamæglere",
   "Sporer, hvad du laver ude på resten af nettet",
   "Rører ved dit Lectio-brugernavn eller kodeord",
-  "Bruger cookies til at spore dig",
+  "Bruger sporingscookies til at følge dig rundt på nettet",
 ]
 
 const SERVICES = [
@@ -387,9 +387,15 @@ export default function PrivatlivPage() {
             <summary>Bruger I cookies eller sporing?</summary>
             <div className="site-detail__body">
               <p>
-                Nej. Vi bruger ikke sporingscookies, og vi følger dig ikke rundt
-                på nettet. PostHog bruges udelukkende til fejl- og
+                Vi bruger ikke sporingscookies, og vi følger dig ikke rundt på
+                nettet. PostHog bruges udelukkende til fejl- og
                 stabilitetsovervågning for elever, der er logget ind.
+              </p>
+              <p>
+                Hvis du vælger &quot;Log ind med BetterLectio&quot; på
+                roadmappet, sætter vi en valgfri login-session-cookie, så du kan
+                sende feedback. Den bruges ikke til at spore dig på andre
+                sider, og du kan logge ud når som helst.
               </p>
             </div>
           </details>
