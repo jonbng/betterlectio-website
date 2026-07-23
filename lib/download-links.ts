@@ -9,3 +9,15 @@ export const DOWNLOAD_LINKS = {
 } as const
 
 export type DownloadPlatform = keyof typeof DOWNLOAD_LINKS
+
+const BL_REF_UUID_RE =
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
+/** Play Store URL with Install Referrer so Android can attribute the invite. */
+export function androidPlayUrlWithReferrer(cookieId: string | null | undefined): string {
+  const base = DOWNLOAD_LINKS.android
+  const id = cookieId?.trim() ?? ""
+  if (!BL_REF_UUID_RE.test(id)) return base
+  const referrer = encodeURIComponent(`bl_ref=${id}`)
+  return `${base}&referrer=${referrer}`
+}

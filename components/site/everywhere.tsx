@@ -55,8 +55,8 @@ function MobilePanel({ reverse }: { reverse: boolean }) {
             className="z-10 w-[52%] max-w-[230px] -rotate-3"
           />
           <PhoneFrame
-            src="/shots/mobile-karakterer.png"
-            alt="BetterLectio-appen: karakterer og gennemsnit"
+            src="/shots/mobile-beskeder.png"
+            alt="BetterLectio-appen: beskeder"
             className="-ml-8 mb-10 w-[46%] max-w-[200px] rotate-3 opacity-95"
           />
         </div>

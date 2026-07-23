@@ -12,7 +12,10 @@ import {
   siteMainClass,
   sitePageClass,
 } from "@/components/site/styles"
-import { DOWNLOAD_LINKS } from "@/lib/download-links"
+import {
+  androidPlayUrlWithReferrer,
+  DOWNLOAD_LINKS,
+} from "@/lib/download-links"
 import { captureDownloadClicked } from "@/lib/posthog"
 import { usePlatform } from "@/lib/use-platform"
 import { cn } from "@/lib/utils"
@@ -84,14 +87,21 @@ function DownloadPageInner() {
   const detected = usePlatform()
   const searchParams = useSearchParams()
   const wasReferred = searchParams.get("ref") === "1"
+  const blRef = searchParams.get("bl_ref")
+
+  const resolvedPlatforms = platforms.map((p) =>
+    p.key === "android"
+      ? { ...p, href: androidPlayUrlWithReferrer(blRef) }
+      : p,
+  )
 
   const sortedPlatforms =
     detected && detected !== "unknown"
       ? [
-          ...platforms.filter((p) => p.key === detected),
-          ...platforms.filter((p) => p.key !== detected),
+          ...resolvedPlatforms.filter((p) => p.key === detected),
+          ...resolvedPlatforms.filter((p) => p.key !== detected),
         ]
-      : platforms
+      : resolvedPlatforms
 
   return (
     <div className="site">
@@ -112,8 +122,8 @@ function DownloadPageInner() {
                 Du blev inviteret af en klassekammerat.
               </span>
               <span className="max-w-[60ch] text-sm text-ink-muted">
-                Installér udvidelsen nedenfor, så bliver invitationen automatisk
-                knyttet til den, der inviterede dig.
+                Installér BetterLectio nedenfor — invitationen knyttes automatisk
+                til den klassekammerat, der delte linket.
               </span>
             </div>
           )}

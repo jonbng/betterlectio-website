@@ -3,8 +3,9 @@ import Image from "next/image"
 import { cn } from "@/lib/utils"
 
 /**
- * Hardware-style frames that wrap product screenshots. Screenshot files live in
- * `public/shots` (currently placeholders, see the plan for target dimensions).
+ * Hardware-style frames that wrap product screenshots.
+ * Files live in `public/shots` — mobile App Store shots at ~1170×2532,
+ * desktop captures at ~2560×1600.
  */
 
 type FrameProps = {
