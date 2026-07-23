@@ -54,7 +54,13 @@ export default async function RoadmapPage({
 
   return (
     <div className="site">
-      <LoginPopupCloser active={loginStatus === "ok"} />
+      {loginStatus ? (
+        <LoginPopupCloser
+          active
+          status={loginStatus}
+          reason={sp.reason ?? null}
+        />
+      ) : null}
       <SiteNav />
 
       <main className={cn(siteMainClass, siteContainerClass, "pt-6 pb-24")}>

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation"
 import { useCallback, useEffect, useRef, useState, useTransition } from "react"
 
 import { signOutWebsite, submitRoadmapIdea } from "@/app/roadmap/actions"
+import type { BlLoginMessage } from "@/components/site/login-popup-closer"
 import { siteButton } from "@/components/site/styles"
 import { cn } from "@/lib/utils"
 
@@ -13,6 +14,21 @@ type Props = {
   displayName: string | null
   loginStatus: "ok" | "error" | null
   loginReason: string | null
+}
+
+function loginReasonMessage(reason: string | null | undefined): string {
+  switch (reason) {
+    case "invalid_state":
+      return "Login-sessionen udløb. Prøv igen."
+    case "verify_failed":
+      return "Kunne ikke bekræfte login."
+    case "missing_params":
+      return "Login-svaret var ufuldstændigt. Prøv igen."
+    case "config":
+      return "Login er midlertidigt utilgængeligt."
+    default:
+      return "Prøv igen."
+  }
 }
 
 export function RoadmapIdeaCta({
@@ -42,19 +58,57 @@ function SignedOutLogin({
   const router = useRouter()
   const [waiting, setWaiting] = useState(false)
   const [showInstallHint, setShowInstallHint] = useState(false)
+  // Errors from postMessage override URL-derived loginStatus errors.
+  const [messageError, setMessageError] = useState<string | null>(null)
   const popupRef = useRef<Window | null>(null)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const pollRef = useRef<number | null>(null)
+
+  const urlError =
+    loginStatus === "error" ? loginReasonMessage(loginReason) : null
+  const displayError = messageError ?? urlError
+
+  const clearWaitingTimers = useCallback(() => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current)
+      timerRef.current = null
+    }
+    if (pollRef.current != null) {
+      window.clearInterval(pollRef.current)
+      pollRef.current = null
+    }
+  }, [])
 
   useEffect(() => {
     return () => {
-      if (timerRef.current) clearTimeout(timerRef.current)
+      clearWaitingTimers()
     }
-  }, [])
+  }, [clearWaitingTimers])
+
+  useEffect(() => {
+    const onMessage = (event: MessageEvent) => {
+      if (event.origin !== window.location.origin) return
+      const data = event.data as BlLoginMessage | null
+      if (!data || data.source !== "bl-login") return
+
+      clearWaitingTimers()
+      setWaiting(false)
+      if (data.status === "error") {
+        setMessageError(loginReasonMessage(data.reason))
+      } else {
+        setMessageError(null)
+      }
+      router.refresh()
+    }
+    window.addEventListener("message", onMessage)
+    return () => window.removeEventListener("message", onMessage)
+  }, [clearWaitingTimers, router])
 
   const startLogin = useCallback(() => {
     setWaiting(true)
     setShowInstallHint(false)
-    if (timerRef.current) clearTimeout(timerRef.current)
+    setMessageError(null)
+    clearWaitingTimers()
 
     const popup = window.open(
       "/auth/login",
@@ -73,15 +127,14 @@ function SignedOutLogin({
       setShowInstallHint(true)
     }, 15_000)
 
-    const poll = window.setInterval(() => {
+    pollRef.current = window.setInterval(() => {
       if (popup.closed) {
-        window.clearInterval(poll)
-        if (timerRef.current) clearTimeout(timerRef.current)
+        clearWaitingTimers()
         setWaiting(false)
         router.refresh()
       }
     }, 500)
-  }, [router])
+  }, [clearWaitingTimers, router])
 
   return (
     <div className="mx-auto mt-16 max-w-[620px] rounded-[24px] border border-line bg-grey/50 p-8 text-center">
@@ -93,10 +146,9 @@ function SignedOutLogin({
         Den ender i vores feedback-kø — og på roadmappet, hvis vi tager den med.
       </p>
 
-      {loginStatus === "error" ? (
+      {displayError ? (
         <p className="mt-4 text-sm font-medium text-red-700">
-          Login mislykkedes
-          {loginReason ? ` (${loginReason})` : ""}. Prøv igen.
+          Login mislykkedes. {displayError}
         </p>
       ) : null}
 
@@ -107,7 +159,7 @@ function SignedOutLogin({
           disabled={waiting}
           className={siteButton("primary")}
         >
-          {waiting ? "Åbner Lectio…" : "Log ind med BetterLectio"}
+          {waiting ? "Logger ind…" : "Log ind med BetterLectio"}
         </button>
       </div>
 
@@ -132,7 +184,7 @@ function SignedInIdeaForm({ displayName }: { displayName: string | null }) {
   const router = useRouter()
   const [title, setTitle] = useState("")
   const [message, setMessage] = useState("")
-  const [status, setStatus] = useState<"idle" | "ok" | "error">( "idle")
+  const [status, setStatus] = useState<"idle" | "ok" | "error">("idle")
   const [error, setError] = useState<string | null>(null)
   const [pending, start] = useTransition()
 
