@@ -110,19 +110,23 @@ function SignedOutLogin({
     setMessageError(null)
     clearWaitingTimers()
 
-    const popup = window.open(
-      "/auth/login",
-      "bl-login",
-      "popup=yes,width=520,height=720",
-    )
+    // Open a normal tab, not a `popup=yes` window. Chrome often skips or
+    // delays content-script injection in extension-style popup windows, so
+    // BetterLectio never sees ?bl_login= and login silently fails.
+    const popup = window.open("/auth/login", "bl-login")
 
     if (!popup) {
-      // Popup blocked — same-tab fallback.
+      // Popup/tab blocked — same-tab fallback.
       window.location.href = "/auth/login"
       return
     }
 
     popupRef.current = popup
+    try {
+      popup.focus()
+    } catch {
+      // Ignore.
+    }
     timerRef.current = setTimeout(() => {
       setShowInstallHint(true)
     }, 15_000)
