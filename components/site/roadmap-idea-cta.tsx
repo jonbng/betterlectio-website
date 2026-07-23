@@ -58,7 +58,6 @@ function SignedOutLogin({
   const router = useRouter()
   const [waiting, setWaiting] = useState(false)
   const [showInstallHint, setShowInstallHint] = useState(false)
-  // Errors from postMessage override URL-derived loginStatus errors.
   const [messageError, setMessageError] = useState<string | null>(null)
   const popupRef = useRef<Window | null>(null)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -110,13 +109,15 @@ function SignedOutLogin({
     setMessageError(null)
     clearWaitingTimers()
 
-    // Open a normal tab, not a `popup=yes` window. Chrome often skips or
-    // delays content-script injection in extension-style popup windows, so
-    // BetterLectio never sees ?bl_login= and login silently fails.
-    const popup = window.open("/auth/login", "bl-login")
+    // Fresh name each time so we don't reuse a stale popup where Chrome
+    // skipped content-script injection.
+    const popup = window.open(
+      "/auth/login",
+      `bl-login-${Date.now()}`,
+      "popup=yes,width=520,height=780",
+    )
 
     if (!popup) {
-      // Popup/tab blocked — same-tab fallback.
       window.location.href = "/auth/login"
       return
     }
@@ -169,7 +170,10 @@ function SignedOutLogin({
 
       <p className="mx-auto mt-4 max-w-[42ch] text-xs leading-[1.45] text-ink-muted">
         Kræver at BetterLectio-udvidelsen er installeret, og at du er logget
-        ind på Lectio.
+        ind på Lectio.{" "}
+        <Link href="/download" className="font-bold underline underline-offset-2">
+          Installér
+        </Link>
       </p>
 
       {showInstallHint ? (

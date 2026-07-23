@@ -6,7 +6,8 @@ import { NextResponse } from "next/server"
 import { LOGIN_STATE_COOKIE } from "@/lib/auth-constants"
 
 const STATE_MAX_AGE = 60 * 5 // 5 minutes
-const LECTIO_LOGIN_BASE = "https://www.lectio.dk/"
+// Prefer login_list over `/` — Lectio's homepage can strip query params on redirect.
+const LECTIO_LOGIN_BASE = "https://www.lectio.dk/lectio/login_list.aspx"
 
 /**
  * Start "Log ind med BetterLectio": set a CSRF state cookie, then send the
