@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
-import { Suspense, useEffect, useState } from "react"
+import { Suspense } from "react"
 
 import { SiteFooter } from "@/components/site/site-footer"
 import { SiteNav } from "@/components/site/site-nav"
@@ -14,10 +14,10 @@ import {
 } from "@/components/site/styles"
 import { DOWNLOAD_LINKS } from "@/lib/download-links"
 import { captureDownloadClicked } from "@/lib/posthog"
+import { usePlatform } from "@/lib/use-platform"
 import { cn } from "@/lib/utils"
 
-type PlatformKey = "chrome" | "ios" | "firefox" | "edge"
-type DetectedPlatform = PlatformKey | "safari-desktop" | "android" | "unknown"
+type PlatformKey = "chrome" | "ios" | "android" | "firefox" | "edge" | "safari"
 
 type Platform = {
   key: PlatformKey
@@ -43,6 +43,20 @@ const platforms: Platform[] = [
     cta: "App Store",
   },
   {
+    key: "safari",
+    name: "Safari",
+    description: "Native app til iPhone og iPad",
+    href: "/download/ios",
+    cta: "App Store",
+  },
+  {
+    key: "android",
+    name: "Android",
+    description: "Native app til Android-telefoner",
+    href: DOWNLOAD_LINKS.android,
+    cta: "Google Play",
+  },
+  {
     key: "firefox",
     name: "Firefox",
     description: "Browser-udvidelse til Firefox",
@@ -58,30 +72,6 @@ const platforms: Platform[] = [
   },
 ]
 
-const UNSUPPORTED_LABEL: Record<"safari-desktop" | "android", string> = {
-  "safari-desktop": "Safari",
-  android: "Android",
-}
-
-function detectPlatform(): DetectedPlatform {
-  if (typeof navigator === "undefined") return "unknown"
-  const ua = navigator.userAgent
-  const platform = navigator.platform || ""
-  const maxTouchPoints = navigator.maxTouchPoints || 0
-
-  const isIOS =
-    /iPad|iPhone|iPod/.test(ua) || (platform === "MacIntel" && maxTouchPoints > 1)
-  if (isIOS) return "ios"
-
-  if (/Android/i.test(ua)) return "android"
-  if (/Edg\//.test(ua)) return "edge"
-  if (/Firefox\//.test(ua)) return "firefox"
-  if (/Chrome\//.test(ua) || /Chromium\//.test(ua)) return "chrome"
-  if (/Safari\//.test(ua)) return "safari-desktop"
-
-  return "unknown"
-}
-
 export default function DownloadPage() {
   return (
     <Suspense fallback={null}>
@@ -91,24 +81,17 @@ export default function DownloadPage() {
 }
 
 function DownloadPageInner() {
-  const [detected, setDetected] = useState<DetectedPlatform | null>(null)
+  const detected = usePlatform()
   const searchParams = useSearchParams()
   const wasReferred = searchParams.get("ref") === "1"
 
-  useEffect(() => {
-    setDetected(detectPlatform())
-  }, [])
-
   const sortedPlatforms =
-    detected && detected !== "safari-desktop" && detected !== "android" && detected !== "unknown"
+    detected && detected !== "unknown"
       ? [
           ...platforms.filter((p) => p.key === detected),
           ...platforms.filter((p) => p.key !== detected),
         ]
       : platforms
-
-  const unsupported =
-    detected === "safari-desktop" || detected === "android" ? detected : null
 
   return (
     <div className="site">
@@ -122,14 +105,14 @@ function DownloadPageInner() {
               role="status"
               aria-live="polite"
             >
-              <span className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-brand">
+              <span className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-ink">
                 Personlig invitation
               </span>
               <span className="text-[19px] font-extrabold tracking-[-0.01em]">
                 Du blev inviteret af en klassekammerat.
               </span>
               <span className="max-w-[60ch] text-sm text-ink-muted">
-                Installér udvidelsen nedenfor — så bliver invitationen automatisk
+                Installér udvidelsen nedenfor, så bliver invitationen automatisk
                 knyttet til den, der inviterede dig.
               </span>
             </div>
@@ -141,16 +124,14 @@ function DownloadPageInner() {
               Hent BetterLectio
             </h1>
             <p className="text-[19px] font-medium text-ink-muted">
-              {unsupported
-                ? `BetterLectio er endnu ikke tilgængelig på ${UNSUPPORTED_LABEL[unsupported]} — men kommer snart.`
-                : "Vi har fundet din platform. Vælg hvor du vil starte."}
+              Vi har fundet din platform. Vælg hvor du vil starte.
             </p>
           </div>
 
           <div className="mt-10 grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-[18px]">
             {sortedPlatforms.map((platform, i) => {
               const isPrimary =
-                i === 0 && detected !== null && !unsupported && detected !== "unknown"
+                i === 0 && detected !== null && detected !== "unknown"
 
               const inner = (
                 <>
@@ -178,7 +159,7 @@ function DownloadPageInner() {
                   <div
                     className={cn(
                       "mt-1.5 inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.06em] [&_svg]:size-3.5",
-                      isPrimary ? "text-white" : "text-brand",
+                      isPrimary ? "text-white" : "text-ink",
                     )}
                   >
                     {platform.cta}
@@ -199,7 +180,7 @@ function DownloadPageInner() {
               const className = cn(
                 "relative flex flex-col gap-2 rounded-[24px] border border-line bg-white p-7 text-ink no-underline shadow-[0_10px_30px_-18px_rgba(0,0,0,0.25)] transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_24px_44px_-22px_rgba(0,0,0,0.32)]",
                 isPrimary &&
-                  "col-span-full border-transparent bg-brand text-white shadow-[0_30px_60px_-26px_color-mix(in_oklch,var(--blue)_48%,transparent)] hover:shadow-[0_40px_70px_-28px_color-mix(in_oklch,var(--blue)_52%,transparent)]",
+                  "col-span-full border-transparent bg-ink text-white shadow-[0_30px_60px_-26px_rgba(0,0,0,0.5)] hover:shadow-[0_40px_70px_-28px_rgba(0,0,0,0.55)]",
               )
               const isExternal = platform.href.startsWith("http")
               const onClick = () =>

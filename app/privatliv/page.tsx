@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils"
 export const metadata: Metadata = {
   title: "Privatliv",
   description:
-    "Dine data er dine. Sådan behandler BetterLectio dine oplysninger — på almindeligt dansk, uden juristsnak.",
+    "Dine data er dine. Sådan behandler BetterLectio dine oplysninger, på almindeligt dansk, uden juristsnak.",
   alternates: { canonical: "/privatliv" },
 }
 
@@ -88,7 +88,7 @@ const PROMISES = [
   {
     icon: <NoSale />,
     title: "Vi sælger aldrig dine data",
-    body: "Ingen annoncer. Ingen datamæglere. Ingen profilering. Vores forretning bygger ikke på dine oplysninger — så der er intet at sælge.",
+    body: "Ingen annoncer. Ingen datamæglere. Ingen profilering. Vores forretning bygger ikke på dine oplysninger, så der er intet at sælge.",
   },
   {
     icon: <Minimal />,
@@ -98,14 +98,14 @@ const PROMISES = [
   {
     icon: <OpenCode />,
     title: "Alt er åbent",
-    body: "Hele kildekoden ligger offentligt på GitHub. Du behøver ikke tro os — du kan tjekke hver eneste linje selv.",
+    body: "Hele kildekoden ligger offentligt på GitHub. Du behøver ikke tro os, du kan tjekke hver eneste linje selv.",
   },
 ]
 
 const DO = [
   "Viser dit skema, dine lektier og karakterer pænere og hurtigere",
   "Husker dine indstillinger, så de følger med på tværs af dine enheder",
-  "Opretter en profil og klassechat — men kun hvis du selv slår det til",
+  "Opretter en profil og klassechat, men kun hvis du selv slår det til",
   "Sender en fejlrapport, når noget crasher, så vi kan nå at fikse det",
 ]
 
@@ -120,18 +120,13 @@ const DONT = [
 const SERVICES = [
   {
     name: "Supabase",
-    desc: "Gemmer det, du selv laver — profilsider, klassechats og et login, der forbinder din BetterLectio-konto med din Lectio-profil (elev-id, skole og basale profiloplysninger).",
+    desc: "Gemmer det, du selv laver, profilsider, klassechats og et login, der forbinder din BetterLectio-konto med din Lectio-profil (elev-id, skole og basale profiloplysninger).",
     tag: "Kun ved valgfrie funktioner",
   },
   {
     name: "PostHog",
-    desc: "Fortæller os, når noget går i stykker. Ren fejl- og stabilitetsovervågning for elever, der er logget ind — så bugs bliver fundet og rettet.",
+    desc: "Fortæller os, når noget går i stykker. Ren fejl- og stabilitetsovervågning for elever, der er logget ind, så bugs bliver fundet og rettet.",
     tag: "Kun til fejlfinding",
-  },
-  {
-    name: "UserJot",
-    desc: "Tager imod din feedback og dine fejlrapporter. Der bliver kun sendt noget, hvis du selv åbner feedback-vinduet og skriver til os.",
-    tag: "Kun hvis du selv skriver",
   },
 ]
 
@@ -145,11 +140,11 @@ export default function PrivatlivPage() {
         <section className="mx-auto max-w-[780px] pt-5 pb-2 text-center">
           <span className={siteEyebrow()}>Privatliv, på almindeligt dansk</span>
           <h1 className="mt-4 mb-5 text-[clamp(44px,6.4vw,76px)] font-extrabold leading-none tracking-[-0.045em]">
-            Dine data er <mark className="bg-transparent text-brand">dine.</mark>
+            Dine data er <mark className="bg-transparent text-ink-muted">dine.</mark>
           </h1>
           <p className="mx-auto max-w-[58ch] text-[clamp(18px,2.2vw,21px)] font-medium leading-[1.5] text-ink-muted">
             BetterLectio er lavet af elever, der selv bruger Lectio hver dag. Vi
-            bygger det, vi selv ville stole på — så her er præcis, hvad der sker
+            bygger det, vi selv ville stole på, så her er præcis, hvad der sker
             med dine data. Uden juristsnak.
           </p>
 
@@ -161,7 +156,7 @@ export default function PrivatlivPage() {
             ].map((chip) => (
               <span
                 key={chip.label}
-                className="inline-flex items-center gap-2 rounded-full border border-line bg-white/75 py-[9px] pr-4 pl-[13px] text-sm font-bold text-ink backdrop-blur-[10px] [&_svg]:size-4 [&_svg]:text-brand"
+                className="inline-flex items-center gap-2 rounded-full border border-line bg-white/75 py-[9px] pr-4 pl-[13px] text-sm font-bold text-ink backdrop-blur-[10px] [&_svg]:size-4 [&_svg]:text-ink"
               >
                 {chip.icon} {chip.label}
               </span>
@@ -180,7 +175,7 @@ export default function PrivatlivPage() {
               key={p.title}
               className="rounded-[26px] border border-line bg-grey px-[30px] py-8 transition-[transform,box-shadow] duration-[350ms] hover:-translate-y-1 hover:shadow-[0_24px_44px_-28px_rgba(0,0,0,0.28)] motion-reduce:transition-none"
             >
-              <div className="mb-5 flex size-[52px] items-center justify-center rounded-[15px] bg-brand-soft text-brand [&_svg]:size-[26px]">
+              <div className="mb-5 flex size-[52px] items-center justify-center rounded-[15px] bg-ink text-white [&_svg]:size-[26px]">
                 {p.icon}
               </div>
               <h3 className="mb-2.5 text-[21px] font-extrabold tracking-[-0.02em] text-ink">
@@ -191,11 +186,11 @@ export default function PrivatlivPage() {
           ))}
         </section>
 
-        {/* The honest ledger — signature -------------------------------- */}
+        {/* The honest ledger, signature -------------------------------- */}
         <div className="mx-auto mt-[72px] max-w-[640px] text-center min-[900px]:mt-24">
           <span className={siteEyebrow()}>Det korte af det lange</span>
           <h2 className="my-3 text-[clamp(28px,3.6vw,42px)] font-extrabold tracking-[-0.03em] text-ink">
-            Hvad vi gør — og aldrig gør
+            Hvad vi gør, og aldrig gør
           </h2>
           <p className="text-[17px] leading-[1.5] text-ink-muted">
             To lister. Ingen forbehold på tre sider. Sådan her ser det ud.
@@ -203,20 +198,20 @@ export default function PrivatlivPage() {
         </div>
 
         <section className="mt-[30px] grid grid-cols-1 gap-5 min-[900px]:grid-cols-2">
-          <div className="rounded-[26px] border border-[oklch(0.9_0.05_150)] bg-[oklch(0.975_0.02_150)] p-8">
+          <div className="rounded-[26px] border border-line bg-grey p-8">
             <div className="mb-[22px] flex items-center gap-3">
-              <span className="flex size-[34px] shrink-0 items-center justify-center rounded-[11px] bg-[oklch(0.72_0.15_150)] text-white [&_svg]:size-5">
+              <span className="flex size-[34px] shrink-0 items-center justify-center rounded-[11px] bg-ink text-white [&_svg]:size-5">
                 <Check />
               </span>
               <h3 className="text-[19px] font-extrabold tracking-[-0.02em] text-ink">
-                Det gør vi — så BetterLectio virker
+                Det gør vi, så BetterLectio virker
               </h3>
             </div>
             <ul className="flex list-none flex-col gap-3.5">
               {DO.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-[11px] text-[15px] font-medium leading-[1.45] text-[#3a3a3c] [&_svg]:mt-px [&_svg]:size-[18px] [&_svg]:shrink-0 [&_svg]:text-[oklch(0.6_0.15_150)]"
+                  className="flex items-start gap-[11px] text-[15px] font-medium leading-[1.45] text-[#3a3a3c] [&_svg]:mt-px [&_svg]:size-[18px] [&_svg]:shrink-0 [&_svg]:text-ink"
                 >
                   <Check />
                   {item}
@@ -225,9 +220,9 @@ export default function PrivatlivPage() {
             </ul>
           </div>
 
-          <div className="rounded-[26px] border border-[oklch(0.9_0.04_25)] bg-[oklch(0.975_0.014_25)] p-8">
+          <div className="rounded-[26px] border border-line bg-white p-8">
             <div className="mb-[22px] flex items-center gap-3">
-              <span className="flex size-[34px] shrink-0 items-center justify-center rounded-[11px] bg-[oklch(0.62_0.2_25)] text-white [&_svg]:size-5">
+              <span className="flex size-[34px] shrink-0 items-center justify-center rounded-[11px] bg-ink-muted text-white [&_svg]:size-5">
                 <Cross />
               </span>
               <h3 className="text-[19px] font-extrabold tracking-[-0.02em] text-ink">
@@ -238,7 +233,7 @@ export default function PrivatlivPage() {
               {DONT.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-[11px] text-[15px] font-medium leading-[1.45] text-[#3a3a3c] [&_svg]:mt-px [&_svg]:size-[18px] [&_svg]:shrink-0 [&_svg]:text-[oklch(0.62_0.2_25)]"
+                  className="flex items-start gap-[11px] text-[15px] font-medium leading-[1.45] text-[#3a3a3c] [&_svg]:mt-px [&_svg]:size-[18px] [&_svg]:shrink-0 [&_svg]:text-ink-muted"
                 >
                   <Cross />
                   {item}
@@ -254,7 +249,7 @@ export default function PrivatlivPage() {
             <Lock />
           </div>
           <div>
-            <span className={cn(siteEyebrow(), "text-[oklch(0.8_0.11_265)]")}>
+            <span className={cn(siteEyebrow(), "text-white/60")}>
               Det vigtigste først
             </span>
             <h2 className="mt-2 mb-3 text-[clamp(26px,3.4vw,38px)] font-extrabold tracking-[-0.03em]">
@@ -262,7 +257,7 @@ export default function PrivatlivPage() {
             </h2>
             <p className="max-w-[60ch] text-[17px] leading-[1.55] text-white/[0.78]">
               Du logger ind hos Lectio, præcis som du plejer. BetterLectio får
-              aldrig dit brugernavn eller kodeord at se — vi lægger os kun oven
+              aldrig dit brugernavn eller kodeord at se, vi lægger os kun oven
               på den side, du allerede er logget ind på.
             </p>
           </div>
@@ -272,10 +267,10 @@ export default function PrivatlivPage() {
         <div className="mx-auto mt-[72px] max-w-[640px] text-center min-[900px]:mt-24">
           <span className={siteEyebrow()}>Bag kulisserne</span>
           <h2 className="my-3 text-[clamp(28px,3.6vw,42px)] font-extrabold tracking-[-0.03em] text-ink">
-            Hvem hjælper os — og hvornår
+            Hvem hjælper os, og hvornår
           </h2>
           <p className="text-[17px] leading-[1.5] text-ink-muted">
-            Nogle funktioner har brug for en server. Her er de tre tjenester, vi
+            Nogle funktioner har brug for en server. Her er de to tjenester, vi
             bruger, og præcis hvornår de kommer i spil.
           </p>
         </div>
@@ -290,7 +285,7 @@ export default function PrivatlivPage() {
                 {s.name}
               </span>
               <p className="text-[15px] leading-[1.5] text-ink-muted">{s.desc}</p>
-              <span className="justify-self-start whitespace-nowrap rounded-full bg-brand-soft px-3 py-1.5 text-center font-mono text-[11px] font-bold uppercase tracking-[0.04em] text-brand">
+              <span className="justify-self-start whitespace-nowrap rounded-full bg-grey px-3 py-1.5 text-center font-mono text-[11px] font-bold uppercase tracking-[0.04em] text-ink">
                 {s.tag}
               </span>
             </article>
@@ -339,7 +334,7 @@ export default function PrivatlivPage() {
                 <li>
                   <span>
                     <strong>Til valgfrie funktioner:</strong> Data, du selv
-                    vælger at oprette eller opdatere — fx profiloplysninger og
+                    vælger at oprette eller opdatere, fx profiloplysninger og
                     indhold i private klassechats.
                   </span>
                 </li>
@@ -347,7 +342,7 @@ export default function PrivatlivPage() {
                   <span>
                     <strong>Til login og kontokobling:</strong> De oplysninger,
                     der skal til for at forbinde din BetterLectio-konto med din
-                    Lectio-identitet — dit elev-id, din skole og basale
+                    Lectio-identitet, dit elev-id, din skole og basale
                     profildetaljer.
                   </span>
                 </li>
@@ -358,16 +353,10 @@ export default function PrivatlivPage() {
                     at forstå og løse problemet.
                   </span>
                 </li>
-                <li>
-                  <span>
-                    <strong>Til feedback:</strong> Det, du selv vælger at sende via
-                    feedback-vinduet.
-                  </span>
-                </li>
               </ul>
               <p>
                 Vi bruger aldrig disse data til annoncering, datahandel eller
-                sporing på tværs af sider — kun til at få funktionerne til at
+                sporing på tværs af sider, kun til at få funktionerne til at
                 virke og holde udvidelsen stabil.
               </p>
             </div>
@@ -402,11 +391,6 @@ export default function PrivatlivPage() {
                 på nettet. PostHog bruges udelukkende til fejl- og
                 stabilitetsovervågning for elever, der er logget ind.
               </p>
-              <p>
-                UserJot bruges ikke til passiv sporing. Åbner du ikke selv
-                vinduet og sender noget, bliver der ikke sendt nogen feedback
-                eller fejlrapport.
-              </p>
             </div>
           </details>
 
@@ -434,15 +418,15 @@ export default function PrivatlivPage() {
         </section>
 
         {/* Open source + contact ---------------------------------------- */}
-        <section className="mt-[30px] rounded-[30px] bg-brand p-[clamp(40px,5vw,64px)] text-center text-white">
-          <span className={cn(siteEyebrow(), "text-white/80")}>
+        <section className="mt-[30px] rounded-[30px] bg-ink p-[clamp(40px,5vw,64px)] text-center text-white">
+          <span className={cn(siteEyebrow(), "text-white/70")}>
             Tro os ikke på ordet
           </span>
           <h2 className="mt-2.5 mb-3 text-[clamp(28px,3.6vw,40px)] font-extrabold tracking-[-0.03em]">
             Tjek det hele selv
           </h2>
           <p className="mx-auto mb-7 max-w-[52ch] text-[17px] leading-[1.55] text-white/85">
-            Alt er open source. Læs koden, åbn en sag, eller skriv til os — vi
+            Alt er open source. Læs koden, åbn en sag, eller skriv til os, vi
             svarer gerne på alt om, hvordan dine data bliver behandlet.
           </p>
           <div className="flex flex-wrap justify-center gap-3.5">

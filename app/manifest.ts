@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Lectio, bare bedre.",
     start_url: "/",
     display: "standalone",
-    background_color: "#f2f2f0",
-    theme_color: "#2d5bff",
+    background_color: "#ffffff",
+    theme_color: "#0f0f10",
     icons: [
       { src: "/icon-48.png", sizes: "48x48", type: "image/png" },
       { src: "/icon-128.png", sizes: "128x128", type: "image/png" },

@@ -11,7 +11,7 @@ export function getSupabaseAdmin(): SupabaseClient {
   const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
   if (!url || !serviceRoleKey) {
     throw new Error(
-      "Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY — Supabase admin client cannot be created.",
+      "Missing SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY, Supabase admin client cannot be created.",
     )
   }
 

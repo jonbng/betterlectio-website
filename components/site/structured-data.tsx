@@ -11,7 +11,7 @@ export function JsonLd({ data }: { data: object | object[] }) {
   return (
     <script
       type="application/ld+json"
-      // Content is our own static data — safe to inline.
+      // Content is our own static data, safe to inline.
       dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
     />
   )
@@ -44,7 +44,7 @@ export function siteJsonLd(): object {
       "En moderne brugerflade til Lectio. Hurtigere, pænere og uden alt det rod. Tilgængelig som app og browser-udvidelse.",
     url: SITE_URL,
     applicationCategory: "EducationalApplication",
-    operatingSystem: "Chrome, Firefox, Edge, iOS",
+    operatingSystem: "Chrome, Firefox, Edge, iOS, Android",
     inLanguage: "da-DK",
     publisher: { "@id": `${SITE_URL}/#organization` },
     downloadUrl: [
@@ -52,6 +52,7 @@ export function siteJsonLd(): object {
       DOWNLOAD_LINKS.firefox,
       DOWNLOAD_LINKS.edge,
       DOWNLOAD_LINKS.ios,
+      DOWNLOAD_LINKS.android,
     ],
     offers: {
       "@type": "Offer",

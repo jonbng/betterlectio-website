@@ -6,7 +6,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        // Personal referral links carry student elevids in the URL —
+        // Personal referral links carry student elevids in the URL , 
         // keep them out of search results.
         disallow: ["/r/"],
       },

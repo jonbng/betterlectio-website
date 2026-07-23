@@ -5,7 +5,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
 
-// Geist is the extension's typeface — match it so the site and product read as one.
+// Geist is the extension's typeface, match it so the site and product read as one.
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
 
 const fontMono = Geist_Mono({
@@ -18,8 +18,8 @@ const SITE_URL = "https://betterlectio.dk"
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "BetterLectio — Lectio, bare bedre.",
-    template: "%s — BetterLectio",
+    default: "BetterLectio: Lectio, bare bedre.",
+    template: "%s · BetterLectio",
   },
   description:
     "BetterLectio er en moderne brugerflade til Lectio. Hurtigere, pænere og uden alt det rod. Tilgængelig som app og browser-udvidelse.",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "da_DK",
     siteName: "BetterLectio",
-    title: "BetterLectio — Lectio, bare bedre.",
+    title: "BetterLectio: Lectio, bare bedre.",
     description: "En moderne brugerflade til Lectio. Hurtigere, pænere og uden alt det rod.",
     url: SITE_URL,
     // OG/Twitter images come from the file-based `opengraph-image.tsx` /
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "BetterLectio — Lectio, bare bedre.",
+    title: "BetterLectio: Lectio, bare bedre.",
     description: "En moderne brugerflade til Lectio. Hurtigere, pænere og uden alt det rod.",
   },
   alternates: {

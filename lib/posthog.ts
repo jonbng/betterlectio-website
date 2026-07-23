@@ -10,7 +10,7 @@ export function capture(event: string, properties?: Props) {
   try {
     posthog.capture(event, properties)
   } catch {
-    // posthog not initialized (no env key) — drop silently
+    // posthog not initialized (no env key), drop silently
   }
 }
 

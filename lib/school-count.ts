@@ -17,7 +17,7 @@ async function fetchSchoolCount(): Promise<number> {
   try {
     const supabase = getSupabaseAdmin()
     // Count distinct schools that have at least one student who has installed
-    // the extension — the honest "brugt af elever på N gymnasier" metric.
+    // the extension, the honest "brugt af elever på N gymnasier" metric.
     const { data, error } = await supabase
       .from("students")
       .select("school_id")
