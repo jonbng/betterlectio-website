@@ -17,7 +17,7 @@ import { UninstallForm } from "./uninstall-form"
 export const metadata: Metadata = {
   title: "Afinstalleret",
   description:
-    "BetterLectio er afinstalleret. Fortæl os hvorfor — det hjælper os med at gøre det bedre.",
+    "BetterLectio er afinstalleret. Fortæl os hvorfor, det hjælper os med at gøre det bedre.",
   robots: { index: false, follow: false },
 }
 
@@ -59,7 +59,7 @@ export default async function UninstallPage({
           </h1>
 
           <p className="max-w-[60ch] text-xl font-medium leading-[1.5] text-ink-muted">
-            BetterLectio er afinstalleret. Hvis du har lyst, så fortæl os hvorfor —
+            BetterLectio er afinstalleret. Hvis du har lyst, så fortæl os hvorfor , 
             det hjælper os med at gøre det bedre for de næste.
           </p>
 

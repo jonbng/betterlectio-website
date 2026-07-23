@@ -2,17 +2,17 @@ export type Variant = (name: string) => string
 
 export const introVariants: Variant[] = [
   (name) =>
-    `Går du på ${name}? Så kender du Lectio — og du kender også, hvor langsomt og rodet det kan føles. BetterLectio er en moderne brugerflade oven på det samme Lectio, du allerede bruger.`,
+    `Går du på ${name}? Så kender du Lectio, og du kender også, hvor langsomt og rodet det kan føles. BetterLectio er en moderne brugerflade oven på det samme Lectio, du allerede bruger.`,
   (name) =>
     `Lectio er en del af hverdagen på ${name}, men brugerfladen er fra forrige årti. BetterLectio rydder op, gør tingene hurtigere og giver dig mørk tilstand, bedre skema og en rigtig lektieoversigt.`,
   (name) =>
-    `Tusindvis af elever bruger Lectio dagligt på ${name}. BetterLectio er en gratis udvidelse, der gør Lectio pænere, hurtigere og nemmere at finde rundt i — uden at ændre noget i din profil.`,
+    `Tusindvis af elever bruger Lectio dagligt på ${name}. BetterLectio er en gratis udvidelse, der gør Lectio pænere, hurtigere og nemmere at finde rundt i, uden at ændre noget i din profil.`,
   (name) =>
-    `Hvis du er træt af, at Lectio på ${name} ser ud som om det er fra 2008, så er BetterLectio til dig. Samme system, samme login — bare bedre.`,
+    `Hvis du er træt af, at Lectio på ${name} ser ud som om det er fra 2008, så er BetterLectio til dig. Samme system, samme login, bare bedre.`,
   (name) =>
     `BetterLectio gør Lectio brugbart igen på ${name}. Mørk tilstand, hurtigere skema, samlet lektie- og opgaveoversigt og beskeder uden konstant genindlæsning.`,
   (name) =>
-    `Lectio er der for at blive — også på ${name}. BetterLectio er en let udvidelse, der lægger en moderne brugerflade ovenpå, så de daglige opgaver bliver markant hurtigere.`,
+    `Lectio er der for at blive, også på ${name}. BetterLectio er en let udvidelse, der lægger en moderne brugerflade ovenpå, så de daglige opgaver bliver markant hurtigere.`,
 ]
 
 export type Benefit = {
@@ -43,13 +43,13 @@ export const benefits: Benefit[] = [
   },
   {
     title: "Mobil-app",
-    body: "BetterLectio findes også som app, så du har skema, lektier og beskeder lige ved hånden — også når du ikke sidder ved computeren.",
+    body: "BetterLectio findes også som app, så du har skema, lektier og beskeder lige ved hånden, også når du ikke sidder ved computeren.",
   },
 ]
 
 export const closingVariants: Variant[] = [
   (name) =>
-    `Hop på BetterLectio på ${name} — det tager under et minut at installere, og du kan altid slå det fra igen.`,
+    `Hop på BetterLectio på ${name}, det tager under et minut at installere, og du kan altid slå det fra igen.`,
   (name) =>
     `Tag ${name} ind i 2026. Installer BetterLectio gratis og oplev forskellen i dag.`,
   (name) =>
@@ -77,12 +77,12 @@ export const faqPool: FaqItem[] = [
   {
     q: "Virker det på min skole?",
     a: (name) =>
-      `Ja — BetterLectio virker på alle skoler, der bruger Lectio. Det inkluderer ${name}.`,
+      `Ja, BetterLectio virker på alle skoler, der bruger Lectio. Det inkluderer ${name}.`,
   },
   {
     q: "Kan lærerne se, at jeg bruger BetterLectio?",
     a: () =>
-      "Nej. BetterLectio kører kun lokalt i din browser eller din mobil. Lectio's servere ser ikke noget anderledes — for dem ligner du en helt almindelig elev.",
+      "Nej. BetterLectio kører kun lokalt i din browser eller din mobil. Lectio's servere ser ikke noget anderledes, for dem ligner du en helt almindelig elev.",
   },
   {
     q: "Hvad med privatliv og data?",
@@ -92,14 +92,14 @@ export const faqPool: FaqItem[] = [
   {
     q: "Hvad hvis jeg ikke kan lide det?",
     a: () =>
-      "Så slår du det bare fra igen — afinstaller udvidelsen eller slet appen, og du er tilbage til standard Lectio. Ingen spor, intet låst inde.",
+      "Så slår du det bare fra igen, afinstaller udvidelsen eller slet appen, og du er tilbage til standard Lectio. Ingen spor, intet låst inde.",
   },
 ]
 
 export const headingPools: Record<"why" | "start" | "faq", Variant[]> = {
   why: [
     (name) => `Hvorfor BetterLectio på ${name}?`,
-    () => "Lectio — bare bedre.",
+    () => "Lectio, bare bedre.",
     (name) => `Lavet til elever på ${name}`,
   ],
   start: [

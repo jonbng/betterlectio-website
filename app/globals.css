@@ -145,18 +145,18 @@
 }
 
 /* =========================================================================
-   BetterLectio marketing site — monochrome design system
+   BetterLectio marketing site, monochrome design system
    Black / grey / white foundation. Blue survives only as a restrained accent
    for links and focus rings; the real colour on the page comes from product
    screenshots. Brand tokens are defined here and surfaced to Tailwind via the
    `@theme inline` block above (bg-brand, text-ink, border-line, …).
 
-   Marketing pages are always light — `.site` fixes its own palette so the
+   Marketing pages are always light, `.site` fixes its own palette so the
    `next-themes` dark toggle (used elsewhere) never flips the landing page.
    ========================================================================= */
 
 .site {
-  /* Neutral foundation — zero chroma across the greyscale. */
+  /* Neutral foundation, zero chroma across the greyscale. */
   --ink: oklch(0.18 0 0);
   --ink-muted: oklch(0.47 0 0);
   --grey: oklch(0.967 0 0);

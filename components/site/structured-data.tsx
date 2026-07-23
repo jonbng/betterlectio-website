@@ -11,7 +11,7 @@ export function JsonLd({ data }: { data: object | object[] }) {
   return (
     <script
       type="application/ld+json"
-      // Content is our own static data — safe to inline.
+      // Content is our own static data, safe to inline.
       dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
     />
   )

@@ -45,7 +45,7 @@ export async function generateMetadata({
   if (!school) return {}
 
   const title = `${school.displayName} Lectio`
-  const description = `Brug Lectio på ${school.displayName} med BetterLectio — en moderne, hurtigere version af Lectio, lavet til elever på ${school.displayName}. Gratis og uden ny konto.`
+  const description = `Brug Lectio på ${school.displayName} med BetterLectio: en moderne, hurtigere version af Lectio, lavet til elever på ${school.displayName}. Gratis og uden ny konto.`
   const url = `/skoler/${school.slug}`
 
   return {

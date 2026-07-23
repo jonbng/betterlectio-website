@@ -51,7 +51,7 @@ export function UninstallForm({ studentId }: { studentId: string }) {
     e.preventDefault()
     if (!reason || isPending || submitted) return
     if (feedbackRequired && feedbackTrimmed.length === 0) {
-      setError("Skriv kort hvad der var for kompliceret — det er det vi prøver at fikse.")
+      setError("Skriv kort hvad der var for kompliceret, det er det vi prøver at fikse.")
       return
     }
 
@@ -65,7 +65,7 @@ export function UninstallForm({ studentId }: { studentId: string }) {
     })
 
     if (!studentId) {
-      // No DB write possible without a student id — still treat as submitted
+      // No DB write possible without a student id, still treat as submitted
       // so the user gets their thank-you state. PostHog already has the event.
       setSubmitted(true)
       return
@@ -99,7 +99,7 @@ export function UninstallForm({ studentId }: { studentId: string }) {
           Det betyder meget.
         </p>
         <p className="max-w-[50ch] text-ink-muted">
-          Vi læser alt — og bruger det til at gøre BetterLectio bedre.
+          Vi læser alt, og bruger det til at gøre BetterLectio bedre.
         </p>
       </div>
     )

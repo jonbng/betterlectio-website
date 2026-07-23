@@ -17,7 +17,7 @@ import { captureDownloadClicked } from "@/lib/posthog"
 import { usePlatform } from "@/lib/use-platform"
 import { cn } from "@/lib/utils"
 
-type PlatformKey = "chrome" | "ios" | "android" | "firefox" | "edge"
+type PlatformKey = "chrome" | "ios" | "android" | "firefox" | "edge" | "safari"
 
 type Platform = {
   key: PlatformKey
@@ -38,6 +38,13 @@ const platforms: Platform[] = [
   {
     key: "ios",
     name: "iOS",
+    description: "Native app til iPhone og iPad",
+    href: "/download/ios",
+    cta: "App Store",
+  },
+  {
+    key: "safari",
+    name: "Safari",
     description: "Native app til iPhone og iPad",
     href: "/download/ios",
     cta: "App Store",
@@ -65,10 +72,6 @@ const platforms: Platform[] = [
   },
 ]
 
-const UNSUPPORTED_LABEL: Record<"safari-desktop", string> = {
-  "safari-desktop": "Safari",
-}
-
 export default function DownloadPage() {
   return (
     <Suspense fallback={null}>
@@ -83,14 +86,12 @@ function DownloadPageInner() {
   const wasReferred = searchParams.get("ref") === "1"
 
   const sortedPlatforms =
-    detected && detected !== "safari-desktop" && detected !== "unknown"
+    detected && detected !== "unknown"
       ? [
           ...platforms.filter((p) => p.key === detected),
           ...platforms.filter((p) => p.key !== detected),
         ]
       : platforms
-
-  const unsupported = detected === "safari-desktop" ? "safari-desktop" : null
 
   return (
     <div className="site">
@@ -111,7 +112,7 @@ function DownloadPageInner() {
                 Du blev inviteret af en klassekammerat.
               </span>
               <span className="max-w-[60ch] text-sm text-ink-muted">
-                Installér udvidelsen nedenfor — så bliver invitationen automatisk
+                Installér udvidelsen nedenfor, så bliver invitationen automatisk
                 knyttet til den, der inviterede dig.
               </span>
             </div>
@@ -123,16 +124,14 @@ function DownloadPageInner() {
               Hent BetterLectio
             </h1>
             <p className="text-[19px] font-medium text-ink-muted">
-              {unsupported
-                ? `BetterLectio er endnu ikke tilgængelig på ${UNSUPPORTED_LABEL[unsupported]} — men kommer snart.`
-                : "Vi har fundet din platform. Vælg hvor du vil starte."}
+              Vi har fundet din platform. Vælg hvor du vil starte.
             </p>
           </div>
 
           <div className="mt-10 grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-[18px]">
             {sortedPlatforms.map((platform, i) => {
               const isPrimary =
-                i === 0 && detected !== null && !unsupported && detected !== "unknown"
+                i === 0 && detected !== null && detected !== "unknown"
 
               const inner = (
                 <>

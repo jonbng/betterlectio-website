@@ -18,7 +18,7 @@ export function Hero({ schoolCount }: { schoolCount: number }) {
           Lectio, <mark className="bg-transparent text-ink-muted">bare bedre.</mark>
         </h1>
         <p className="max-w-[480px] text-[clamp(18px,2.2vw,22px)] font-medium leading-[1.45] text-ink-muted">
-          Samme skema, samme karakterer, samme beskeder — bare hurtigere, pænere
+          Samme skema, samme karakterer, samme beskeder, bare hurtigere, pænere
           og faktisk til at finde rundt i. På din telefon og i din browser.
         </p>
 
@@ -47,12 +47,12 @@ export function Hero({ schoolCount }: { schoolCount: number }) {
         <BeforeAfter
           beforeSrc="/shots/lectio-before.png"
           afterSrc="/shots/betterlectio-after.png"
-          beforeAlt="Lectios standard-skema — gråt og kompakt"
-          afterAlt="Det samme skema i BetterLectio — rent og farvekodet"
+          beforeAlt="Lectios standard-skema, gråt og kompakt"
+          afterAlt="Det samme skema i BetterLectio: rent og farvekodet"
           className="shadow-[0_50px_100px_-45px_rgba(0,0,0,0.5)]"
         />
         <p className="mt-4 text-center font-mono text-xs uppercase tracking-[0.04em] text-ink-muted">
-          Træk i midten — Lectio til venstre, BetterLectio til højre
+          Træk i midten: Lectio til venstre, BetterLectio til højre
         </p>
       </div>
     </section>

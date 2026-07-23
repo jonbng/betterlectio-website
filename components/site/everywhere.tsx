@@ -46,7 +46,7 @@ function MobilePanel({ reverse }: { reverse: boolean }) {
       reverse={reverse}
       eyebrow="BetterLectio Mobile"
       title="En rigtig app i lommen."
-      body="Ikke Lectios mobilside, der ser ud som om den giver op. Skema, beskeder, lektier og karakterer åbner med det samme — til både iPhone og Android."
+      body="Ikke Lectios mobilside, der ser ud som om den giver op. Skema, beskeder, lektier og karakterer åbner med det samme, til både iPhone og Android."
       visual={
         <div className="flex items-end justify-center">
           <PhoneFrame
@@ -81,7 +81,7 @@ function WebPanel({ reverse }: { reverse: boolean }) {
       reverse={reverse}
       eyebrow="BetterLectio for Web"
       title="Og i din browser."
-      body="En udvidelse, der lægger sig oven på Lectio og gør hele oplevelsen pænere og hurtigere. Virker i Chrome, Firefox og Edge — installeret på under et minut."
+      body="En udvidelse, der lægger sig oven på Lectio og gør hele oplevelsen pænere og hurtigere. Virker i Chrome, Firefox og Edge, installeret på under et minut."
       visual={
         <BrowserFrame
           src="/shots/web-skema.png"
@@ -155,7 +155,7 @@ export function Everywhere() {
           BetterLectio følger med dig.
         </h2>
         <p className="mx-auto max-w-[52ch] text-[18px] leading-[1.5] text-ink-muted">
-          Det er ikke to forskellige produkter — det er den samme moderne Lectio,
+          Det er ikke to forskellige produkter, det er den samme moderne Lectio,
           uanset om du sidder ved computeren eller tjekker skemaet i bussen.
         </p>
       </div>

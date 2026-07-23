@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils"
 export const metadata: Metadata = {
   title: "Roadmap",
   description:
-    "Hvad vi arbejder på i BetterLectio. Roadmappet er på vej — følg med på GitHub imens.",
+    "Hvad vi arbejder på i BetterLectio. Roadmappet er på vej, følg med på GitHub imens.",
   alternates: { canonical: "/roadmap" },
 }
 

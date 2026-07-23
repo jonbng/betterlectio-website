@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"
 
 /**
  * Hardware-style frames that wrap product screenshots. Screenshot files live in
- * `public/shots` (currently placeholders — see the plan for target dimensions).
+ * `public/shots` (currently placeholders, see the plan for target dimensions).
  */
 
 type FrameProps = {

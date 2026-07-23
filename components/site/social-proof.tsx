@@ -2,7 +2,7 @@ import { Star } from "@/components/site/icons"
 import { siteContainerClass, siteEyebrow } from "@/components/site/styles"
 import { cn } from "@/lib/utils"
 
-// Placeholder ratings — swap for live store numbers when wired up.
+// Placeholder ratings, swap for live store numbers when wired up.
 const RATINGS = [
   { store: "Chrome Web Store", score: "4,9" },
   { store: "Firefox Add-ons", score: "4,8" },
@@ -11,7 +11,7 @@ const RATINGS = [
   { store: "Google Play", score: "Ny" },
 ]
 
-// Placeholder testimonials — real student quotes to be gathered before launch.
+// Placeholder testimonials, real student quotes to be gathered before launch.
 const QUOTES = [
   {
     quote:

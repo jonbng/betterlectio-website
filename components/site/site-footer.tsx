@@ -21,7 +21,7 @@ export function SiteFooter() {
               BetterLectio
             </h2>
             <p className="max-w-[320px] opacity-80">
-              En moderne brugerflade til Lectio. Bygget af elever, for elever — så
+              En moderne brugerflade til Lectio. Bygget af elever, for elever, så
               skema, lektier og karakterer faktisk er til at bruge.
             </p>
           </div>

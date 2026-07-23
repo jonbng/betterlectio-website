@@ -9,11 +9,6 @@ const NAV_LINKS = [
   { href: "/#funktioner", label: "Funktioner", external: false },
   { href: "/privatliv", label: "Privatliv", external: false },
   { href: "/roadmap", label: "Roadmap", external: false },
-  {
-    href: "https://github.com/jonbng/betterlectio",
-    label: "Kildekode",
-    external: true,
-  },
 ]
 
 const NAV_LINK_CLASS =
@@ -30,12 +25,12 @@ export function SiteNav() {
     >
       <Link
         href="/"
-        aria-label="BetterLectio — forside"
+        aria-label="BetterLectio: forside"
         className="group inline-flex items-center gap-2.5 text-2xl font-extrabold tracking-tight text-ink no-underline"
       >
         <SiteLogoMark
           size={34}
-          className="block shrink-0 rounded-[9px] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-rotate-6 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:rotate-0 motion-reduce:group-hover:scale-100"
+          className="block shrink-0 rounded-[9px] [--logo-badge:var(--ink)] [--logo-glyph:#fff] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-rotate-6 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:rotate-0 motion-reduce:group-hover:scale-100"
         />
         <span>
           Better<span className="text-ink-muted">Lectio</span>

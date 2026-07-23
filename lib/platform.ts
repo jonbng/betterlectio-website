@@ -7,14 +7,14 @@ export type DetectedPlatform =
   | "edge"
   | "ios"
   | "android"
-  | "safari-desktop"
+  | "safari"
   | "unknown"
 
 /** Whether the visitor is most likely on a phone or a computer. */
 export type DeviceKind = "mobile" | "desktop" | "unknown"
 
 /**
- * Best-effort platform detection from the user agent. Client-only — returns
+ * Best-effort platform detection from the user agent. Client-only, returns
  * "unknown" during SSR so CTAs render a sensible, JS-free fallback.
  */
 export function detectPlatform(): DetectedPlatform {
@@ -31,15 +31,14 @@ export function detectPlatform(): DetectedPlatform {
   if (/Edg\//.test(ua)) return "edge"
   if (/Firefox\//.test(ua)) return "firefox"
   if (/Chrome\//.test(ua) || /Chromium\//.test(ua)) return "chrome"
-  if (/Safari\//.test(ua)) return "safari-desktop"
+  if (/Safari\//.test(ua)) return "safari"
 
   return "unknown"
 }
 
 export function deviceKind(p: DetectedPlatform): DeviceKind {
-  if (p === "ios" || p === "android") return "mobile"
-  if (p === "chrome" || p === "firefox" || p === "edge" || p === "safari-desktop")
-    return "desktop"
+  if (p === "ios" || p === "android" || p === "safari") return "mobile"
+  if (p === "chrome" || p === "firefox" || p === "edge") return "desktop"
   return "unknown"
 }
 
@@ -92,10 +91,9 @@ export function installFor(p: DetectedPlatform): {
   primary: InstallTarget
   secondary: InstallTarget
 } {
-  if (p === "ios") return { primary: IOS_TARGET, secondary: GENERIC_BROWSER }
+  if (p === "ios" || p === "safari") return { primary: IOS_TARGET, secondary: GENERIC_BROWSER }
   if (p === "android") return { primary: ANDROID_TARGET, secondary: GENERIC_BROWSER }
   if (p === "chrome" || p === "firefox" || p === "edge")
     return { primary: BROWSER_TARGETS[p], secondary: GENERIC_APP }
-  // safari-desktop (no extension yet) + unknown → sensible defaults.
   return { primary: GENERIC_BROWSER, secondary: GENERIC_APP }
 }

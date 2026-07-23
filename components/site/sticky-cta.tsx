@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useEffect, useState } from "react"
 
 import { Close } from "@/components/site/icons"
+import { siteButton } from "@/components/site/styles"
 import { installFor } from "@/lib/platform"
 import { captureDownloadClicked } from "@/lib/posthog"
 import { usePlatform } from "@/lib/use-platform"
@@ -35,7 +36,7 @@ export function StickyCta() {
     try {
       sessionStorage.setItem(DISMISS_KEY, "1")
     } catch {
-      // storage unavailable — dismissal just won't persist
+      // storage unavailable, dismissal just won't persist
     }
   }
 
@@ -48,45 +49,60 @@ export function StickyCta() {
   return (
     <div
       className={cn(
-        "fixed inset-x-3 bottom-3 z-50 mx-auto flex max-w-[440px] items-center gap-3 rounded-2xl border border-line bg-white/90 p-2.5 pl-4 shadow-[0_18px_50px_-20px_rgba(0,0,0,0.45)] backdrop-blur-xl transition-[opacity,transform] duration-300 min-[720px]:inset-x-auto min-[720px]:right-5 min-[720px]:mx-0",
+        "fixed bottom-5 left-1/2 z-50 w-[min(calc(100%-2rem),560px)] -translate-x-1/2 transition-[opacity,transform] duration-300 min-[720px]:bottom-6",
         visible
           ? "translate-y-0 opacity-100"
-          : "pointer-events-none translate-y-4 opacity-0",
+          : "pointer-events-none translate-y-8 opacity-0",
       )}
       aria-hidden={!visible}
+      role="region"
+      aria-label="Hent BetterLectio"
     >
-      <p className="flex-1 text-sm font-semibold text-ink">
-        Hent BetterLectio — gratis
-      </p>
+      <div className="flex items-center gap-3 rounded-[20px] border border-ink/10 bg-white/95 px-4 py-3.5 shadow-[0_24px_70px_-18px_rgba(0,0,0,0.55)] ring-1 ring-black/[0.04] backdrop-blur-xl min-[720px]:gap-4 min-[720px]:px-6 min-[720px]:py-4">
+        <div className="min-w-0 flex-1">
+          <p className="text-[15px] font-extrabold tracking-[-0.01em] text-ink min-[720px]:text-base">
+            Hent BetterLectio gratis
+          </p>
+          <p className="mt-0.5 text-xs font-medium text-ink-muted">
+            Gratis · ingen ny konto
+          </p>
+        </div>
 
-      {primary.external ? (
-        <a
-          href={primary.href}
-          target="_blank"
-          rel="noreferrer"
-          onClick={onInstall}
-          className="rounded-full bg-ink px-4 py-2.5 text-sm font-bold text-white no-underline transition-opacity hover:opacity-90"
-        >
-          {primary.label}
-        </a>
-      ) : (
-        <Link
-          href={primary.href}
-          onClick={onInstall}
-          className="rounded-full bg-ink px-4 py-2.5 text-sm font-bold text-white no-underline transition-opacity hover:opacity-90"
-        >
-          {primary.label}
-        </Link>
-      )}
+        {primary.external ? (
+          <a
+            href={primary.href}
+            target="_blank"
+            rel="noreferrer"
+            onClick={onInstall}
+            className={siteButton(
+              "primary",
+              "shrink-0 px-5 py-2.5 text-sm min-[720px]:px-6 min-[720px]:py-3",
+            )}
+          >
+            {primary.label}
+          </a>
+        ) : (
+          <Link
+            href={primary.href}
+            onClick={onInstall}
+            className={siteButton(
+              "primary",
+              "shrink-0 px-5 py-2.5 text-sm min-[720px]:px-6 min-[720px]:py-3",
+            )}
+          >
+            {primary.label}
+          </Link>
+        )}
 
-      <button
-        type="button"
-        onClick={dismiss}
-        aria-label="Luk"
-        className="flex size-8 shrink-0 items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-grey hover:text-ink [&_svg]:size-4"
-      >
-        <Close />
-      </button>
+        <button
+          type="button"
+          onClick={dismiss}
+          aria-label="Luk"
+          className="flex size-9 shrink-0 items-center justify-center rounded-full text-ink-muted transition-colors hover:bg-grey hover:text-ink [&_svg]:size-4"
+        >
+          <Close />
+        </button>
+      </div>
     </div>
   )
 }

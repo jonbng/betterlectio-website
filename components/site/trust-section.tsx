@@ -8,7 +8,7 @@ const POINTS = [
   {
     icon: <GraduationCap />,
     title: "Lavet af elever",
-    body: "Vi bruger selv Lectio hver dag. BetterLectio er det, vi ville ønske fandtes — så vi byggede det.",
+    body: "Vi bruger selv Lectio hver dag. BetterLectio er det, vi ville ønske fandtes, så vi byggede det.",
   },
   {
     icon: <Shield />,
@@ -23,7 +23,7 @@ const POINTS = [
   {
     icon: <Code />,
     title: "Åben kildekode",
-    body: "Hele koden ligger offentligt på GitHub. Du behøver ikke tro os — du kan tjekke hver linje.",
+    body: "Hele koden ligger offentligt på GitHub. Du behøver ikke tro os, du kan tjekke hver linje.",
   },
 ]
 
@@ -34,7 +34,7 @@ export function TrustSection() {
         <div className="max-w-[640px]">
           <span className={siteEyebrow("white")}>Til at stole på</span>
           <h2 className="mt-3 mb-4 text-[clamp(28px,3.8vw,46px)] font-extrabold tracking-[-0.035em]">
-            Bygget af elever — ikke et firma.
+            Bygget af elever, ikke et firma.
           </h2>
           <p className="text-[18px] leading-[1.55] text-white/75">
             BetterLectio er gratis og open source. Der er ingen skjult forretning,

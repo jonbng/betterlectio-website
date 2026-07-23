@@ -5,7 +5,7 @@ type SiteLogoProps = {
 }
 
 /**
- * The BetterLectio owl mark — a brand-blue rounded badge with the white owl
+ * The BetterLectio owl mark, a brand-blue rounded badge with the white owl
  * glyph, identical to the extension / app icon (`app/icon.svg`). Render on its
  * own or alongside the wordmark via <SiteLogoLockup />.
  */

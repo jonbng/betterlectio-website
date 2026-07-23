@@ -20,7 +20,7 @@ export default async function Image({
 
   return renderOgImage({
     eyebrow: name,
-    title: `${name} Lectio — bare bedre.`,
+    title: `${name} Lectio, bare bedre.`,
     subtitle: `En moderne, hurtigere version af Lectio til elever på ${name}. Gratis og uden ny konto.`,
   })
 }

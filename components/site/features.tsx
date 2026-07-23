@@ -23,13 +23,13 @@ export function Features() {
       </div>
 
       <div className="grid grid-cols-1 gap-5 min-[720px]:grid-cols-12">
-        {/* Grades — signature dark card */}
+        {/* Grades, signature dark card */}
         <article className={cn(CARD_BASE, "bg-ink text-white min-[720px]:col-span-7")}>
           <span className={siteEyebrow("white")}>Karakterer</span>
           <h3 className={TITLE}>Slut med at regne gennemsnit i hånden.</h3>
           <p className={cn(BODY, "max-w-[42ch] text-white/75")}>
             Alle karakterer samlet, farvekodet og vægtet automatisk. Du kan se
-            præcis hvor du står — uden et regneark åbent ved siden af.
+            præcis hvor du står, uden et regneark åbent ved siden af.
           </p>
           <div className="mt-8 overflow-hidden rounded-2xl bg-white/10 p-3">
             <Image
@@ -50,7 +50,7 @@ export function Features() {
           </span>
           <h3 className={TITLE}>Endelig ordentlig dark mode.</h3>
           <p className={cn(BODY, "text-ink-muted")}>
-            Rigtig sort — ikke Lectios triste grå. Perfekt til aftenlektier.
+            Rigtig sort, ikke Lectios triste grå. Perfekt til aftenlektier.
           </p>
           <div className="mt-7 overflow-hidden rounded-2xl border border-line">
             <Image
@@ -86,7 +86,7 @@ export function Features() {
           </div>
         </article>
 
-        {/* Speed + notifications — text pair */}
+        {/* Speed + notifications, text pair */}
         <article className={cn(CARD_BASE, "flex flex-col gap-8 bg-grey min-[720px]:col-span-7 min-[720px]:flex-row")}>
           <div className="flex-1">
             <span className={cn(siteEyebrow(), "[&_svg]:size-4 inline-flex items-center gap-1.5")}>
@@ -94,7 +94,7 @@ export function Features() {
             </span>
             <h3 className={TITLE}>Bygget til at være hurtigt.</h3>
             <p className={cn(BODY, "text-ink-muted")}>
-              Sider åbner med det samme. Ingen ventetid, ingen genindlæsninger —
+              Sider åbner med det samme. Ingen ventetid, ingen genindlæsninger , 
               bare det du skal bruge.
             </p>
           </div>

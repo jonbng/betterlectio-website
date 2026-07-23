@@ -3,7 +3,7 @@ import type { SVGProps } from "react"
 /**
  * Shared inline-SVG icon set for the marketing site. Stroke icons inherit
  * `currentColor`; brand glyphs (Apple, Google Play, GitHub) are filled. Kept
- * monochrome on purpose — colour on the site comes from product screenshots.
+ * monochrome on purpose, colour on the site comes from product screenshots.
  */
 
 type IconProps = SVGProps<SVGSVGElement>
