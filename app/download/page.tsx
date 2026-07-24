@@ -122,7 +122,7 @@ function DownloadPageInner() {
                 Du blev inviteret af en klassekammerat.
               </span>
               <span className="max-w-[60ch] text-sm text-ink-muted">
-                Installér BetterLectio nedenfor — invitationen knyttes automatisk
+                Installér BetterLectio nedenfor, så knyttes invitationen automatisk
                 til den klassekammerat, der delte linket.
               </span>
             </div>
