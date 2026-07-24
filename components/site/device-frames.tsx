@@ -26,8 +26,6 @@ export function PhoneFrame({ src, alt, className, priority, sizes }: FrameProps)
       )}
     >
       <div className="relative overflow-hidden rounded-[2rem] bg-white">
-        {/* notch */}
-        <div className="absolute left-1/2 top-0 z-10 h-[18px] w-[38%] -translate-x-1/2 rounded-b-2xl bg-ink" />
         <Image
           src={src}
           alt={alt}
