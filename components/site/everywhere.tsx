@@ -40,12 +40,12 @@ function StoreLink({
   )
 }
 
-function MobilePanel({ reverse }: { reverse: boolean }) {
+function MobilePanel({ reverse, isFirst }: { reverse: boolean; isFirst: boolean }) {
   return (
     <Panel
       reverse={reverse}
       eyebrow="BetterLectio Mobile"
-      title="En rigtig app i lommen."
+      title={isFirst ? "En rigtig app i lommen." : "Og i lommen."}
       body="Ikke Lectios mobilside, der ser ud som om den giver op. Skema, beskeder, lektier og karakterer åbner med det samme, til både iPhone og Android."
       visual={
         <div className="flex items-end justify-center">
@@ -75,12 +75,12 @@ function MobilePanel({ reverse }: { reverse: boolean }) {
   )
 }
 
-function WebPanel({ reverse }: { reverse: boolean }) {
+function WebPanel({ reverse, isFirst }: { reverse: boolean; isFirst: boolean }) {
   return (
     <Panel
       reverse={reverse}
       eyebrow="BetterLectio for Web"
-      title="Og i din browser."
+      title={isFirst ? "I din browser." : "Og i din browser."}
       body="En udvidelse, der lægger sig oven på Lectio og gør hele oplevelsen pænere og hurtigere. Virker i Chrome, Firefox og Edge, installeret på under et minut."
       visual={
         <BrowserFrame
@@ -163,13 +163,13 @@ export function Everywhere() {
       <div className="mt-12 flex flex-col gap-6 min-[720px]:mt-14">
         {mobileFirst ? (
           <>
-            <MobilePanel reverse={false} />
-            <WebPanel reverse />
+            <MobilePanel reverse={false} isFirst />
+            <WebPanel reverse isFirst={false} />
           </>
         ) : (
           <>
-            <WebPanel reverse={false} />
-            <MobilePanel reverse />
+            <WebPanel reverse={false} isFirst />
+            <MobilePanel reverse isFirst={false} />
           </>
         )}
       </div>
