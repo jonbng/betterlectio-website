@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/privatliv" },
 }
 
-const LAST_UPDATED = "24. marts 2026"
+const LAST_UPDATED = "2. august 2026"
 
 /* --- tiny inline icon set (matches the site's inline-SVG style) ---------- */
 
@@ -125,8 +125,8 @@ const SERVICES = [
   },
   {
     name: "PostHog",
-    desc: "Fortæller os, når noget går i stykker. Ren fejl- og stabilitetsovervågning for elever, der er logget ind, så bugs bliver fundet og rettet.",
-    tag: "Kun til fejlfinding",
+    desc: "Modtager kun få, udvalgte produkthændelser og et begrænset antal fejl. Automatisk side-, skærm- og sessionssporing er slået fra.",
+    tag: "Minimal, udtrykkelig måling",
   },
 ]
 
@@ -348,6 +348,25 @@ export default function PrivatlivPage() {
                 </li>
                 <li>
                   <span>
+                    <strong>Til invitationer:</strong> Når du åbner et personligt
+                    invitationslink, gemmer vi invitationens afsender, tidspunkt,
+                    browseroplysninger, henvisende side, grov geografisk placering
+                    og en dagligt roteret hash af IP-adressen. Selve IP-adressen
+                    gemmes ikke. Oplysninger om klik uden en gennemført invitation
+                    slettes senest efter 180 dage.
+                  </span>
+                </li>
+                <li>
+                  <span>
+                    <strong>Til profilbilleder:</strong> Et billede, du selv sender,
+                    opbevares privat, mens en moderator gennemgår det. Metadata
+                    fjernes, og kun en normaliseret kopi offentliggøres ved
+                    godkendelse. Den private original slettes efter afgørelsen;
+                    fejlede uploads slettes efter højst syv dage.
+                  </span>
+                </li>
+                <li>
+                  <span>
                     <strong>Til fejlfinding:</strong> Teknisk information om crashes
                     og fejl, plus den kontekst om konto og skole, der skal til for
                     at forstå og løse problemet.
@@ -376,7 +395,7 @@ export default function PrivatlivPage() {
                   <span>
                     <strong>Netværksadgang til BetterLectios tjenester:</strong>{" "}
                     Bruges kun, når en funktion har brug for Supabase, eller når en
-                    fejlrapport sendes til PostHog.
+                    begrænset fejlrapport sendes til PostHog.
                   </span>
                 </li>
               </ul>
@@ -387,9 +406,15 @@ export default function PrivatlivPage() {
             <summary>Bruger I cookies eller sporing?</summary>
             <div className="site-detail__body">
               <p>
-                Vi bruger ikke sporingscookies, og vi følger dig ikke rundt på
-                nettet. PostHog bruges udelukkende til fejl- og
-                stabilitetsovervågning for elever, der er logget ind.
+                Vi bruger ikke annonceringscookies og følger dig ikke rundt på
+                nettet. Et personligt invitationslink bruger dog en nødvendig,
+                HttpOnly invitationscookie i op til 180 dage, så en første
+                installation kan krediteres den rigtige klassekammerat. Cookien
+                bruges ikke til annoncering og slettes, når invitationen afgøres.
+                PostHog modtager kun få udtrykkelige hændelser (fx
+                download, gennemført onboarding, login og feedback) samt en
+                et begrænset antal fejl. Automatisk sidevisning, skærmvisning,
+                klikregistrering og sessionsoptagelse er slået fra.
               </p>
               <p>
                 Hvis du vælger &quot;Log ind med BetterLectio&quot; på
