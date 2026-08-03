@@ -13,16 +13,12 @@ export type DetectedPlatform =
 /** Whether the visitor is most likely on a phone or a computer. */
 export type DeviceKind = "mobile" | "desktop" | "unknown"
 
-/**
- * Best-effort platform detection from the user agent. Client-only, returns
- * "unknown" during SSR so CTAs render a sensible, JS-free fallback.
- */
-export function detectPlatform(): DetectedPlatform {
-  if (typeof navigator === "undefined") return "unknown"
-  const ua = navigator.userAgent
-  const platform = navigator.platform || ""
-  const maxTouchPoints = navigator.maxTouchPoints || 0
-
+/** Best-effort platform detection from explicit browser signals. */
+export function detectPlatformFromSignals(
+  ua: string,
+  platform = "",
+  maxTouchPoints = 0,
+): DetectedPlatform {
   const isIOS =
     /iPad|iPhone|iPod/.test(ua) || (platform === "MacIntel" && maxTouchPoints > 1)
   if (isIOS) return "ios"
@@ -34,6 +30,24 @@ export function detectPlatform(): DetectedPlatform {
   if (/Safari\//.test(ua)) return "safari"
 
   return "unknown"
+}
+
+/** Server-safe detection when only the User-Agent header is available. */
+export function detectPlatformFromUserAgent(ua: string): DetectedPlatform {
+  return detectPlatformFromSignals(ua)
+}
+
+/**
+ * Client detection with the extra platform/touch signals needed for iPadOS
+ * devices that identify themselves as desktop Macs.
+ */
+export function detectPlatform(): DetectedPlatform {
+  if (typeof navigator === "undefined") return "unknown"
+  return detectPlatformFromSignals(
+    navigator.userAgent,
+    navigator.platform || "",
+    navigator.maxTouchPoints || 0,
+  )
 }
 
 export function deviceKind(p: DetectedPlatform): DeviceKind {
