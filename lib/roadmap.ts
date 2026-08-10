@@ -4,11 +4,16 @@ import { unstable_cache } from "next/cache"
 
 import { getSupabaseAdmin } from "@/lib/supabase"
 
-// Public roadmap columns of feedback_items. Statuses map to three board
-// columns. Only admin-published rows (is_public = true) are ever read, and we
-// select curated public copy only — never the raw user message or any PII.
-export type RoadmapColumnKey = "planned" | "in_progress" | "shipped"
+// Public roadmap: items in review / planned / in_progress are shown with their
+// real title/message. Pending, completed, declined, and duplicate stay hidden.
+export type RoadmapColumnKey = "review" | "planned" | "in_progress"
 export type RoadmapCategory = "bug" | "idea" | "other"
+
+export const ROADMAP_STATUSES: RoadmapColumnKey[] = [
+  "review",
+  "planned",
+  "in_progress",
+]
 
 export type RoadmapItem = {
   id: string
@@ -29,34 +34,58 @@ export type RoadmapColumn = {
 export const ROADMAP_CACHE_TAG = "roadmap"
 const CACHE_REVALIDATE_SECONDS = 60 * 5 // 5 min; votes also bust the tag on write
 
-const STATUS_TO_COLUMN: Record<string, RoadmapColumnKey> = {
-  planned: "planned",
-  in_progress: "in_progress",
-  completed: "shipped",
-}
-
 const COLUMN_LABELS: Record<RoadmapColumnKey, string> = {
+  review: "Under vurdering",
   planned: "Planlagt",
   in_progress: "I gang",
-  shipped: "Udgivet",
 }
 
-const COLUMN_ORDER: RoadmapColumnKey[] = ["planned", "in_progress", "shipped"]
+const COLUMN_ORDER: RoadmapColumnKey[] = [
+  "review",
+  "planned",
+  "in_progress",
+]
 
 type RoadmapRow = {
   id: string
   status: string
   category: string
-  public_title: string | null
-  public_description: string | null
+  title: string | null
+  message: string
   roadmap_eta: string | null
   roadmap_sort: number | null
   roadmap_vote_count: number | null
-  made_public_at: string | null
+  created_at: string | null
 }
 
 function normalizeCategory(value: string): RoadmapCategory {
   return value === "bug" || value === "idea" ? value : "other"
+}
+
+function displayTitle(row: Pick<RoadmapRow, "title" | "message">): string {
+  if (row.title?.trim()) return row.title.trim()
+  const first = row.message.trim().split(/\n/)[0] ?? ""
+  return first.length > 80 ? `${first.slice(0, 77)}…` : first || "Untitled"
+}
+
+function displayDescription(
+  row: Pick<RoadmapRow, "title" | "message">,
+  title: string,
+): string | null {
+  const message = row.message.trim()
+  if (!message) return null
+  // When there's a real title, show the full message as the body.
+  if (row.title?.trim()) return message
+  // Title was derived from the first line — only show a body if there's more.
+  if (message === title || message.startsWith(title.replace(/…$/, ""))) {
+    const rest = message.includes("\n")
+      ? message.split(/\n/).slice(1).join("\n").trim()
+      : message.length > 80
+        ? message.slice(80).trim()
+        : ""
+    return rest || null
+  }
+  return message
 }
 
 async function fetchRoadmap(): Promise<RoadmapColumn[]> {
@@ -71,16 +100,17 @@ async function fetchRoadmap(): Promise<RoadmapColumn[]> {
     const { data, error } = await supabase
       .from("feedback_items")
       .select(
-        "id, status, category, public_title, public_description, roadmap_eta, roadmap_sort, roadmap_vote_count, made_public_at",
+        "id, status, category, title, message, roadmap_eta, roadmap_sort, roadmap_vote_count, created_at",
       )
-      .eq("is_public", true)
-      .in("status", ["planned", "in_progress", "completed"])
+      .in("status", ROADMAP_STATUSES)
     if (error) throw error
 
     const rows = (data ?? []) as RoadmapRow[]
     const byColumn = new Map<RoadmapColumnKey, RoadmapRow[]>()
     for (const row of rows) {
-      const column = STATUS_TO_COLUMN[row.status]
+      const column = COLUMN_ORDER.includes(row.status as RoadmapColumnKey)
+        ? (row.status as RoadmapColumnKey)
+        : null
       if (!column) continue
       const list = byColumn.get(column) ?? []
       list.push(row)
@@ -92,15 +122,18 @@ async function fetchRoadmap(): Promise<RoadmapColumn[]> {
       return {
         key,
         label: COLUMN_LABELS[key],
-        items: rowsForColumn.map((row) => ({
-          id: row.id,
-          title: row.public_title?.trim() || "Kommende forbedring",
-          description: row.public_description?.trim() || null,
-          category: normalizeCategory(row.category),
-          column: key,
-          eta: row.roadmap_eta?.trim() || null,
-          voteCount: row.roadmap_vote_count ?? 0,
-        })),
+        items: rowsForColumn.map((row) => {
+          const title = displayTitle(row)
+          return {
+            id: row.id,
+            title,
+            description: displayDescription(row, title),
+            category: normalizeCategory(row.category),
+            column: key,
+            eta: row.roadmap_eta?.trim() || null,
+            voteCount: row.roadmap_vote_count ?? 0,
+          }
+        }),
       }
     })
   } catch (err) {
@@ -111,7 +144,7 @@ async function fetchRoadmap(): Promise<RoadmapColumn[]> {
 
 // Manual sort in JS so we can put null sort values last (Postgres nulls-first
 // ordering is awkward through the JS client): sort asc, then most votes, then
-// most recently published.
+// newest.
 function sortRows(a: RoadmapRow, b: RoadmapRow): number {
   const sa = a.roadmap_sort
   const sb = b.roadmap_sort
@@ -121,8 +154,8 @@ function sortRows(a: RoadmapRow, b: RoadmapRow): number {
   const va = a.roadmap_vote_count ?? 0
   const vb = b.roadmap_vote_count ?? 0
   if (va !== vb) return vb - va
-  const ta = a.made_public_at ? Date.parse(a.made_public_at) : 0
-  const tb = b.made_public_at ? Date.parse(b.made_public_at) : 0
+  const ta = a.created_at ? Date.parse(a.created_at) : 0
+  const tb = b.created_at ? Date.parse(b.created_at) : 0
   return tb - ta
 }
 

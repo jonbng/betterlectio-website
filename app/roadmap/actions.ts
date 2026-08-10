@@ -5,7 +5,7 @@ import { randomUUID } from "node:crypto"
 import { updateTag } from "next/cache"
 import { cookies } from "next/headers"
 
-import { ROADMAP_CACHE_TAG } from "@/lib/roadmap"
+import { ROADMAP_CACHE_TAG, ROADMAP_STATUSES } from "@/lib/roadmap"
 import { getSupabaseAdmin } from "@/lib/supabase"
 
 const VOTER_COOKIE = "bl_rmv"
@@ -64,13 +64,19 @@ export async function toggleVote(feedbackId: string): Promise<VoteResult> {
   const voterId = await getOrCreateVoterId()
   const supabase = getSupabaseAdmin()
 
-  // Item must exist and be published on the roadmap.
+  // Item must be on the public roadmap (review / planned / in_progress).
   const { data: item, error: itemErr } = await supabase
     .from("feedback_items")
-    .select("id, is_public, status")
+    .select("id, status")
     .eq("id", feedbackId)
     .single()
-  if (itemErr || !item || !item.is_public) {
+  if (
+    itemErr ||
+    !item ||
+    !ROADMAP_STATUSES.includes(
+      item.status as (typeof ROADMAP_STATUSES)[number],
+    )
+  ) {
     return { ok: false, error: "not_found" }
   }
 

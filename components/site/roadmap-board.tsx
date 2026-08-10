@@ -11,9 +11,9 @@ import type {
 import { cn } from "@/lib/utils"
 
 const COLUMN_ACCENT: Record<RoadmapColumnKey, string> = {
+  review: "bg-[#f97316]",
   planned: "bg-[#3b82f6]",
   in_progress: "bg-[#a855f7]",
-  shipped: "bg-[#22c55e]",
 }
 
 const CATEGORY_META: Record<RoadmapCategory, { label: string; className: string }> = {
