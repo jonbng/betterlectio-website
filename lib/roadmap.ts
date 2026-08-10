@@ -4,16 +4,17 @@ import { unstable_cache } from "next/cache"
 
 import { getSupabaseAdmin } from "@/lib/supabase"
 
-// Public roadmap: items in review / planned / in_progress are shown with their
-// real title/message. Pending, completed, declined, and duplicate stay hidden.
-export type RoadmapColumnKey = "review" | "planned" | "in_progress"
+// Public roadmap: planned / in_progress / completed show with real title/message.
+// Pending, review, declined, and duplicate stay hidden.
+export type RoadmapColumnKey = "planned" | "in_progress" | "done"
 export type RoadmapCategory = "bug" | "idea" | "other"
 
-export const ROADMAP_STATUSES: RoadmapColumnKey[] = [
-  "review",
+/** DB statuses that appear on the public roadmap. */
+export const ROADMAP_STATUSES = [
   "planned",
   "in_progress",
-]
+  "completed",
+] as const
 
 export type RoadmapItem = {
   id: string
@@ -34,17 +35,20 @@ export type RoadmapColumn = {
 export const ROADMAP_CACHE_TAG = "roadmap"
 const CACHE_REVALIDATE_SECONDS = 60 * 5 // 5 min; votes also bust the tag on write
 
+const STATUS_TO_COLUMN: Record<(typeof ROADMAP_STATUSES)[number], RoadmapColumnKey> =
+  {
+    planned: "planned",
+    in_progress: "in_progress",
+    completed: "done",
+  }
+
 const COLUMN_LABELS: Record<RoadmapColumnKey, string> = {
-  review: "Under vurdering",
   planned: "Planlagt",
   in_progress: "I gang",
+  done: "Færdig",
 }
 
-const COLUMN_ORDER: RoadmapColumnKey[] = [
-  "review",
-  "planned",
-  "in_progress",
-]
+const COLUMN_ORDER: RoadmapColumnKey[] = ["planned", "in_progress", "done"]
 
 type RoadmapRow = {
   id: string
@@ -108,9 +112,8 @@ async function fetchRoadmap(): Promise<RoadmapColumn[]> {
     const rows = (data ?? []) as RoadmapRow[]
     const byColumn = new Map<RoadmapColumnKey, RoadmapRow[]>()
     for (const row of rows) {
-      const column = COLUMN_ORDER.includes(row.status as RoadmapColumnKey)
-        ? (row.status as RoadmapColumnKey)
-        : null
+      const column =
+        STATUS_TO_COLUMN[row.status as (typeof ROADMAP_STATUSES)[number]]
       if (!column) continue
       const list = byColumn.get(column) ?? []
       list.push(row)

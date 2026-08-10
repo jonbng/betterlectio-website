@@ -64,7 +64,7 @@ export async function toggleVote(feedbackId: string): Promise<VoteResult> {
   const voterId = await getOrCreateVoterId()
   const supabase = getSupabaseAdmin()
 
-  // Item must be on the public roadmap (review / planned / in_progress).
+  // Item must be on the public roadmap (planned / in_progress / completed).
   const { data: item, error: itemErr } = await supabase
     .from("feedback_items")
     .select("id, status")
