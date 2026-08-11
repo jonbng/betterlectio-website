@@ -69,7 +69,7 @@ export function HeroCta() {
           <Star />
         </span>
         <span>
-          <b className="font-bold text-ink">4,9</b> i gennemsnit · 500+ elever
+          <b className="font-bold text-ink">4,9</b> i gennemsnit · 1000+ elever
         </span>
       </a>
     </>
