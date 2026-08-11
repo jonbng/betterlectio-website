@@ -148,7 +148,7 @@ function SignedOutLogin({
       </h2>
       <p className="mx-auto mt-2 max-w-[46ch] text-sm leading-[1.5] text-ink-muted">
         Log ind med BetterLectio (browser-udvidelsen) for at sende en idé.
-        Den ender i vores feedback-kø — og på roadmappet, hvis vi tager den med.
+        Den ender i vores feedback-kø, og på roadmappet, hvis vi tager den med.
       </p>
 
       {displayError ? (
@@ -251,7 +251,7 @@ function SignedInIdeaForm({ displayName }: { displayName: string | null }) {
 
       {status === "ok" ? (
         <p className="mt-5 rounded-2xl border border-line bg-white px-4 py-3 text-sm font-medium text-ink">
-          Tak — vi kigger på det. Hvis vi tager ideen med, dukker den op på
+          Tak, vi kigger på det. Hvis vi tager ideen med, dukker den op på
           roadmappet.
         </p>
       ) : (

@@ -22,7 +22,7 @@ import { cn } from "@/lib/utils"
 export const metadata: Metadata = {
   title: "Roadmap",
   description:
-    "Se hvad vi planlægger, arbejder på og har færdiggjort i BetterLectio — og stem på det, du vil have mest.",
+    "Se hvad vi planlægger, arbejder på og har færdiggjort i BetterLectio, og stem på det, du vil have mest.",
   alternates: { canonical: "/roadmap" },
 }
 
@@ -73,7 +73,7 @@ export default async function RoadmapPage({
             Hvad der er på vej.
           </h1>
           <p className="mx-auto max-w-[54ch] text-[clamp(17px,2vw,20px)] font-medium leading-[1.5] text-ink-muted">
-            Vi bygger i det åbne — følg med i, hvad der er planlagt, i gang og
+            Vi bygger i det åbne. Følg med i, hvad der er planlagt, i gang og
             færdigt. Stem på det, du synes er vigtigst.
           </p>
         </section>
