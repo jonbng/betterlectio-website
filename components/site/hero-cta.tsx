@@ -1,11 +1,13 @@
 "use client"
 
 import Link from "next/link"
+import { useState } from "react"
 
+import { AppQrDialog } from "@/components/site/app-qr-dialog"
 import { Star } from "@/components/site/icons"
 import { siteButton, type SiteButtonVariant } from "@/components/site/styles"
 import { DOWNLOAD_LINKS } from "@/lib/download-links"
-import { type InstallTarget, installFor } from "@/lib/platform"
+import { deviceKind, type InstallTarget, installFor } from "@/lib/platform"
 import { captureDownloadClicked } from "@/lib/posthog"
 import { usePlatform } from "@/lib/use-platform"
 
@@ -13,14 +15,34 @@ function CtaButton({
   cta,
   variant,
   source,
+  onAppQr,
 }: {
   cta: InstallTarget
   variant: SiteButtonVariant
   source: string
+  /** Desktop only — phones must never get a QR they can't scan. */
+  onAppQr?: () => void
 }) {
   const className = siteButton(variant)
   const onClick = () =>
     captureDownloadClicked(cta.platform, { source, cta: cta.label })
+
+  // QR is only offered when the parent confirms desktop (onAppQr set).
+  // On mobile, fall through to the normal store/download link.
+  if (cta.appQr && onAppQr) {
+    return (
+      <button
+        type="button"
+        className={className}
+        onClick={() => {
+          onClick()
+          onAppQr()
+        }}
+      >
+        {cta.label}
+      </button>
+    )
+  }
 
   if (cta.external) {
     return (
@@ -46,12 +68,29 @@ export function HeroCta() {
   // `null` until hydration → render the platform-neutral default pair.
   const detected = usePlatform()
   const { primary, secondary } = installFor(detected ?? "unknown")
+  const [appQrOpen, setAppQrOpen] = useState(false)
+
+  // QR only makes sense on a computer — phones can't scan their own screen.
+  // Until platform is known, treat as non-desktop so we never flash a QR CTA
+  // on mobile (falls through to the /download/app link instead).
+  const showAppQr = detected !== null && deviceKind(detected) === "desktop"
+  const openAppQr = showAppQr ? () => setAppQrOpen(true) : undefined
 
   return (
     <>
       <div className="mt-9 flex flex-wrap gap-3.5">
-        <CtaButton cta={primary} variant="primary" source="hero_primary" />
-        <CtaButton cta={secondary} variant="secondary" source="hero_secondary" />
+        <CtaButton
+          cta={primary}
+          variant="primary"
+          source="hero_primary"
+          onAppQr={openAppQr}
+        />
+        <CtaButton
+          cta={secondary}
+          variant="secondary"
+          source="hero_secondary"
+          onAppQr={openAppQr}
+        />
       </div>
 
       <a
@@ -72,6 +111,14 @@ export function HeroCta() {
           <b className="font-bold text-ink">4,9</b> i gennemsnit · 1000+ elever
         </span>
       </a>
+
+      {showAppQr ? (
+        <AppQrDialog
+          open={appQrOpen}
+          onClose={() => setAppQrOpen(false)}
+          source="hero_secondary"
+        />
+      ) : null}
     </>
   )
 }

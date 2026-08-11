@@ -63,6 +63,11 @@ export type InstallTarget = {
   /** Value sent to analytics + used as a key. */
   platform: string
   external: boolean
+  /**
+   * Hint that desktop UIs may open a QR dialog for this target (phones must
+   * never do that — they should follow `href` to the store instead).
+   */
+  appQr?: boolean
 }
 
 const BROWSER_TARGETS: Record<"chrome" | "firefox" | "edge", InstallTarget> = {
@@ -91,9 +96,11 @@ const GENERIC_BROWSER: InstallTarget = {
 }
 const GENERIC_APP: InstallTarget = {
   label: "Hent app",
-  href: "/download",
+  /** Fallback if JS is off; QR dialog is preferred on the marketing site. */
+  href: "/download/app",
   platform: "app",
   external: false,
+  appQr: true,
 }
 
 /**
