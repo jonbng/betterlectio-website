@@ -60,7 +60,7 @@ function Stars() {
 
 export function SocialProof({ schoolCount }: { schoolCount: number }) {
   const stats = [
-    { value: "500+", label: "elever bruger det" },
+    { value: "1000+", label: "elever bruger det" },
     { value: `${schoolCount}`, label: "gymnasier" },
     { value: "5", label: "platforme" },
     { value: "100%", label: "open source" },
