@@ -18,16 +18,24 @@ async function fetchSchoolCount(): Promise<number> {
     const supabase = getSupabaseAdmin()
     // Count distinct schools that have at least one student who has installed
     // the extension, the honest "brugt af elever på N gymnasier" metric.
-    const { data, error } = await supabase
-      .from("students")
-      .select("school_id")
-      .not("extension_installed_at", "is", null)
-    if (error) throw error
-    if (!data) return FALLBACK_SCHOOL_COUNT
-
     const schools = new Set<number>()
-    for (const row of data as Array<{ school_id: number | null }>) {
-      if (row.school_id != null) schools.add(row.school_id)
+    const pageSize = 500
+    let offset = 0
+    while (true) {
+      const { data, error } = await supabase
+        .from("students")
+        .select("school_id")
+        .not("extension_installed_at", "is", null)
+        .order("id", { ascending: true })
+        .range(offset, offset + pageSize - 1)
+      if (error) throw error
+
+      const page = (data ?? []) as Array<{ school_id: number | null }>
+      for (const row of page) {
+        if (row.school_id != null) schools.add(row.school_id)
+      }
+      if (page.length < pageSize) break
+      offset += page.length
     }
     return schools.size || FALLBACK_SCHOOL_COUNT
   } catch (err) {
