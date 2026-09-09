@@ -8,10 +8,10 @@ import { getSupabaseAdmin } from "@/lib/supabase"
 // conservative and rounded so we never over-claim.
 const FALLBACK_SCHOOL_COUNT = 75
 
-// Heavy caching: the number moves slowly, so we only recompute hourly.
+// The number moves slowly, but should still reflect recent adoption.
 // `unstable_cache` memoizes the resolved value across requests/renders and the
 // `revalidate` window keeps it warm without hammering Supabase.
-const CACHE_REVALIDATE_SECONDS = 60 * 60 // 1h
+const CACHE_REVALIDATE_SECONDS = 5 * 60 // 5m
 
 async function fetchSchoolCount(): Promise<number> {
   try {

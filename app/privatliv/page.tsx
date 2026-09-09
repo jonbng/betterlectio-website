@@ -113,7 +113,7 @@ const DONT = [
   "Sælger eller udlejer dine data",
   "Deler data med annoncører eller datamæglere",
   "Sporer, hvad du laver ude på resten af nettet",
-  "Rører ved dit Lectio-brugernavn eller kodeord",
+  "Rører ved dit Lectio-brugernavn eller password",
   "Bruger sporingscookies til at følge dig rundt på nettet",
 ]
 
@@ -253,11 +253,11 @@ export default function PrivatlivPage() {
               Det vigtigste først
             </span>
             <h2 className="mt-2 mb-3 text-[clamp(26px,3.4vw,38px)] font-extrabold tracking-[-0.03em]">
-              Vi ser aldrig dit Lectio-kodeord
+              Vi ser aldrig dit Lectio-password
             </h2>
             <p className="max-w-[60ch] text-[17px] leading-[1.55] text-white/[0.78]">
               Du logger ind hos Lectio, præcis som du plejer. BetterLectio får
-              aldrig dit brugernavn eller kodeord at se. Enkelte frivillige
+              aldrig dit brugernavn eller password at se. Enkelte frivillige
               testdeltagere kan udtrykkeligt give os lov til at opbevare deres
               sessionscookies krypteret, så vi kan teste og vedligeholde
               integrationen. Samtykket kan trækkes tilbage når som helst.
@@ -355,7 +355,7 @@ export default function PrivatlivPage() {
                     Lectio-sessionscookies krypteret. De bruges til udvikling og
                     drift af Lectio-integrationen, holdes aktive med periodiske
                     forespørgsler til Lectio og slettes straks, når samtykket
-                    trækkes tilbage. Vi indsamler aldrig brugernavn eller kodeord.
+                    trækkes tilbage. Vi indsamler aldrig brugernavn eller password.
                   </span>
                 </li>
                 <li>

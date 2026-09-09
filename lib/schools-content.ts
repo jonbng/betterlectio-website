@@ -87,7 +87,7 @@ export const faqPool: FaqItem[] = [
   {
     q: "Hvad med privatliv og data?",
     a: () =>
-      "Dine login-oplysninger og personlige data forbliver mellem dig og Lectio. BetterLectio sender ikke dit kodeord eller dine beskeder videre. Du kan se vores privatlivspolitik på /privatliv.",
+      "Dine login-oplysninger og personlige data forbliver mellem dig og Lectio. BetterLectio sender ikke dit password eller dine beskeder videre. Du kan se vores privatlivspolitik på /privatliv.",
   },
   {
     q: "Hvad hvis jeg ikke kan lide det?",
