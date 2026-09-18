@@ -43,5 +43,11 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/roadmap", "/roadmap/:path*", "/auth/:path*"],
+  matcher: [
+    "/roadmap",
+    "/roadmap/:path*",
+    "/feedback",
+    "/feedback/:path*",
+    "/auth/:path*",
+  ],
 }

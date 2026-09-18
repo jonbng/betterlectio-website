@@ -2,16 +2,17 @@ import { createServerClient } from "@supabase/ssr"
 import { cookies } from "next/headers"
 import { NextResponse, type NextRequest } from "next/server"
 
-import { LOGIN_STATE_COOKIE } from "@/lib/auth-constants"
+import { LOGIN_RETURN_COOKIE, LOGIN_STATE_COOKIE } from "@/lib/auth-constants"
 
 function completionResponse(
   status: "ok" | "error",
   reason?: string,
+  returnTo = "/roadmap"
 ): NextResponse {
   const destination =
     status === "ok"
-      ? "/roadmap?login=ok"
-      : `/roadmap?login=error&reason=${encodeURIComponent(reason ?? "unknown")}`
+      ? `${returnTo}${returnTo.includes("?") ? "&" : "?"}login=ok`
+      : `${returnTo}${returnTo.includes("?") ? "&" : "?"}login=error&reason=${encodeURIComponent(reason ?? "unknown")}`
   const payload = JSON.stringify({
     source: "bl-login",
     status,
@@ -64,7 +65,7 @@ function completionResponse(
         "Content-Type": "text/html; charset=utf-8",
         "Cache-Control": "no-store",
       },
-    },
+    }
   )
 }
 
@@ -84,23 +85,32 @@ export async function GET(req: NextRequest) {
 
   const store = await cookies()
   const expected = store.get(LOGIN_STATE_COOKIE)?.value
+  const storedReturn = store.get(LOGIN_RETURN_COOKIE)?.value
+  const returnTo =
+    storedReturn?.startsWith("/") && !storedReturn.startsWith("//")
+      ? storedReturn
+      : "/roadmap"
 
   if (!expected || expected !== state) {
-    const response = completionResponse("error", "invalid_state")
+    const response = completionResponse("error", "invalid_state", returnTo)
     response.cookies.delete(LOGIN_STATE_COOKIE)
+    response.cookies.delete(LOGIN_RETURN_COOKIE)
     return response
   }
 
   const supabaseUrl = process.env.SUPABASE_URL
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
   if (!supabaseUrl || !anonKey) {
-    console.error("[auth/callback] missing SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY")
-    const response = completionResponse("error", "config")
+    console.error(
+      "[auth/callback] missing SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY"
+    )
+    const response = completionResponse("error", "config", returnTo)
     response.cookies.delete(LOGIN_STATE_COOKIE)
+    response.cookies.delete(LOGIN_RETURN_COOKIE)
     return response
   }
 
-  const response = completionResponse("ok")
+  const response = completionResponse("ok", undefined, returnTo)
   const supabase = createServerClient(supabaseUrl, anonKey, {
     cookies: {
       getAll() {
@@ -121,11 +131,13 @@ export async function GET(req: NextRequest) {
 
   if (error) {
     console.error("[auth/callback] verifyOtp failed", error.message)
-    const errorResponse = completionResponse("error", "verify_failed")
+    const errorResponse = completionResponse("error", "verify_failed", returnTo)
     errorResponse.cookies.delete(LOGIN_STATE_COOKIE)
+    errorResponse.cookies.delete(LOGIN_RETURN_COOKIE)
     return errorResponse
   }
 
   response.cookies.delete(LOGIN_STATE_COOKIE)
+  response.cookies.delete(LOGIN_RETURN_COOKIE)
   return response
 }

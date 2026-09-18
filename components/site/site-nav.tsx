@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { href: "/#funktioner", label: "Funktioner", external: false },
   { href: "/privatliv", label: "Privatliv", external: false },
   { href: "/roadmap", label: "Roadmap", external: false },
+  { href: "/feedback", label: "Min feedback", external: false },
 ]
 
 const NAV_LINK_CLASS =
@@ -19,7 +20,7 @@ export function SiteNav() {
     <nav
       className={cn(
         siteContainerClass,
-        "z-50 flex h-[76px] items-center justify-between gap-5 min-[720px]:h-24",
+        "z-50 flex h-[76px] items-center justify-between gap-5 min-[720px]:h-24"
       )}
       aria-label="Primær"
     >
@@ -30,7 +31,7 @@ export function SiteNav() {
       >
         <SiteLogoMark
           size={34}
-          className="block shrink-0 rounded-[9px] [--logo-badge:var(--ink)] [--logo-glyph:#fff] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] group-hover:-rotate-6 group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:rotate-0 motion-reduce:group-hover:scale-100"
+          className="block shrink-0 rounded-[9px] transition-transform duration-300 ease-[cubic-bezier(0.34,1.56,0.64,1)] [--logo-badge:var(--ink)] [--logo-glyph:#fff] group-hover:scale-105 group-hover:-rotate-6 motion-reduce:transition-none motion-reduce:group-hover:scale-100 motion-reduce:group-hover:rotate-0"
         />
         <span>
           Better<span className="text-ink-muted">Lectio</span>
@@ -53,7 +54,7 @@ export function SiteNav() {
             <Link key={link.href} href={link.href} className={NAV_LINK_CLASS}>
               {link.label}
             </Link>
-          ),
+          )
         )}
       </div>
 
