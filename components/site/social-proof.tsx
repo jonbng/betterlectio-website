@@ -4,11 +4,11 @@ import { cn } from "@/lib/utils"
 
 // Placeholder ratings, swap for live store numbers when wired up.
 const RATINGS = [
-  { store: "Chrome Web Store", score: "4,9" },
-  { store: "Firefox Add-ons", score: "4,8" },
-  { store: "Microsoft Edge", score: "4,9" },
-  { store: "App Store", score: "4,7" },
-  { store: "Google Play", score: "Ny" },
+  { store: "Chrome Web Store", score: "4.9" },
+  { store: "Firefox Add-ons", score: "5.0" },
+  { store: "Microsoft Edge", score: "5.0" },
+  { store: "App Store", score: "På iOS", detail: "Tilgængelig" },
+  { store: "Google Play", score: "5.0" },
 ]
 
 // Placeholder testimonials, real student quotes to be gathered before launch.
@@ -16,19 +16,19 @@ const QUOTES = [
   {
     quote:
       "Jeg åbner slet ikke Lectio mere uden BetterLectio. Skemaet er faktisk til at læse nu.",
-    name: "Emma",
+    name: "Jonathan",
     meta: "3.g",
   },
   {
     quote:
       "Endelig kan jeg se mit gennemsnit uden at regne det ud selv. Og dark mode er bare lækkert.",
-    name: "Frederik",
+    name: "Lea",
     meta: "2.g",
   },
   {
     quote:
       "Appen er 10 gange hurtigere end Lectios mobilside. Bruger den hver eneste dag.",
-    name: "Sofia",
+    name: "Elliott",
     meta: "1.g",
   },
 ]
@@ -60,7 +60,7 @@ function Stars() {
 
 export function SocialProof({ schoolCount }: { schoolCount: number }) {
   const stats = [
-    { value: "3000+", label: "elever bruger det" },
+    { value: "2500+", label: "elever bruger det" },
     { value: `${schoolCount}`, label: "gymnasier" },
     { value: "5", label: "platforme" },
     { value: "100%", label: "open source" },
@@ -83,7 +83,11 @@ export function SocialProof({ schoolCount }: { schoolCount: number }) {
             className="flex flex-col items-center gap-1.5 rounded-2xl border border-line bg-white px-4 py-5 text-center"
           >
             <span className="text-2xl font-extrabold tracking-[-0.02em]">{r.score}</span>
-            <Stars />
+            {r.detail ? (
+              <span className="text-xs font-medium text-ink-muted">{r.detail}</span>
+            ) : (
+              <Stars />
+            )}
             <span className="text-xs font-medium text-ink-muted">{r.store}</span>
           </div>
         ))}
