@@ -7,6 +7,11 @@ import { cn } from "@/lib/utils"
 const NAV_LINKS = [
   { href: "/#overalt", label: "Overalt", external: false },
   { href: "/#funktioner", label: "Funktioner", external: false },
+  {
+    href: "https://events.betterlectio.dk",
+    label: "Events",
+    external: true,
+  },
   { href: "/privatliv", label: "Privatliv", external: false },
   { href: "/roadmap", label: "Roadmap", external: false },
   { href: "/feedback", label: "Min feedback", external: false },
@@ -38,7 +43,7 @@ export function SiteNav() {
         </span>
       </Link>
 
-      <div className="hidden items-center gap-7 rounded-full border border-line bg-white/70 px-7 py-3 backdrop-blur-[20px] backdrop-saturate-[1.8] min-[900px]:flex">
+      <div className="hidden items-center gap-5 rounded-full border border-line bg-white/70 px-6 py-3 backdrop-blur-[20px] backdrop-saturate-[1.8] min-[900px]:flex">
         {NAV_LINKS.map((link) =>
           link.external ? (
             <a
