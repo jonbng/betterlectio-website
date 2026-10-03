@@ -9,9 +9,36 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const baseEntries: MetadataRoute.Sitemap = [
     { url: SITE_URL, lastModified, changeFrequency: "weekly", priority: 1 },
-    { url: `${SITE_URL}/download`, lastModified, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${SITE_URL}/privatliv`, lastModified, changeFrequency: "yearly", priority: 0.3 },
-    { url: `${SITE_URL}/roadmap`, lastModified, changeFrequency: "monthly", priority: 0.4 },
+    {
+      url: `${SITE_URL}/download`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${SITE_URL}/stats`,
+      lastModified,
+      changeFrequency: "daily",
+      priority: 0.7,
+    },
+    {
+      url: `${SITE_URL}/presse`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.6,
+    },
+    {
+      url: `${SITE_URL}/privatliv`,
+      lastModified,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
+    {
+      url: `${SITE_URL}/roadmap`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.4,
+    },
   ]
 
   const schools = await getAllSchoolsForSeo()

@@ -52,7 +52,7 @@ export function Hero({ schoolCount }: { schoolCount: number }) {
           className="shadow-[0_50px_100px_-45px_rgba(0,0,0,0.5)]"
         />
         <p className="mt-4 text-center font-mono text-xs uppercase tracking-[0.04em] text-ink-muted">
-          Træk i midten: Lectio til venstre, BetterLectio til højre
+          Træk i midten: BetterLectio til venstre, Lectio til højre
         </p>
       </div>
     </section>

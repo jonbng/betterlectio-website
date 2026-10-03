@@ -16,8 +16,8 @@ type BeforeAfterProps = {
 }
 
 /**
- * Drag-to-compare slider. Bottom layer is the "after" (BetterLectio) image;
- * the "before" (plain Lectio) is clipped from the left up to the handle. Works
+ * Drag-to-compare slider. Bottom layer is the "before" (plain Lectio) image;
+ * the "after" (BetterLectio) is clipped from the left up to the handle. Works
  * with pointer/touch and the keyboard (focus the handle, use arrow keys).
  */
 export function BeforeAfter({
@@ -59,8 +59,8 @@ export function BeforeAfter({
       }}
     >
       <Image
-        src={afterSrc}
-        alt={afterAlt}
+        src={beforeSrc}
+        alt={beforeAlt}
         width={2560}
         height={1600}
         priority
@@ -68,13 +68,13 @@ export function BeforeAfter({
         className="ba__img"
       />
       <Image
-        src={beforeSrc}
-        alt={beforeAlt}
+        src={afterSrc}
+        alt={afterAlt}
         width={2560}
         height={1600}
         priority
         sizes="(max-width: 980px) 100vw, 620px"
-        className="ba__img ba__before"
+        className="ba__img ba__after"
       />
 
       <span className="ba__tag ba__tag--before">{beforeLabel}</span>
@@ -88,6 +88,7 @@ export function BeforeAfter({
         aria-valuemin={0}
         aria-valuemax={100}
         aria-valuenow={Math.round(pos)}
+        aria-valuetext={`${Math.round(pos)}% BetterLectio vist`}
         onKeyDown={(e) => {
           if (e.key === "ArrowLeft") setPos((p) => Math.max(0, p - 4))
           if (e.key === "ArrowRight") setPos((p) => Math.min(100, p + 4))

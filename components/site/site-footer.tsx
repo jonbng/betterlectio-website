@@ -21,13 +21,13 @@ export function SiteFooter() {
               BetterLectio
             </h2>
             <p className="max-w-[320px] opacity-80">
-              En moderne brugerflade til Lectio. Bygget af elever, for elever, så
-              skema, lektier og karakterer faktisk er til at bruge.
+              En moderne brugerflade til Lectio. Bygget af elever, for elever,
+              så skema, lektier og karakterer faktisk er til at bruge.
             </p>
           </div>
 
           <div>
-            <h4 className="mb-5 text-[13px] uppercase tracking-[2px] text-white/45">
+            <h4 className="mb-5 text-[13px] tracking-[2px] text-white/45 uppercase">
               Produkt
             </h4>
             <ul className="list-none">
@@ -70,10 +70,15 @@ export function SiteFooter() {
           </div>
 
           <div>
-            <h4 className="mb-5 text-[13px] uppercase tracking-[2px] text-white/45">
+            <h4 className="mb-5 text-[13px] tracking-[2px] text-white/45 uppercase">
               Info
             </h4>
             <ul className="list-none">
+              <li className="mb-3">
+                <Link href="/stats" className={FOOTER_LINK_CLASS}>
+                  Impact
+                </Link>
+              </li>
               <li className="mb-3">
                 <Link href="/privatliv" className={FOOTER_LINK_CLASS}>
                   Privatliv
@@ -82,6 +87,11 @@ export function SiteFooter() {
               <li className="mb-3">
                 <Link href="/roadmap" className={FOOTER_LINK_CLASS}>
                   Roadmap
+                </Link>
+              </li>
+              <li className="mb-3">
+                <Link href="/presse" className={FOOTER_LINK_CLASS}>
+                  Presse
                 </Link>
               </li>
               <li className="mb-3">

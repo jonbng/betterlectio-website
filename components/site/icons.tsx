@@ -8,7 +8,10 @@ import type { SVGProps } from "react"
 
 type IconProps = SVGProps<SVGSVGElement>
 
-function Stroke({ children, ...props }: IconProps & { children: React.ReactNode }) {
+function Stroke({
+  children,
+  ...props
+}: IconProps & { children: React.ReactNode }) {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -46,6 +49,12 @@ export const Check = (p: IconProps) => (
 export const Close = (p: IconProps) => (
   <Stroke {...p}>
     <path d="M18 6 6 18M6 6l12 12" />
+  </Stroke>
+)
+
+export const Menu = (p: IconProps) => (
+  <Stroke {...p}>
+    <path d="M4 7h16M4 12h16M4 17h16" />
   </Stroke>
 )
 
