@@ -10,6 +10,11 @@ const nextConfig = {
   turbopack: {
     root: __dirname,
   },
+  images: {
+    // UI-heavy press previews need less compression than photographic assets;
+    // small labels and timetable text otherwise become visibly soft.
+    qualities: [75, 95],
+  },
 }
 
 export default nextConfig

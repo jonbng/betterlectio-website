@@ -5,13 +5,7 @@ import Link from "next/link"
 import { PressCopyButton } from "@/components/site/press-copy-button"
 import { SiteFooter } from "@/components/site/site-footer"
 import { SiteNav } from "@/components/site/site-nav"
-import {
-  ArrowRight,
-  ArrowUpRight,
-  Code,
-  Shield,
-  Smartphone,
-} from "@/components/site/icons"
+import { ArrowRight, ArrowUpRight } from "@/components/site/icons"
 import {
   siteButton,
   siteContainerClass,
@@ -24,7 +18,7 @@ import { cn } from "@/lib/utils"
 export const metadata: Metadata = {
   title: "Presse og medier",
   description:
-    "Fakta, baggrund, billeder og pressekontakt for BetterLectio — en gratis, uafhængig brugerflade til Lectio, bygget af elever.",
+    "Fakta, baggrund, billeder og pressekontakt for BetterLectio — en gratis, uafhængig brugerflade til Lectio, udviklet af Jonathan Bangert.",
   alternates: { canonical: "/presse" },
   openGraph: {
     title: "Presse og medier · BetterLectio",
@@ -33,7 +27,7 @@ export const metadata: Metadata = {
   },
 }
 
-const PRESS_EMAIL = "betterlectio@jonathanb.dk"
+const PRESS_EMAIL = "jonathan@betterlectio.dk"
 const FOUNDER_WEBSITE = "https://jonathanbangert.com"
 const PRESS_MAILTO = `mailto:${PRESS_EMAIL}?subject=${encodeURIComponent(
   "Presseforespørgsel om BetterLectio"
@@ -123,7 +117,7 @@ const EDITORIAL_ASSETS = [
   },
   {
     src: "/press/editorial/editorial-mobile-1600.png",
-    alt: "To BetterLectio-mobilskærme på blå baggrund",
+    alt: "To BetterLectio-mobilskærme i en lys redaktionel komposition",
     title: "Lectio. Bare bedre.",
     detail: "PNG · 1600 × 2000 · stående format",
     fit: "contain" as const,
@@ -283,7 +277,8 @@ function AssetCard({
           src={src}
           alt={alt}
           fill
-          sizes="(min-width: 900px) 33vw, 100vw"
+          sizes="(min-width: 1080px) 33vw, (min-width: 700px) 50vw, 100vw"
+          quality={95}
           className={cn(
             "outline -outline-offset-1 outline-black/10 transition-transform duration-300 ease-out motion-reduce:transition-none",
             fit === "cover"
@@ -351,11 +346,11 @@ export default async function PressePage() {
   const firstStudent = formatDate(stats.firstStudentAt)
 
   const shortDescription =
-    "BetterLectio er en gratis og uafhængig brugerflade til Lectio, bygget af elever for at gøre skema, lektier, karakterer og beskeder enklere at bruge. BetterLectio findes til iOS, Android og de største browsere og er ikke tilknyttet MaCom A/S."
+    "BetterLectio er en gratis, open source og uafhængig brugerflade til Lectio, udviklet af gymnasieelev Jonathan Bangert. BetterLectio er ikke tilknyttet MaCom A/S."
 
   const fullDescription = `BetterLectio er en gratis og uafhængig brugerflade til Lectio, skabt af elev og udvikler Jonathan Bangert. Produktet gør skema, lektier, karakterer og beskeder mere overskuelige uden at erstatte skolens eksisterende Lectio-system. BetterLectio findes til iOS, Android, Chrome, Firefox og Edge. ${students} elevprofiler fra ${schools} skoler er registreret i BetterLectio. Projektet er open source og ikke tilknyttet MaCom A/S.`
 
-  const factsText = `BETTERLECTIO — FAKTA\n\n• ${students} registrerede elevprofiler\n• Elever fra ${schools} skoler\n• Tilgængelig på iOS, Android, Chrome, Firefox og Edge\n• Gratis og open source\n• Grundlagt af Jonathan Bangert\n• Første elev registreret ${firstStudent}\n• Uafhængigt af og ikke tilknyttet MaCom A/S\n• Tal opdateret ${updated}\n\nKilde: betterlectio.dk/presse`
+  const factsText = `BETTERLECTIO — FAKTA\n\n• ${students} elevprofiler registreret i BetterLectio\n• ${schools} skoler med mindst én registreret elevprofil\n• Første elevprofil registreret ${firstStudent}\n• Tilgængelig til iOS, Android, Chrome, Firefox og Edge\n• Gratis, uden annoncer og open source\n• Udviklet af Jonathan Bangert\n• Ikke tilknyttet, godkendt eller drevet af MaCom A/S\n• Tal opdateret ${updated}\n\nKilde og metode: betterlectio.dk/stats`
 
   const pressJsonLd = {
     "@context": "https://schema.org",
@@ -404,16 +399,16 @@ export default async function PressePage() {
         >
           <div className="grid items-end gap-10 min-[960px]:grid-cols-[1.3fr_0.7fr] min-[960px]:gap-16">
             <div>
-              <span className={siteEyebrow()}>Presse og medier</span>
+              <span className={siteEyebrow()}>Presse</span>
               <h1 className="mt-4 max-w-[920px] text-[clamp(48px,7.7vw,100px)] leading-[0.94] font-extrabold tracking-[-0.06em] text-balance">
-                En elev byggede det Lectio, han selv savnede.
+                BetterLectio er en uafhængig brugerflade til Lectio.
               </h1>
             </div>
 
             <div className="pb-1">
               <p className="max-w-[48ch] text-[clamp(18px,2vw,22px)] leading-[1.5] font-medium text-pretty text-ink-muted">
-                Her finder journalister verificerbare tal, historien bag
-                BetterLectio og billeder, der er klar til redaktionel brug.
+                Udviklet af gymnasieelev Jonathan Bangert. Her finder du
+                nøgletal, baggrund, pressebilleder og direkte kontakt.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <a
@@ -423,7 +418,7 @@ export default async function PressePage() {
                     "pr-5 pl-6 active:scale-[0.96]"
                   )}
                 >
-                  Kontakt til interview <MailIcon className="size-[18px]" />
+                  Kontakt Jonathan <MailIcon className="size-[18px]" />
                 </a>
                 <a
                   href="#materialer"
@@ -452,13 +447,13 @@ export default async function PressePage() {
               className="min-h-11 content-center text-ink-muted underline-offset-4 hover:text-ink hover:underline"
               href="#historien"
             >
-              Historien
+              Tidslinje
             </a>
             <a
               className="min-h-11 content-center text-ink-muted underline-offset-4 hover:text-ink hover:underline"
               href="#beskrivelse"
             >
-              Klar til citat
+              Om BetterLectio
             </a>
             <a
               className="min-h-11 content-center text-ink-muted underline-offset-4 hover:text-ink hover:underline"
@@ -492,7 +487,7 @@ export default async function PressePage() {
             <div>
               <span className={siteEyebrow()}>Dokumenterbare fakta</span>
               <h2 className="mt-3 text-[clamp(34px,5vw,60px)] leading-none font-extrabold tracking-[-0.045em] text-balance">
-                Det vigtigste, med det samme.
+                Nøgletal.
               </h2>
             </div>
             <PressCopyButton text={factsText} label="Kopiér alle fakta" />
@@ -506,18 +501,18 @@ export default async function PressePage() {
             />
             <Fact
               value={schools}
-              label="skoler repræsenteret"
+              label="skoler med profiler"
               note="Skoler med mindst én registreret elevprofil i BetterLectio."
             />
             <Fact
-              value="5"
-              label="platforme"
-              note="iOS, Android, Chrome, Firefox og Edge."
+              value={firstStudent.split(" ").slice(0, 2).join(" ")}
+              label="første registrering"
+              note={`Den første elevprofil blev registreret i ${firstStudent.split(" ").at(-1)}.`}
             />
             <Fact
-              value="0 kr."
-              label="for elever"
-              note="BetterLectio er gratis og kildekoden er offentlig."
+              value="Gratis"
+              label="og open source"
+              note="Ingen annoncer, abonnementer eller skjulte gebyrer."
             />
           </div>
 
@@ -542,20 +537,14 @@ export default async function PressePage() {
           <div className={siteContainerClass}>
             <div className="grid gap-12 min-[960px]:grid-cols-[0.84fr_1.16fr] min-[960px]:gap-20">
               <div>
-                <span className={siteEyebrow("white")}>Historien</span>
+                <span className={siteEyebrow("white")}>Kort tidslinje</span>
                 <h2 className="mt-3 text-[clamp(38px,5.5vw,68px)] leading-[0.98] font-extrabold tracking-[-0.05em] text-balance">
-                  Bygget indefra skolegangen.
+                  Fra første version til i dag.
                 </h2>
                 <p className="mt-6 max-w-[45ch] text-[18px] leading-[1.6] text-pretty text-white/68">
-                  BetterLectio begyndte med en enkel frustration: Det system,
-                  elever bruger hver dag, føltes ikke bygget til deres hverdag.
-                  Jonathan Bangert begyndte derfor at bygge en ny brugerflade
-                  oven på Lectio — først til browseren og siden til mobilen.
-                </p>
-                <p className="mt-5 max-w-[45ch] text-[18px] leading-[1.6] text-pretty text-white/68">
-                  Produktet udvikles tæt på brugerne. Elever kan foreslå idéer,
-                  stemme på dem og følge arbejdet offentligt på BetterLectios
-                  roadmap.
+                  Jonathan Bangert begyndte at udvikle BetterLectio, mens han
+                  selv brugte Lectio som gymnasieelev. Først som
+                  browserudvidelse, siden som mobilapp.
                 </p>
               </div>
 
@@ -563,23 +552,18 @@ export default async function PressePage() {
                 {[
                   [
                     "December 2025",
-                    "Projektet begynder",
-                    "Den første version af en bedre Lectio-brugerflade bliver bygget.",
+                    "Udviklingen begynder",
+                    "Jonathan bygger den første version af browserudvidelsen.",
                   ],
                   [
                     firstStudent,
-                    "Den første elev",
-                    "Den første elevprofil bliver registreret i BetterLectio.",
+                    "Første registrering",
+                    "Den første elevprofil bliver registreret.",
                   ],
                   [
-                    "11. august 2026",
-                    "1.000 elever",
-                    "BetterLectio passerer sin første store milepæl.",
-                  ],
-                  [
-                    "I dag",
+                    updated,
                     `${students} elevprofiler`,
-                    `Elever fra ${schools} skoler er nu repræsenteret.`,
+                    `Profilerne er fordelt på ${schools} skoler.`,
                   ],
                 ].map(([date, title, body], index) => (
                   <li
@@ -607,150 +591,81 @@ export default async function PressePage() {
           </div>
         </section>
 
-        <section className={cn(siteContainerClass, "py-16 min-[720px]:py-24")}>
-          <div className="grid gap-5 min-[900px]:grid-cols-2">
-            <article className="rounded-[30px] bg-grey p-8 min-[720px]:p-11">
-              <span className={siteEyebrow()}>Det er BetterLectio</span>
-              <h2 className="mt-3 text-[clamp(32px,4vw,48px)] leading-none font-extrabold tracking-[-0.04em] text-balance">
-                En ny brugerflade til en eksisterende skolehverdag.
-              </h2>
-              <ul className="mt-8 space-y-4">
-                {[
-                  [Smartphone, "En app og browser-udvidelse til elever"],
-                  [Code, "Et uafhængigt open source-projekt"],
-                  [Shield, "Udviklet med privatliv som et produktkrav"],
-                ].map(([Icon, text]) => {
-                  const ItemIcon = Icon as typeof Smartphone
-                  return (
-                    <li
-                      key={text as string}
-                      className="flex items-center gap-3 font-semibold"
-                    >
-                      <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-white shadow-[0_0_0_1px_oklch(0_0_0/0.06)]">
-                        <ItemIcon className="size-5" />
-                      </span>
-                      <span>{text as string}</span>
-                    </li>
-                  )
-                })}
-              </ul>
-            </article>
-
-            <article className="rounded-[30px] bg-white p-8 shadow-[0_0_0_1px_oklch(0_0_0/0.06),0_1px_2px_-1px_oklch(0_0_0/0.06),0_2px_4px_oklch(0_0_0/0.04)] min-[720px]:p-11">
-              <span className={siteEyebrow()}>Det er ikke BetterLectio</span>
-              <h2 className="mt-3 text-[clamp(32px,4vw,48px)] leading-none font-extrabold tracking-[-0.04em] text-balance">
-                Ikke en erstatning for skolens system.
-              </h2>
-              <p className="mt-7 text-[17px] leading-[1.6] text-pretty text-ink-muted">
-                BetterLectio ændrer oplevelsen omkring Lectio, men skolen
-                fortsætter med at bruge Lectio som sit administrative system.
-                BetterLectio træffer ingen beslutninger om skema, karakterer,
-                fravær eller elevdata.
-              </p>
-              <p className="mt-5 border-l-2 border-ink pl-5 text-[17px] leading-[1.55] font-bold text-pretty">
-                BetterLectio er et selvstændigt projekt og er ikke tilknyttet,
-                godkendt eller drevet af MaCom A/S.
-              </p>
-            </article>
-          </div>
-        </section>
-
         <section
           id="beskrivelse"
           className={cn(
             siteContainerClass,
-            "scroll-mt-8 pb-16 min-[720px]:pb-24"
+            "scroll-mt-8 py-16 min-[720px]:py-24"
           )}
         >
-          <div className="max-w-[720px]">
-            <span className={siteEyebrow()}>Klar til redaktionen</span>
+          <div className="max-w-[760px]">
+            <span className={siteEyebrow()}>Om BetterLectio</span>
             <h2 className="mt-3 text-[clamp(34px,5vw,60px)] leading-none font-extrabold tracking-[-0.045em] text-balance">
-              Beskriv BetterLectio præcist.
+              Hvad produktet er — og ikke er.
             </h2>
-            <p className="mt-5 text-[17px] leading-[1.55] text-pretty text-ink-muted">
-              Teksterne må bruges direkte eller tilpasses. Vi beder kun om, at
-              uafhængigheden fra MaCom bevares tydeligt.
+          </div>
+
+          <div className="mt-9 grid overflow-hidden rounded-[28px] border border-line bg-line min-[900px]:grid-cols-2">
+            <article className="bg-grey p-7 min-[720px]:p-10">
+              <h3 className="text-xl font-extrabold tracking-[-0.02em]">
+                Kort fortalt
+              </h3>
+              <p className="mt-4 text-[17px] leading-[1.6] text-pretty text-ink-muted">
+                BetterLectio viser indhold fra Lectio i en anden brugerflade.
+                Det findes som app til iOS og Android og som browserudvidelse
+                til Chrome, Firefox og Edge.
+              </p>
+              <ul className="mt-6 space-y-2 text-[15px] font-semibold">
+                <li>Gratis og uden annoncer</li>
+                <li>Open source</li>
+                <li>Installeres af den enkelte elev</li>
+              </ul>
+            </article>
+            <article className="bg-white p-7 min-[720px]:p-10">
+              <h3 className="text-xl font-extrabold tracking-[-0.02em]">
+                Forholdet til Lectio
+              </h3>
+              <p className="mt-4 text-[17px] leading-[1.6] text-pretty text-ink-muted">
+                Skolerne fortsætter med at bruge Lectio som administrativt
+                system. BetterLectio ændrer brugeroplevelsen, men bestemmer ikke
+                skema, karakterer, fravær eller andre oplysninger i Lectio.
+              </p>
+              <p className="mt-5 border-l-2 border-ink pl-5 font-bold text-pretty">
+                BetterLectio er ikke tilknyttet, godkendt eller drevet af MaCom
+                A/S.
+              </p>
+            </article>
+          </div>
+
+          <div className="mt-14 flex flex-wrap items-end justify-between gap-5">
+            <div>
+              <span className={siteEyebrow()}>Tekst til omtale</span>
+              <h3 className="mt-3 text-[clamp(28px,4vw,44px)] leading-none font-extrabold tracking-[-0.04em] text-balance">
+                Klar til at kopiere.
+              </h3>
+            </div>
+            <p className="max-w-[430px] text-sm leading-[1.55] text-pretty text-ink-muted">
+              Teksterne må bruges direkte eller tilpasses. Bevar oplysningen om
+              BetterLectios uafhængighed fra MaCom.
             </p>
           </div>
 
-          <div className="mt-9 divide-y divide-line border-y border-line">
+          <div className="mt-7 divide-y divide-line border-y border-line">
             {[
-              ["Én linje", "38 ord", shortDescription],
-              ["Kort beskrivelse", "Ca. 70 ord", fullDescription],
-            ].map(([title, length, text]) => (
+              ["Kort", shortDescription],
+              ["Udvidet", fullDescription],
+            ].map(([title, text]) => (
               <article
                 key={title}
                 className="grid gap-5 py-7 min-[900px]:grid-cols-[180px_1fr_auto] min-[900px]:items-start min-[900px]:gap-8"
               >
-                <div>
-                  <h3 className="font-extrabold">{title}</h3>
-                  <p className="mt-1 font-mono text-[11px] tracking-[0.04em] text-ink-muted uppercase">
-                    {length}
-                  </p>
-                </div>
+                <h4 className="font-extrabold">{title}</h4>
                 <p className="max-w-[720px] text-[17px] leading-[1.6] text-pretty text-ink-muted">
                   {text}
                 </p>
                 <PressCopyButton text={text} />
               </article>
             ))}
-          </div>
-        </section>
-
-        <section className="bg-grey py-16 min-[720px]:py-24">
-          <div className={siteContainerClass}>
-            <div className="grid gap-8 min-[900px]:grid-cols-[0.7fr_1.3fr] min-[900px]:gap-16">
-              <div>
-                <span className={siteEyebrow()}>Mulige vinkler</span>
-                <h2 className="mt-3 text-[clamp(34px,5vw,58px)] leading-none font-extrabold tracking-[-0.045em] text-balance">
-                  Fire steder at begynde.
-                </h2>
-                <p className="mt-5 max-w-[38ch] text-[17px] leading-[1.55] text-pretty text-ink-muted">
-                  Ikke færdige overskrifter, men konkrete indgange til historien
-                  og de mennesker, der bruger produktet.
-                </p>
-              </div>
-
-              <div className="grid gap-px overflow-hidden rounded-[26px] bg-line shadow-[0_0_0_1px_oklch(0_0_0/0.04)] sm:grid-cols-2">
-                {[
-                  [
-                    "01",
-                    "Elev byggede sit eget alternativ",
-                    "Hvordan daglig frustration blev til et produkt for elever på tværs af landet.",
-                  ],
-                  [
-                    "02",
-                    "Fra én elev til mange skoler",
-                    "Organisk vækst fra den første profil til et landsdækkende elevfællesskab.",
-                  ],
-                  [
-                    "03",
-                    "Unges krav til skolens software",
-                    "Hvad sker der, når elever selv designer det værktøj, de bruger hver dag?",
-                  ],
-                  [
-                    "04",
-                    "Privatliv i elevens værktøjer",
-                    "Hvordan et open source-projekt arbejder med følsomme skoledata og tillid.",
-                  ],
-                ].map(([index, title, body]) => (
-                  <article
-                    key={index}
-                    className="min-h-56 bg-white p-7 min-[720px]:p-8"
-                  >
-                    <p className="font-mono text-xs font-bold text-ink-muted tabular-nums">
-                      {index}
-                    </p>
-                    <h3 className="mt-7 text-[22px] leading-tight font-extrabold tracking-[-0.025em] text-balance">
-                      {title}
-                    </h3>
-                    <p className="mt-3 leading-[1.5] text-pretty text-ink-muted">
-                      {body}
-                    </p>
-                  </article>
-                ))}
-              </div>
-            </div>
           </div>
         </section>
 
@@ -763,9 +678,9 @@ export default async function PressePage() {
         >
           <div className="flex flex-wrap items-end justify-between gap-5">
             <div>
-              <span className={siteEyebrow()}>Mediebibliotek</span>
+              <span className={siteEyebrow()}>Pressebilleder og logoer</span>
               <h2 className="mt-3 text-[clamp(34px,5vw,60px)] leading-none font-extrabold tracking-[-0.045em] text-balance">
-                Alt det visuelle, samlet.
+                Klar til redaktionel brug.
               </h2>
             </div>
             <p className="max-w-[430px] text-sm leading-[1.55] text-pretty text-ink-muted">
@@ -777,7 +692,7 @@ export default async function PressePage() {
           <div className="mt-9 grid gap-6 rounded-[30px] bg-ink p-7 text-white min-[780px]:grid-cols-[1fr_auto] min-[780px]:items-center min-[780px]:p-10">
             <div>
               <p className="font-mono text-[11px] font-bold tracking-[0.06em] text-white/45 uppercase">
-                39 filer · original opløsning
+                40 filer · original opløsning
               </p>
               <h3 className="mt-2 text-[clamp(28px,4vw,44px)] leading-none font-extrabold tracking-[-0.04em] text-balance">
                 Hent hele pressepakken.
@@ -811,15 +726,32 @@ export default async function PressePage() {
                 download
                 className="inline-flex min-h-11 items-center rounded-full px-4 text-sm font-bold text-white/65 transition-colors duration-150 hover:text-white focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-white"
               >
-                Kun billeder · 11,1 MB
+                Kun billeder · 11,2 MB
               </a>
             </div>
           </div>
 
           <div className="mt-14">
             <CollectionHeader
-              label="01 · Logoer"
-              title="Den rigtige version til enhver flade."
+              label="01 · Anbefalet"
+              title="Tre billeder til de fleste artikler."
+              description="Et hovedbillede, en direkte sammenligning og et stående mobilformat. Alle viser produktet med demodata."
+            />
+            <div className="mt-7 grid gap-5 min-[700px]:grid-cols-2 min-[1080px]:grid-cols-3">
+              {[
+                EDITORIAL_ASSETS[0],
+                EDITORIAL_ASSETS[1],
+                EDITORIAL_ASSETS[4],
+              ].map((asset) => (
+                <AssetCard key={asset.src} {...asset} />
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-16 border-t border-line pt-14">
+            <CollectionHeader
+              label="02 · Logoer"
+              title="Logoer til lyse og mørke flader."
               description="SVG anbefales til tryk og stor gengivelse. PNG-filerne er 1024 × 1024 px med transparent baggrund, hvor det er angivet."
             />
             <div className="mt-7 grid gap-5 min-[620px]:grid-cols-2 min-[1080px]:grid-cols-4">
@@ -829,24 +761,36 @@ export default async function PressePage() {
             </div>
           </div>
 
-          <div className="mt-16 border-t border-line pt-14">
-            <CollectionHeader
-              label="02 · Redaktionens valg"
-              title="Pressebilleder, der fortæller historien."
-              description="Seks færdige kompositioner til artikler, nyhedsbreve og sociale medier — i brede, stående og kvadratiske formater. Alle viser det rigtige produkt med demodata."
-            />
-            <div className="mt-7 grid gap-5 min-[700px]:grid-cols-2 min-[1080px]:grid-cols-3">
-              {EDITORIAL_ASSETS.map((asset) => (
-                <AssetCard key={asset.src} {...asset} />
-              ))}
-            </div>
-          </div>
-
           <details className="group mt-12 border-t border-line pt-2">
             <summary className="flex min-h-20 cursor-pointer list-none items-center justify-between gap-5 py-4 focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand [&::-webkit-details-marker]:hidden">
               <div>
                 <p className="font-mono text-[11px] font-bold tracking-[0.05em] text-ink-muted uppercase">
-                  03 · Browser · 9 filer
+                  03 · Flere pressebilleder · 3 filer
+                </p>
+                <h3 className="mt-1 text-2xl font-extrabold tracking-[-0.03em]">
+                  Flere formater
+                </h3>
+              </div>
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-grey text-2xl font-light transition-transform duration-200 ease-out group-open:rotate-45 motion-reduce:transition-none">
+                +
+              </span>
+            </summary>
+            <div className="grid gap-5 pt-4 pb-8 min-[700px]:grid-cols-2 min-[1080px]:grid-cols-3">
+              {[
+                EDITORIAL_ASSETS[2],
+                EDITORIAL_ASSETS[3],
+                EDITORIAL_ASSETS[5],
+              ].map((asset) => (
+                <AssetCard key={asset.src} {...asset} />
+              ))}
+            </div>
+          </details>
+
+          <details className="group border-t border-line pt-2">
+            <summary className="flex min-h-20 cursor-pointer list-none items-center justify-between gap-5 py-4 focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand [&::-webkit-details-marker]:hidden">
+              <div>
+                <p className="font-mono text-[11px] font-bold tracking-[0.05em] text-ink-muted uppercase">
+                  04 · Browser · 11 filer
                 </p>
                 <h3 className="mt-1 text-2xl font-extrabold tracking-[-0.03em]">
                   Hele browseroplevelsen
@@ -914,7 +858,7 @@ export default async function PressePage() {
             <summary className="flex min-h-20 cursor-pointer list-none items-center justify-between gap-5 py-4 focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-brand [&::-webkit-details-marker]:hidden">
               <div>
                 <p className="font-mono text-[11px] font-bold tracking-[0.05em] text-ink-muted uppercase">
-                  04 · Mobil · 7 filer
+                  05 · Mobil · 7 filer
                 </p>
                 <h3 className="mt-1 text-2xl font-extrabold tracking-[-0.03em]">
                   Kampagnebilleder til mobil
@@ -984,7 +928,7 @@ export default async function PressePage() {
                 sizes="(min-width: 900px) 44vw, 100vw"
                 className="object-cover object-center outline -outline-offset-1 outline-black/10"
               />
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 bg-gradient-to-t from-black/72 via-black/28 to-transparent px-6 pt-24 pb-6 text-white min-[720px]:px-8 min-[720px]:pb-8">
+              <div className="absolute inset-x-0 bottom-0 flex flex-col items-start gap-4 bg-gradient-to-t from-black/72 via-black/28 to-transparent px-6 pt-24 pb-6 text-white min-[500px]:flex-row min-[500px]:items-end min-[500px]:justify-between min-[720px]:px-8 min-[720px]:pb-8">
                 <div>
                   <p className="text-lg font-extrabold tracking-[-0.02em]">
                     Jonathan Bangert
@@ -1005,22 +949,17 @@ export default async function PressePage() {
             <div className="p-8 min-[720px]:p-12 min-[1000px]:p-14">
               <span className={siteEyebrow()}>Stifteren</span>
               <h2 className="mt-3 text-[clamp(32px,4.5vw,52px)] leading-none font-extrabold tracking-[-0.045em] text-balance">
-                Bygget tæt på problemet.
+                Jonathan Bangert
               </h2>
               <p className="mt-6 max-w-[52ch] text-[17px] leading-[1.6] text-pretty text-ink-muted">
-                Jonathan Bangert er softwareudvikler og elev på UWC Red Cross
-                Nordic i Norge. Han begyndte at kode som 10-årig og har siden
-                bygget produkter i krydsfeltet mellem teknologi og skole.
+                Jonathan er gymnasieelev på UWC Red Cross Nordic i Norge og
+                udvikler BetterLectio. Han byggede den første version, mens han
+                selv brugte Lectio i sin skolehverdag.
               </p>
               <p className="mt-4 max-w-[52ch] text-[17px] leading-[1.6] text-pretty text-ink-muted">
-                BetterLectio voksede ud af hans egen skolehverdag: et ønske om
-                at gøre det system, han selv brugte hver dag, enklere, hurtigere
-                og mere gennemtænkt for elever.
-              </p>
-              <p className="mt-6 max-w-[52ch] border-l-2 border-brand pl-5 text-[17px] leading-[1.55] font-bold text-pretty">
-                Det særlige er ikke kun, at BetterLectio er bygget af en elev.
-                Produktbeslutningerne bliver truffet midt i den skolehverdag,
-                løsningen forsøger at forbedre.
+                Han kan interviewes om produktets udvikling, brugernes feedback
+                og erfaringen med at bygge et værktøj til en skolehverdag, han
+                selv er en del af.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a
@@ -1060,6 +999,65 @@ export default async function PressePage() {
           </div>
         </section>
 
+        <section className="bg-grey py-16 min-[720px]:py-24">
+          <div className={siteContainerClass}>
+            <div className="grid gap-8 min-[900px]:grid-cols-[0.72fr_1.28fr] min-[900px]:gap-16">
+              <div>
+                <span className={siteEyebrow()}>Spørgsmål og svar</span>
+                <h2 className="mt-3 text-[clamp(34px,5vw,58px)] leading-none font-extrabold tracking-[-0.045em] text-balance">
+                  Ofte stillede spørgsmål.
+                </h2>
+              </div>
+
+              <dl className="divide-y divide-line border-y border-line">
+                {[
+                  [
+                    "Er BetterLectio en del af Lectio?",
+                    "Nej. BetterLectio er et selvstændigt projekt og er ikke tilknyttet, godkendt eller drevet af MaCom A/S.",
+                  ],
+                  [
+                    `Hvad betyder ${students} elevprofiler?`,
+                    "Det er profiler registreret i BetterLectio. Tallet er ikke et downloadtal og siger ikke, hvor mange der er aktive på en bestemt dag.",
+                  ],
+                  [
+                    `Betyder ${schools} skoler, at skolerne har valgt BetterLectio?`,
+                    "Nej. En skole tælles med, når mindst én registreret elevprofil er knyttet til den. Det er ikke det samme som et samarbejde med eller en anbefaling fra skolen.",
+                  ],
+                  [
+                    "Hvad koster BetterLectio?",
+                    "BetterLectio er gratis, uden annoncer og uden abonnement. Kildekoden er offentlig på GitHub.",
+                  ],
+                ].map(([question, answer]) => (
+                  <div
+                    key={question}
+                    className="grid gap-2 py-6 min-[720px]:grid-cols-[0.82fr_1.18fr] min-[720px]:gap-8"
+                  >
+                    <dt className="font-extrabold text-pretty">{question}</dt>
+                    <dd className="leading-[1.55] text-pretty text-ink-muted">
+                      {answer}
+                    </dd>
+                  </div>
+                ))}
+                <div className="grid gap-2 py-6 min-[720px]:grid-cols-[0.82fr_1.18fr] min-[720px]:gap-8">
+                  <dt className="font-extrabold text-pretty">
+                    Hvordan håndterer BetterLectio data?
+                  </dt>
+                  <dd className="leading-[1.55] text-pretty text-ink-muted">
+                    Databehandlingen og de anvendte tjenester er beskrevet på{" "}
+                    <Link
+                      href="/privatliv"
+                      className="font-bold text-ink underline decoration-line decoration-2 underline-offset-4 hover:decoration-ink"
+                    >
+                      privatlivssiden
+                    </Link>
+                    , og kildekoden kan gennemgås offentligt.
+                  </dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </section>
+
         <section
           id="kontakt"
           className="scroll-mt-8 bg-ink py-16 text-white min-[720px]:py-24"
@@ -1067,11 +1065,12 @@ export default async function PressePage() {
           <div className={cn(siteContainerClass, "text-center")}>
             <span className={siteEyebrow("white")}>Pressekontakt</span>
             <h2 className="mx-auto mt-3 max-w-[14ch] text-[clamp(38px,6vw,72px)] leading-[0.96] font-extrabold tracking-[-0.05em] text-balance">
-              Arbejder du på en historie?
+              Kontakt Jonathan.
             </h2>
             <p className="mx-auto mt-6 max-w-[590px] text-[18px] leading-[1.55] text-pretty text-white/65">
-              Skriv, hvis du mangler et interview, et bestemt tal, teknisk
-              baggrund eller et billede i et andet format.
+              Skriv om interview, dokumentation, tekniske spørgsmål eller
+              materiale i et andet format. Henvendelser kan være på dansk eller
+              engelsk.
             </p>
             <a
               href={PRESS_MAILTO}
@@ -1082,9 +1081,6 @@ export default async function PressePage() {
             >
               {PRESS_EMAIL} <MailIcon className="size-[18px]" />
             </a>
-            <p className="mt-5 font-mono text-[11px] tracking-[0.05em] text-white/40 uppercase">
-              Presseforespørgsler · Dansk eller engelsk
-            </p>
           </div>
         </section>
       </main>

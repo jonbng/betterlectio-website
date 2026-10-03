@@ -9,7 +9,7 @@ by MaCom A/S.
 
 PRESS CONTACT
 Jonathan Bangert
-betterlectio@jonathanb.dk
+jonathan@betterlectio.dk
 https://betterlectio.dk/presse
 https://jonathanbangert.com
 
@@ -47,4 +47,4 @@ Suggested captions are available beside every image at
 https://betterlectio.dk/presse. Credit all assets as "BetterLectio".
 
 Need another crop, video or technical background?
-Contact betterlectio@jonathanb.dk.
+Contact jonathan@betterlectio.dk.
