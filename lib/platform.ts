@@ -65,7 +65,7 @@ export type InstallTarget = {
   external: boolean
   /**
    * Hint that desktop UIs may open a QR dialog for this target (phones must
-   * never do that — they should follow `href` to the store instead).
+   * never do that; they should follow `href` to the store instead).
    */
   appQr?: boolean
 }

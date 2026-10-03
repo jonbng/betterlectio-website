@@ -3,6 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 import { PressCopyButton } from "@/components/site/press-copy-button"
+import { ProtectedPressEmail } from "@/components/site/protected-press-email"
 import { SiteFooter } from "@/components/site/site-footer"
 import { SiteNav } from "@/components/site/site-nav"
 import { ArrowRight, ArrowUpRight } from "@/components/site/icons"
@@ -18,7 +19,7 @@ import { cn } from "@/lib/utils"
 export const metadata: Metadata = {
   title: "Presse og medier",
   description:
-    "Fakta, baggrund, billeder og pressekontakt for BetterLectio — en gratis, uafhængig brugerflade til Lectio, udviklet af Jonathan Bangert.",
+    "Fakta, baggrund, billeder og pressekontakt for BetterLectio, en gratis, uafhængig brugerflade til Lectio, udviklet af Jonathan Bangert.",
   alternates: { canonical: "/presse" },
   openGraph: {
     title: "Presse og medier · BetterLectio",
@@ -27,11 +28,7 @@ export const metadata: Metadata = {
   },
 }
 
-const PRESS_EMAIL = "jonathan@betterlectio.dk"
 const FOUNDER_WEBSITE = "https://jonathanbangert.com"
-const PRESS_MAILTO = `mailto:${PRESS_EMAIL}?subject=${encodeURIComponent(
-  "Presseforespørgsel om BetterLectio"
-)}`
 
 const LOGO_ASSETS = [
   {
@@ -176,24 +173,6 @@ function DownloadIcon({ className }: { className?: string }) {
       className={className}
     >
       <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
-    </svg>
-  )
-}
-
-function MailIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={2}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-      className={className}
-    >
-      <rect x="3" y="5" width="18" height="14" rx="2" />
-      <path d="m3 7 9 6 9-6" />
     </svg>
   )
 }
@@ -350,7 +329,7 @@ export default async function PressePage() {
 
   const fullDescription = `BetterLectio er en gratis og uafhængig brugerflade til Lectio, skabt af elev og udvikler Jonathan Bangert. Produktet gør skema, lektier, karakterer og beskeder mere overskuelige uden at erstatte skolens eksisterende Lectio-system. BetterLectio findes til iOS, Android, Chrome, Firefox og Edge. ${students} elevprofiler fra ${schools} skoler er registreret i BetterLectio. Projektet er open source og ikke tilknyttet MaCom A/S.`
 
-  const factsText = `BETTERLECTIO — FAKTA\n\n• ${students} elevprofiler registreret i BetterLectio\n• ${schools} skoler med mindst én registreret elevprofil\n• Første elevprofil registreret ${firstStudent}\n• Tilgængelig til iOS, Android, Chrome, Firefox og Edge\n• Gratis, uden annoncer og open source\n• Udviklet af Jonathan Bangert\n• Ikke tilknyttet, godkendt eller drevet af MaCom A/S\n• Tal opdateret ${updated}\n\nKilde og metode: betterlectio.dk/stats`
+  const factsText = `BETTERLECTIO: FAKTA\n\n• ${students} elevprofiler registreret i BetterLectio\n• ${schools} skoler med mindst én registreret elevprofil\n• Første elevprofil registreret ${firstStudent}\n• Tilgængelig til iOS, Android, Chrome, Firefox og Edge\n• Gratis, uden annoncer og open source\n• Udviklet af Jonathan Bangert\n• Ikke tilknyttet, godkendt eller drevet af MaCom A/S\n• Tal opdateret ${updated}\n\nKilde og metode: betterlectio.dk/stats`
 
   const pressJsonLd = {
     "@context": "https://schema.org",
@@ -370,13 +349,6 @@ export default async function PressePage() {
         "https://linkedin.com/in/jonathan-bangert/",
         "https://x.com/jonbng",
       ],
-    },
-    email: PRESS_EMAIL,
-    contactPoint: {
-      "@type": "ContactPoint",
-      contactType: "press",
-      email: PRESS_EMAIL,
-      availableLanguage: ["Danish", "English"],
     },
     sameAs: ["https://github.com/jonbng/betterlectio"],
   }
@@ -411,15 +383,7 @@ export default async function PressePage() {
                 nøgletal, baggrund, pressebilleder og direkte kontakt.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
-                <a
-                  href={PRESS_MAILTO}
-                  className={siteButton(
-                    "primary",
-                    "pr-5 pl-6 active:scale-[0.96]"
-                  )}
-                >
-                  Kontakt Jonathan <MailIcon className="size-[18px]" />
-                </a>
+                <ProtectedPressEmail />
                 <a
                   href="#materialer"
                   className={siteButton(
@@ -497,7 +461,7 @@ export default async function PressePage() {
             <Fact
               value={students}
               label="registrerede elevprofiler"
-              note="Profiler oprettet i BetterLectio — ikke et estimat eller et downloadtal."
+              note="Profiler oprettet i BetterLectio, ikke et estimat eller et downloadtal."
             />
             <Fact
               value={schools}
@@ -601,7 +565,7 @@ export default async function PressePage() {
           <div className="max-w-[760px]">
             <span className={siteEyebrow()}>Om BetterLectio</span>
             <h2 className="mt-3 text-[clamp(34px,5vw,60px)] leading-none font-extrabold tracking-[-0.045em] text-balance">
-              Hvad produktet er — og ikke er.
+              Hvad produktet er, og ikke er.
             </h2>
           </div>
 
@@ -903,12 +867,7 @@ export default async function PressePage() {
               Mangler du en særlig beskæring, video eller teknisk baggrund?
               Skriv til os, så hjælper vi med det originale materiale.
             </p>
-            <a
-              href={PRESS_MAILTO}
-              className="inline-flex min-h-11 items-center gap-2 font-bold underline decoration-line decoration-2 underline-offset-4 hover:decoration-ink"
-            >
-              Bed om materiale <ArrowRight className="size-4" />
-            </a>
+            <ProtectedPressEmail tone="link" />
           </div>
         </section>
 
@@ -962,15 +921,7 @@ export default async function PressePage() {
                 selv er en del af.
               </p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href={PRESS_MAILTO}
-                  className={siteButton(
-                    "primary",
-                    "pr-5 pl-6 active:scale-[0.96]"
-                  )}
-                >
-                  {PRESS_EMAIL} <MailIcon className="size-[18px]" />
-                </a>
+                <ProtectedPressEmail />
                 <a
                   href={FOUNDER_WEBSITE}
                   target="_blank"
@@ -1072,15 +1023,10 @@ export default async function PressePage() {
               materiale i et andet format. Henvendelser kan være på dansk eller
               engelsk.
             </p>
-            <a
-              href={PRESS_MAILTO}
-              className={siteButton(
-                "ghost",
-                "mt-8 border-white/20 px-7 active:scale-[0.96]"
-              )}
-            >
-              {PRESS_EMAIL} <MailIcon className="size-[18px]" />
-            </a>
+            <ProtectedPressEmail
+              tone="ghost"
+              className="mt-8 border-white/20 px-7"
+            />
           </div>
         </section>
       </main>

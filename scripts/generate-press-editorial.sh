@@ -71,12 +71,12 @@ for screen in schedule messages homework; do
     -geometry +16+16 -composite "$TMP/phone-${screen}.png"
 done
 
-# 01 — Flagship editorial landscape: an immediately legible brand story with
+# 01 - Flagship editorial landscape: an immediately legible brand story with
 # real web and mobile UI. Designed to work as an article lead image.
-magick -size 2400x1350 xc:'#F2F2EF' \
-  -fill '#E4E4DF' -draw 'circle 2220,40 2500,40' \
-  -fill '#3158E7' -font "$FONT_BOLD" -pointsize 24 -annotate +138+110 'BETTERLECTIO / 01' \
-  -fill '#3158E7' -draw 'roundrectangle 134,1080,686,1096,8,8' \
+magick -size 2400x1350 xc:'#F5F5F2' \
+  -fill '#E8ECF8' -draw 'circle 2220,40 2500,40' \
+  -fill '#3F63D8' -font "$FONT_BOLD" -pointsize 24 -annotate +134+110 'BETTERLECTIO' \
+  -fill '#3F63D8' -draw 'roundrectangle 134,1084,686,1092,4,4' \
   -fill '#171719' -font "$FONT_BLACK" -pointsize 142 -interline-spacing -16 \
   -annotate +134+332 $'Skolen.\nSamlet.' \
   -fill '#58585E' -font "$FONT_REGULAR" -pointsize 34 -interline-spacing 8 \
@@ -92,12 +92,12 @@ magick "$TMP/overview-stage.png" "$TMP/browser-light.png" -geometry +790+174 -co
 magick "$TMP/overview-device.png" "$TMP/phone-schedule.png" -geometry +1824+354 -composite \
   -strip -depth 8 -quality 94 "$OUT/editorial-overview-2400.png"
 
-# 02 — Dark landscape: high contrast and plenty of clean negative space for
+# 02 - Dark landscape: high contrast and plenty of clean negative space for
 # publication crops and overlaid headlines.
 magick -size 2400x1350 xc:'#131315' \
-  -fill '#3158E7' -draw 'rectangle 0,0,38,1350' \
-  -fill '#2A2A2F' -draw 'circle 2180,1160 2650,1160' \
-  -fill '#7D98FF' -font "$FONT_BOLD" -pointsize 24 -annotate +140+112 'BETTERLECTIO / 02' \
+  -fill '#3F63D8' -draw 'rectangle 0,0,24,1350' \
+  -fill '#1D2440' -draw 'circle 2180,1160 2650,1160' \
+  -fill '#7D98FF' -font "$FONT_BOLD" -pointsize 24 -annotate +140+112 'BETTERLECTIO' \
   -fill white -font "$FONT_BLACK" -pointsize 118 -interline-spacing -12 \
   -annotate +138+318 $'Ro i\nskoledagen.' \
   -fill '#A7A7AF' -font "$FONT_REGULAR" -pointsize 31 -interline-spacing 8 \
@@ -110,13 +110,13 @@ magick "$TMP/dark-base.png" "$TMP/logo-104.png" -geometry +138+1096 -composite \
 magick "$TMP/dark-stage.png" "$TMP/browser-dark.png" -geometry +870+214 -composite \
   -strip -depth 8 -quality 94 "$OUT/editorial-dark-2400.png"
 
-# 03 — Before/after comparison: newsworthy, self-explanatory and based only
+# 03 - Before/after comparison: newsworthy, self-explanatory and based only
 # on authentic screenshots.
 magick -size 2400x1350 xc:'#ECECEA' \
   -fill '#FFFFFF' -draw 'rectangle 1200,0,2400,1350' \
-  -fill '#77777D' -font "$FONT_BOLD" -pointsize 25 -annotate +142+104 'FØR / 01' \
+  -fill '#77777D' -font "$FONT_BOLD" -pointsize 25 -annotate +142+104 'FØR' \
   -fill '#171719' -font "$FONT_BLACK" -pointsize 82 -annotate +142+206 'Lectio' \
-  -fill '#3158E7' -font "$FONT_BOLD" -pointsize 25 -annotate +1260+104 'EFTER / 02' \
+  -fill '#3F63D8' -font "$FONT_BOLD" -pointsize 25 -annotate +1260+104 'EFTER' \
   -fill '#171719' -font "$FONT_BLACK" -pointsize 82 -annotate +1260+206 'BetterLectio' \
   -fill '#68686E' -font "$FONT_REGULAR" -pointsize 28 -annotate +142+1260 'Samme skoledag. Et helt andet overblik.' \
   "$TMP/compare-base.png"
@@ -129,15 +129,15 @@ magick "$TMP/compare-base.png" \
 magick "$TMP/compare-stage.png" "$TMP/lectio.png" -geometry +120+290 -composite \
   "$TMP/better.png" -geometry +1260+290 -composite \
   -fill '#D7D7D2' -draw 'roundrectangle 120,1010,1120,1014,2,2' \
-  -fill '#3158E7' -draw 'roundrectangle 1260,1010,2260,1014,2,2' \
+  -fill '#3F63D8' -draw 'roundrectangle 1260,1010,2260,1014,2,2' \
   -strip -depth 8 -quality 94 "$OUT/editorial-before-after-2400.png"
 
-# 04 — Portrait/mobile editorial art: a magazine-friendly 4:5 format using
+# 04 - Portrait/mobile editorial art: a magazine-friendly 4:5 format using
 # the same neutral canvas and restrained blue accent as the landscape set.
-magick -size 1600x2000 xc:'#F2F2EF' \
-  -fill '#3158E7' -draw 'rectangle 0,0,1600,24' \
-  -fill '#E4E4DF' -draw 'circle 1450,160 1760,160' \
-  -fill '#3158E7' -font "$FONT_BOLD" -pointsize 22 -annotate +108+84 'BETTERLECTIO / MOBILE' \
+magick -size 1600x2000 xc:'#F5F5F2' \
+  -fill '#3F63D8' -draw 'rectangle 0,0,1600,18' \
+  -fill '#E8ECF8' -draw 'circle 1450,160 1760,160' \
+  -fill '#3F63D8' -font "$FONT_BOLD" -pointsize 22 -annotate +108+84 'BETTERLECTIO' \
   -fill '#171719' -font "$FONT_BLACK" -pointsize 116 -interline-spacing -12 \
   -annotate +104+240 $'Lectio.\nBare bedre.' \
   -fill '#626268' -font "$FONT_REGULAR" -pointsize 31 \
@@ -149,19 +149,22 @@ magick "$TMP/mobile-base.png" \
   "$TMP/mobile-stage.png"
 magick "$TMP/mobile-stage.png" "$TMP/phone-schedule.png" -geometry +126+630 -composite \
   "$TMP/phone-messages.png" -geometry +1010+630 -composite \
-  -fill '#3158E7' -draw 'roundrectangle 104,1690,1496,1702,6,6' \
+  -fill '#3F63D8' -font "$FONT_BOLD" -pointsize 22 -annotate +126+1634 'SKEMA' \
+  -fill '#3F63D8' -font "$FONT_BOLD" -pointsize 22 -annotate +1010+1634 'BESKEDER' \
+  -fill '#3F63D8' -draw 'roundrectangle 104,1690,1496,1698,4,4' \
   "$TMP/logo-104.png" -geometry +104+1770 -composite \
   -fill '#171719' -font "$FONT_BOLD" -pointsize 36 -annotate +224+1842 'BetterLectio' \
   -strip -depth 8 -quality 94 "$OUT/editorial-mobile-1600.png"
 
-# 05 — Ecosystem landscape: shows cross-device continuity without pretending
+# 05 - Ecosystem landscape: shows cross-device continuity without pretending
 # the product is anything other than the real app and browser extension.
 magick -size 2400x1350 xc:'#FBFBF8' \
-  -fill '#3158E7' -draw 'rectangle 0,0,780,1350' \
-  -fill '#BECBFF' -font "$FONT_BOLD" -pointsize 22 -annotate +108+104 'BETTERLECTIO / 05' \
+  -fill '#171719' -draw 'rectangle 0,0,780,1350' \
+  -fill '#3F63D8' -draw 'rectangle 0,0,20,1350' \
+  -fill '#8FA7F0' -font "$FONT_BOLD" -pointsize 22 -annotate +108+104 'BETTERLECTIO' \
   -fill white -font "$FONT_BLACK" -pointsize 92 -interline-spacing -8 \
   -annotate +104+286 $'Ét sted.\nHele dagen.' \
-  -fill '#DCE4FF' -font "$FONT_REGULAR" -pointsize 30 -interline-spacing 8 \
+  -fill '#B8B8C0' -font "$FONT_REGULAR" -pointsize 30 -interline-spacing 8 \
   -annotate +112+548 $'På mobilen.\nI browseren.\nAltid genkendeligt.' \
   "$TMP/ecosystem-base.png"
 magick "$TMP/ecosystem-base.png" "$TMP/logo-104.png" -geometry +112+1114 -composite \
@@ -174,12 +177,12 @@ magick "$TMP/ecosystem-stage.png" "$TMP/browser-light.png" -geometry +800+140 -c
 magick "$TMP/ecosystem-device.png" "$TMP/phone-homework.png" -geometry +1796+340 -composite \
   -strip -depth 8 -quality 94 "$OUT/editorial-everywhere-2400.png"
 
-# 06 — Square cover: useful for social cards, newsletters and cropped article
+# 06 - Square cover: useful for social cards, newsletters and cropped article
 # thumbnails where the product must remain recognizable at small sizes.
-magick -size 2000x2000 xc:'#F2F2EF' \
-  -fill '#3158E7' -draw 'rectangle 0,0,28,2000' \
-  -fill '#E4E4DF' -draw 'circle 1840,160 2220,160' \
-  -fill '#3158E7' -font "$FONT_BOLD" -pointsize 22 -annotate +120+82 'BETTERLECTIO / 06' \
+magick -size 2000x2000 xc:'#F5F5F2' \
+  -fill '#3F63D8' -draw 'rectangle 0,0,20,2000' \
+  -fill '#E8ECF8' -draw 'circle 1840,160 2220,160' \
+  -fill '#3F63D8' -font "$FONT_BOLD" -pointsize 22 -annotate +120+82 'BETTERLECTIO' \
   -fill '#171719' -font "$FONT_BLACK" -pointsize 126 -interline-spacing -14 \
   -annotate +116+272 $'Din skoledag.\nUden støj.' \
   -fill '#626268' -font "$FONT_REGULAR" -pointsize 34 \

@@ -34,7 +34,7 @@ export async function createSupabaseServerClient(): Promise<SupabaseClient> {
             cookieStore.set(name, value, options)
           }
         } catch {
-          // Called from a Server Component — cookie writes are ignored.
+          // Called from a Server Component, so cookie writes are ignored.
           // middleware.ts refreshes sessions on /roadmap and /auth/*.
         }
       },

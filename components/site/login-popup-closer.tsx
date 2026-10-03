@@ -35,7 +35,7 @@ export function LoginPopupCloser({
     try {
       window.opener.location.reload()
     } catch {
-      // Cross-origin / closed opener — ignore.
+      // Ignore a cross-origin or closed opener.
     }
     window.close()
   }, [active, status, reason])

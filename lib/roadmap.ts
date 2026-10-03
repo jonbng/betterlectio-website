@@ -80,7 +80,7 @@ function displayDescription(
   if (!message) return null
   // When there's a real title, show the full message as the body.
   if (row.title?.trim()) return message
-  // Title was derived from the first line — only show a body if there's more.
+  // Title was derived from the first line; only show a body if there's more.
   if (message === title || message.startsWith(title.replace(/…$/, ""))) {
     const rest = message.includes("\n")
       ? message.split(/\n/).slice(1).join("\n").trim()

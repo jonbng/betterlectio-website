@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils"
 
 /**
  * Hardware-style frames that wrap product screenshots.
- * Files live in `public/shots` — mobile App Store shots at ~1170×2532,
+ * Files live in `public/shots`: mobile App Store shots at ~1170×2532,
  * desktop captures at ~2560×1600.
  */
 

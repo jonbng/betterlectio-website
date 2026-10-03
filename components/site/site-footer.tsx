@@ -37,6 +37,14 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li className="mb-3">
+                <Link
+                  href="/betterlectio-vs-lectio-plus"
+                  className={FOOTER_LINK_CLASS}
+                >
+                  BetterLectio vs. Lectio+
+                </Link>
+              </li>
+              <li className="mb-3">
                 <a
                   href={DOWNLOAD_LINKS.ios}
                   target="_blank"

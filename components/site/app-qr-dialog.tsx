@@ -7,7 +7,7 @@ import { useEffect, useId, useRef, useState } from "react"
 import { Apple, Close, GooglePlay, Smartphone } from "@/components/site/icons"
 import { cn } from "@/lib/utils"
 
-/** Absolute URL encoded in the QR — routes phones to the right store. */
+/** Absolute URL encoded in the QR, routing phones to the right store. */
 export const APP_QR_PATH = "/download/app"
 
 type AppQrDialogProps = {
@@ -114,7 +114,7 @@ export function AppQrDialog({ open, onClose, source }: AppQrDialogProps) {
               role="img"
               aria-label={`QR-kode til ${qrHref}`}
               className="size-56 select-none [&_svg]:size-full"
-              // SVG string from the qrcode package — no user input.
+              // SVG string from the qrcode package; no user input.
               dangerouslySetInnerHTML={{ __html: qrSvg }}
             />
           ) : (

@@ -20,7 +20,7 @@ function CtaButton({
   cta: InstallTarget
   variant: SiteButtonVariant
   source: string
-  /** Desktop only — phones must never get a QR they can't scan. */
+  /** Desktop only; phones must never get a QR they can't scan. */
   onAppQr?: () => void
 }) {
   const className = siteButton(variant)
@@ -70,7 +70,7 @@ export function HeroCta() {
   const { primary, secondary } = installFor(detected ?? "unknown")
   const [appQrOpen, setAppQrOpen] = useState(false)
 
-  // QR only makes sense on a computer — phones can't scan their own screen.
+  // QR only makes sense on a computer because phones can't scan their own screen.
   // Until platform is known, treat as non-desktop so we never flash a QR CTA
   // on mobile (falls through to the /download/app link instead).
   const showAppQr = detected !== null && deviceKind(detected) === "desktop"

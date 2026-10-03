@@ -39,6 +39,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.4,
     },
+    {
+      url: `${SITE_URL}/betterlectio-vs-lectio-plus`,
+      lastModified: new Date("2026-10-04"),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
   ]
 
   const schools = await getAllSchoolsForSeo()
