@@ -2,12 +2,12 @@ import { Star } from "@/components/site/icons"
 import { siteContainerClass, siteEyebrow } from "@/components/site/styles"
 import { cn } from "@/lib/utils"
 
-// Placeholder ratings, swap for live store numbers when wired up.
+// Current store ratings. Keep these in sync with the public store listings.
 const RATINGS = [
   { store: "Chrome Web Store", score: "4.9" },
   { store: "Firefox Add-ons", score: "5.0" },
   { store: "Microsoft Edge", score: "5.0" },
-  { store: "App Store", score: "På iOS", detail: "Tilgængelig" },
+  { store: "App Store", score: "5.0" },
   { store: "Google Play", score: "5.0" },
 ]
 
@@ -83,11 +83,7 @@ export function SocialProof({ schoolCount }: { schoolCount: number }) {
             className="flex flex-col items-center gap-1.5 rounded-2xl border border-line bg-white px-4 py-5 text-center"
           >
             <span className="text-2xl font-extrabold tracking-[-0.02em]">{r.score}</span>
-            {r.detail ? (
-              <span className="text-xs font-medium text-ink-muted">{r.detail}</span>
-            ) : (
-              <Stars />
-            )}
+            <Stars />
             <span className="text-xs font-medium text-ink-muted">{r.store}</span>
           </div>
         ))}
