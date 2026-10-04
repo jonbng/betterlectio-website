@@ -1,9 +1,11 @@
 BETTERLECTIO PRESS KIT
-Updated: 3 October 2026
+Updated: 4 October 2026
 
 ABOUT
-BetterLectio is a free, independent interface for Lectio, created by student
-and developer Jonathan Bangert. BetterLectio is available for iOS, Android,
+BetterLectio is a free, independent interface for Lectio, built by students.
+Jonathan Bangert created the project and continues to lead and maintain it;
+Elliott Friedrich has contributed significantly to the iOS app. The first
+public release was in March 2026. BetterLectio is available for iOS, Android,
 Chrome, Firefox and Edge. It is not affiliated with, endorsed by or operated
 by MaCom A/S.
 

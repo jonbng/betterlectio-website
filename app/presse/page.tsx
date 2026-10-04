@@ -325,11 +325,11 @@ export default async function PressePage() {
   const firstStudent = formatDate(stats.firstStudentAt)
 
   const shortDescription =
-    "BetterLectio er en gratis, open source og uafhængig brugerflade til Lectio, udviklet af gymnasieelev Jonathan Bangert. BetterLectio er ikke tilknyttet MaCom A/S."
+    "BetterLectio er en gratis og uafhængig brugerflade til Lectio, bygget af elever og ledet af gymnasieelev Jonathan Bangert. BetterLectio er ikke tilknyttet MaCom A/S."
 
-  const fullDescription = `BetterLectio er en gratis og uafhængig brugerflade til Lectio, skabt af elev og udvikler Jonathan Bangert. Produktet gør skema, lektier, karakterer og beskeder mere overskuelige uden at erstatte skolens eksisterende Lectio-system. BetterLectio findes til iOS, Android, Chrome, Firefox og Edge. ${students} elevprofiler fra ${schools} skoler er registreret i BetterLectio. Projektet er open source og ikke tilknyttet MaCom A/S.`
+  const fullDescription = `BetterLectio er en gratis og uafhængig brugerflade til Lectio, skabt og ledet af gymnasieelev Jonathan Bangert. Han begyndte projektet på Sorø Akademi for at skabe en mere overskuelig oplevelse af det system, han selv brugte hver dag. BetterLectio blev offentligt tilgængeligt i marts 2026 og findes i dag til iOS, Android, Chrome, Firefox og Edge. Elliott Friedrich har bidraget væsentligt til iOS-appen. ${students} elevprofiler fra ${schools} skoler er registreret i BetterLectio. Projektet har ingen omsætning og er ikke tilknyttet MaCom A/S.`
 
-  const factsText = `BETTERLECTIO: FAKTA\n\n• ${students} elevprofiler registreret i BetterLectio\n• ${schools} skoler med mindst én registreret elevprofil\n• Første elevprofil registreret ${firstStudent}\n• Tilgængelig til iOS, Android, Chrome, Firefox og Edge\n• Gratis, uden annoncer og open source\n• Udviklet af Jonathan Bangert\n• Ikke tilknyttet, godkendt eller drevet af MaCom A/S\n• Tal opdateret ${updated}\n\nKilde og metode: betterlectio.dk/stats`
+  const factsText = `BETTERLECTIO: FAKTA\n\n• ${students} elevprofiler registreret i BetterLectio\n• ${schools} skoler med mindst én registreret elevprofil\n• Første elevprofil registreret ${firstStudent}\n• Første offentlige udgivelse i marts 2026\n• Tilgængelig til iOS, Android, Chrome, Firefox og Edge\n• Gratis og uden annoncer\n• Skabt og ledet af Jonathan Bangert\n• Elliott Friedrich har bidraget væsentligt til iOS-appen\n• Ikke tilknyttet, godkendt eller drevet af MaCom A/S\n• Tal opdateret ${updated}\n\nKilde og metode: betterlectio.dk/stats`
 
   const pressJsonLd = {
     "@context": "https://schema.org",
@@ -379,8 +379,8 @@ export default async function PressePage() {
 
             <div className="pb-1">
               <p className="max-w-[48ch] text-[clamp(18px,2vw,22px)] leading-[1.5] font-medium text-pretty text-ink-muted">
-                Udviklet af gymnasieelev Jonathan Bangert. Her finder du
-                nøgletal, baggrund, pressebilleder og direkte kontakt.
+                Gratis, bygget af elever og ledet af gymnasieelev Jonathan
+                Bangert. Her er fakta, baggrund, billeder og direkte kontakt.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <ProtectedPressEmail />
@@ -506,10 +506,14 @@ export default async function PressePage() {
                   Fra første version til i dag.
                 </h2>
                 <p className="mt-6 max-w-[45ch] text-[18px] leading-[1.6] text-pretty text-white/68">
-                  Jonathan Bangert begyndte at udvikle BetterLectio, mens han
-                  gik på Sorø Akademi og selv brugte Lectio. I dag går han på
-                  UWC Red Cross Nordic i Norge, hvorfra han fortsat leder og
-                  vedligeholder projektet.
+                  Jonathan Bangert begyndte på BetterLectio, fordi han var
+                  frustreret over Lectios brugerflade. På Sorø Akademi så han
+                  samtidig elever omkring sig betale for en anden app for at få
+                  en bedre oplevelse på telefonen.
+                </p>
+                <p className="mt-4 max-w-[45ch] text-[15px] leading-[1.6] text-pretty text-white/52">
+                  Det begyndte som et værktøj til ham selv. Venner bad om at få
+                  adgang, og kort efter brugte en stor del af hans klasse det.
                 </p>
               </div>
 
@@ -517,18 +521,23 @@ export default async function PressePage() {
                 {[
                   [
                     "December 2025",
-                    "Udviklingen begynder",
-                    "Jonathan bygger den første version, mens han går på Sorø Akademi.",
+                    "Bygget til eget brug",
+                    "Jonathan begynder at bygge browserudvidelsen i sit første år på Sorø Akademi.",
                   ],
                   [
-                    firstStudent,
-                    "Første registrering",
-                    "Den første elevprofil bliver registreret.",
+                    "Marts 2026",
+                    "Første offentlige udgivelse",
+                    "Browserudvidelsen bliver gjort offentligt tilgængelig.",
+                  ],
+                  [
+                    "Sommer 2026",
+                    "BetterLectio kommer på mobil",
+                    "iOS- og Android-apps bliver lanceret. Elliott Friedrich bidrager væsentligt til iOS-appen.",
                   ],
                   [
                     updated,
                     `${students} elevprofiler`,
-                    `Profilerne er fordelt på ${schools} skoler.`,
+                    `Registrerede profiler fra ${schools} skoler. Jonathan leder fortsat projektet fra UWC Red Cross Nordic i Norge.`,
                   ],
                 ].map(([date, title, body], index) => (
                   <li
@@ -582,7 +591,7 @@ export default async function PressePage() {
               </p>
               <ul className="mt-6 space-y-2 text-[15px] font-semibold">
                 <li>Gratis og uden annoncer</li>
-                <li>Open source</li>
+                <li>Bygget af elever</li>
                 <li>Installeres af den enkelte elev</li>
               </ul>
             </article>
@@ -597,7 +606,8 @@ export default async function PressePage() {
               </p>
               <p className="mt-5 border-l-2 border-ink pl-5 font-bold text-pretty">
                 BetterLectio er ikke tilknyttet, godkendt eller drevet af MaCom
-                A/S.
+                A/S. Ingen skoler har officielt anbefalet eller frarådet
+                projektet.
               </p>
             </article>
           </div>
@@ -912,15 +922,25 @@ export default async function PressePage() {
                 Jonathan Bangert
               </h2>
               <p className="mt-6 max-w-[52ch] text-[17px] leading-[1.6] text-pretty text-ink-muted">
-                Jonathan skabte BetterLectio, mens han gik på Sorø Akademi. I
-                dag er han elev på UWC Red Cross Nordic i Norge, hvorfra han
-                fortsat leder og vedligeholder projektet.
+                Jonathan skabte BetterLectio i sit første år på Sorø Akademi.
+                Han var frustreret over brugerfladen i et system, han selv
+                skulle bruge flere gange om dagen, og begyndte derfor at bygge
+                en browserudvidelse til sig selv. Da venner og siden en stor del
+                af klassen tog den i brug, gjorde han projektet offentligt.
               </p>
               <p className="mt-4 max-w-[52ch] text-[17px] leading-[1.6] text-pretty text-ink-muted">
-                Han kan interviewes om produktets udvikling, brugernes feedback
-                og erfaringen med at bygge et værktøj til en skolehverdag, han
-                selv er en del af.
+                I dag er han elev på UWC Red Cross Nordic i Norge og leder og
+                vedligeholder fortsat BetterLectio. Tidligere byggede han og
+                Elliott Friedrich skoleplatformen Akademia, som de præsenterede
+                i <em>Løvens Hule Junior</em> på dansk tv.
               </p>
+              <div className="mt-7 border-l-2 border-ink pl-5">
+                <p className="font-extrabold">Bygget af elever</p>
+                <p className="mt-1 max-w-[50ch] text-sm leading-[1.55] text-pretty text-ink-muted">
+                  Jonathan startede og leder projektet. Elliott Friedrich har
+                  bidraget væsentligt til udviklingen af iOS-appen.
+                </p>
+              </div>
               <div className="mt-8 flex flex-wrap gap-3">
                 <ProtectedPressEmail />
                 <a
@@ -978,6 +998,18 @@ export default async function PressePage() {
                   [
                     "Hvad koster BetterLectio?",
                     "BetterLectio er gratis, uden annoncer og uden abonnement. Kildekoden er offentlig på GitHub.",
+                  ],
+                  [
+                    "Hvem står bag BetterLectio?",
+                    "Jonathan Bangert skabte projektet og leder og vedligeholder det fortsat. Elliott Friedrich har bidraget væsentligt til iOS-appen.",
+                  ],
+                  [
+                    "Hvordan er projektet finansieret?",
+                    "BetterLectio har ingen omsætning og er selvfinansieret. Holdet har indtil videre brugt cirka 1.000 kr. på projektet.",
+                  ],
+                  [
+                    "Hvor kommer navnet og logoet fra?",
+                    "Navnet og logoet stammer fra et tidligere, uafhængigt projekt med samme navn, som ikke længere virkede efter en ændring i Lectio. Holdet bag det nuværende BetterLectio kontaktede den tidligere skaber og overtog navnet og logoet med vedkommendes tilladelse.",
                   ],
                 ].map(([question, answer]) => (
                   <div
