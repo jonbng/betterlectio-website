@@ -6,10 +6,7 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
-  GraduationCap,
   Monitor,
-  Shield,
-  Smartphone,
 } from "@/components/site/icons"
 import { SiteFooter } from "@/components/site/site-footer"
 import { SiteNav } from "@/components/site/site-nav"
@@ -32,6 +29,7 @@ const SOURCES = {
   lectioPlusAndroid:
     "https://play.google.com/store/apps/details?id=com.totus_labs.lectio",
   betterlectioGithub: "https://github.com/jonbng/betterlectio",
+  betterlectioAndroidGithub: "https://github.com/jonbng/betterlectio-android",
   betterlectioPrivacy: "https://betterlectio.dk/privatliv",
   betterlectioStats: "https://betterlectio.dk/stats",
   betterlectioDownload: "https://betterlectio.dk/download",
@@ -68,7 +66,6 @@ type ComparisonRow = {
   label: string
   betterlectio: React.ReactNode
   lectioPlus: React.ReactNode
-  better?: "betterlectio" | "lectio-plus" | "tie"
   sources: SourceLink[]
 }
 
@@ -87,7 +84,6 @@ const comparisonRows: ComparisonRow[] = [
         <span>App Store viser også et medlemskab til 249 kr.</span>
       </>
     ),
-    better: "betterlectio",
     sources: [
       { label: "BetterLectio download", href: SOURCES.betterlectioDownload },
       { label: "Lectio+ i App Store", href: SOURCES.lectioPlusIos },
@@ -107,7 +103,6 @@ const comparisonRows: ComparisonRow[] = [
         <span>Separate apps til iOS og Android.</span>
       </>
     ),
-    better: "tie",
     sources: [
       { label: "BetterLectio platforme", href: SOURCES.betterlectioDownload },
       { label: "Lectio+ App Store", href: SOURCES.lectioPlusIos },
@@ -128,7 +123,6 @@ const comparisonRows: ComparisonRow[] = [
         <span>Lectio+ markedsføres som en mobilapp.</span>
       </>
     ),
-    better: "betterlectio",
     sources: [
       { label: "BetterLectio platforme", href: SOURCES.betterlectioDownload },
       { label: "Lectio+ App Store", href: SOURCES.lectioPlusIos },
@@ -148,7 +142,6 @@ const comparisonRows: ComparisonRow[] = [
         <span>Farverne gør skemaet lettere at afkode.</span>
       </>
     ),
-    better: "betterlectio",
     sources: [
       { label: "BetterLectio kildekode", href: SOURCES.betterlectioGithub },
       { label: "Lectio+ App Store", href: SOURCES.lectioPlusIos },
@@ -159,18 +152,18 @@ const comparisonRows: ComparisonRow[] = [
     betterlectio: (
       <>
         <strong>Open source</strong>
-        <span>Koden kan læses og efterprøves på GitHub.</span>
+        <span>Koden kan læses, efterprøves og forbedres af andre.</span>
       </>
     ),
     lectioPlus: (
       <>
-        <strong>Lukket kildekode</strong>
-        <span>Udgives kommercielt af Totus Labs ApS.</span>
+        <strong>Closed source</strong>
+        <span>Kildekoden er ikke offentligt tilgængelig.</span>
       </>
     ),
-    better: "betterlectio",
     sources: [
-      { label: "BetterLectio på GitHub", href: SOURCES.betterlectioGithub },
+      { label: "Browser på GitHub", href: SOURCES.betterlectioGithub },
+      { label: "Android på GitHub", href: SOURCES.betterlectioAndroidGithub },
       { label: "Lectio+ i App Store", href: SOURCES.lectioPlusIos },
     ],
   },
@@ -188,10 +181,28 @@ const comparisonRows: ComparisonRow[] = [
         <span>Lectio+ lover også at forblive reklamefri.</span>
       </>
     ),
-    better: "tie",
     sources: [
       { label: "BetterLectio privatliv", href: SOURCES.betterlectioPrivacy },
       { label: "Lectio+ i App Store", href: SOURCES.lectioPlusIos },
+    ],
+  },
+  {
+    label: "Privatliv på enheden",
+    betterlectio: (
+      <>
+        <strong>Password sendes ikke til BetterLectio</strong>
+        <span>Privatlivssiden beskriver undtagelser og databehandling.</span>
+      </>
+    ),
+    lectioPlus: (
+      <>
+        <strong>Profiloplysninger gemmes krypteret</strong>
+        <span>Det oplyser Lectio+ i sin App Store-beskrivelse.</span>
+      </>
+    ),
+    sources: [
+      { label: "BetterLectio privatliv", href: SOURCES.betterlectioPrivacy },
+      { label: "Lectio+ App Store", href: SOURCES.lectioPlusIos },
     ],
   },
   {
@@ -208,7 +219,6 @@ const comparisonRows: ComparisonRow[] = [
         <span>Har funktioner målrettet begge brugergrupper.</span>
       </>
     ),
-    better: "lectio-plus",
     sources: [{ label: "Lectio+ App Store", href: SOURCES.lectioPlusIos }],
   },
   {
@@ -225,7 +235,6 @@ const comparisonRows: ComparisonRow[] = [
         <span>Understøtter flere ældre iPhones.</span>
       </>
     ),
-    better: "lectio-plus",
     sources: [
       { label: "BetterLectio i App Store", href: "https://apps.apple.com/dk/app/betterlectio/id6761808963" },
       { label: "Lectio+ i App Store", href: SOURCES.lectioPlusIos },
@@ -237,7 +246,7 @@ const faqs = [
   {
     question: "Er BetterLectio virkelig helt gratis?",
     answer:
-      "Ja. BetterLectio koster 0 kr. og har hverken abonnement, køb i appen eller annoncer. Kildekoden er samtidig offentligt tilgængelig.",
+      "Ja. BetterLectio koster 0 kr. og har hverken abonnement, køb i appen eller annoncer. BetterLectio er samtidig open source.",
   },
   {
     question: "Er Lectio+ gratis?",
@@ -372,31 +381,6 @@ function SourceAnchor({ source }: { source: SourceLink }) {
   )
 }
 
-function VerdictMark({ winner }: { winner?: ComparisonRow["better"] }) {
-  if (!winner) return null
-  const text =
-    winner === "tie"
-      ? "Lige"
-      : winner === "betterlectio"
-        ? "Fordel BetterLectio"
-        : "Fordel Lectio+"
-
-  return (
-    <span
-      className={cn(
-        "mt-3 inline-flex w-fit items-center rounded-full px-2.5 py-1 font-mono text-[10px] font-bold tracking-[0.03em] uppercase",
-        winner === "betterlectio"
-          ? "bg-ink text-white"
-          : winner === "lectio-plus"
-            ? "bg-brand-soft text-brand-deep"
-            : "bg-grey text-ink-muted",
-      )}
-    >
-      {text}
-    </span>
-  )
-}
-
 export default async function ComparisonPage() {
   const stats = await getPublicStats()
   const number = new Intl.NumberFormat("da-DK")
@@ -411,103 +395,92 @@ export default async function ComparisonPage() {
         <section
           className={cn(
             siteContainerClass,
-            "grid gap-10 pt-9 pb-14 min-[720px]:pt-16 min-[720px]:pb-20 min-[980px]:grid-cols-[1.08fr_0.92fr] min-[980px]:items-end min-[980px]:gap-16",
+            "pt-10 pb-14 min-[720px]:pt-16 min-[720px]:pb-20",
           )}
         >
-          <div>
+          <div className="max-w-[900px]">
             <span className={siteEyebrow()}>
-              Ærlig sammenligning · kontrolleret {LAST_REVIEWED}
+              Produktsammenligning · opdateret {LAST_REVIEWED}
             </span>
-            <h1 className="mt-5 max-w-[850px] text-[clamp(48px,7.8vw,102px)] leading-[0.92] font-extrabold tracking-[-0.06em] text-balance">
+            <h1 className="mt-5 text-[clamp(46px,7vw,84px)] leading-[0.94] font-extrabold tracking-[-0.055em] text-balance">
               BetterLectio <span className="text-ink-muted">vs. Lectio+</span>
             </h1>
-            <p className="mt-7 max-w-[650px] text-[clamp(19px,2.3vw,25px)] leading-[1.45] font-medium text-pretty text-ink-muted">
-              To moderne måder at bruge Lectio på. Den ene koster 0 kr. og
-              følger dig fra telefonen ind i browseren. Den anden har været med
-              siden 2014 og står stærkt på iPhone.
+            <p className="mt-6 max-w-[720px] text-[clamp(19px,2.2vw,24px)] leading-[1.5] font-medium text-pretty text-ink-muted">
+              Begge gør Lectio nemmere på mobilen. Den praktiske forskel er, at
+              BetterLectio er gratis og også forbedrer Lectio på computeren,
+              mens Lectio+ har længere historik og bredere støtte til lærere.
+            </p>
+            <p className="mt-5 text-sm text-ink-muted">
+              Skrevet af BetterLectio · 9 sammenligningspunkter · kilder ved
+              hvert punkt
             </p>
           </div>
 
-          <aside className="overflow-hidden rounded-[30px] bg-ink text-white shadow-[0_0_0_1px_oklch(0_0_0/0.05),0_24px_70px_-36px_oklch(0_0_0/0.7)]">
-            <div className="p-7 min-[520px]:p-9">
-              <span className={siteEyebrow("white")}>Det korte svar</span>
-              <p className="mt-4 text-[clamp(24px,3vw,34px)] leading-[1.15] font-extrabold tracking-[-0.035em] text-balance">
-                For elever, der vil have mobil og browser uden at betale, er
-                BetterLectio det stærkeste valg.
-              </p>
-              <p className="mt-4 text-[16px] leading-[1.6] text-pretty text-white/68">
-                Især hvis du vil have en gratis løsning på både mobil og
-                computer. Lectio+ giver mere mening, hvis du er lærer, bruger en
-                ældre iPhone eller vægter en lang iOS-historik højest.
+          <div className="mt-10 grid overflow-hidden rounded-[24px] border border-line bg-white min-[760px]:grid-cols-[0.58fr_1fr_1fr]">
+            <div className="bg-grey px-6 py-7 min-[760px]:px-7">
+              <span className={siteEyebrow()}>Kort konklusion</span>
+              <p className="mt-3 text-sm leading-[1.6] text-pretty text-ink-muted">
+                Der er ikke én vinder for alle. Valget afhænger især af enhed,
+                rolle og pris.
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-px bg-white/15">
-              <div className="bg-white/[0.06] px-6 py-6">
-                <p className="font-mono text-[10px] tracking-[0.08em] text-white/50 uppercase">
-                  BetterLectio
-                </p>
-                <p className="mt-2 text-[clamp(34px,5vw,52px)] leading-none font-extrabold tracking-[-0.045em] tabular-nums">
-                  0 kr.
-                </p>
-              </div>
-              <div className="bg-white/[0.06] px-6 py-6">
-                <p className="font-mono text-[10px] tracking-[0.08em] text-white/50 uppercase">
-                  Lectio+
-                </p>
-                <p className="mt-2 text-[clamp(25px,3.8vw,40px)] leading-none font-extrabold tracking-[-0.04em] tabular-nums">
-                  99 kr./år
-                </p>
-              </div>
+            <div className="border-t border-line px-6 py-7 min-[760px]:border-t-0 min-[760px]:border-l min-[760px]:px-7">
+              <p className="font-mono text-[11px] font-bold tracking-[0.05em] uppercase">
+                Vælg BetterLectio
+              </p>
+              <p className="mt-3 text-[16px] leading-[1.6] text-pretty text-ink-muted">
+                Hvis du er elev og vil have en gratis løsning på både mobil og
+                computer med farver, der følger dine enheder.
+              </p>
             </div>
-          </aside>
+            <div className="border-t border-line px-6 py-7 min-[760px]:border-t-0 min-[760px]:border-l min-[760px]:px-7">
+              <p className="font-mono text-[11px] font-bold tracking-[0.05em] uppercase">
+                Vælg Lectio+
+              </p>
+              <p className="mt-3 text-[16px] leading-[1.6] text-pretty text-ink-muted">
+                Hvis du er lærer, har en ældre iPhone eller foretrækker den app
+                med længst historik og flest iOS-anmeldelser.
+              </p>
+            </div>
+          </div>
         </section>
 
-        <section className={cn(siteContainerClass, "pb-16 min-[720px]:pb-24")}>
-          <div className="grid gap-px overflow-hidden rounded-[24px] bg-line shadow-[0_0_0_1px_oklch(0_0_0/0.04),0_8px_28px_-22px_oklch(0_0_0/0.24)] min-[720px]:grid-cols-3">
-            {[
-              ["0 kr.", "altid gratis", "Ingen abonnement eller køb i appen"],
-              ["5", "platforme", "iOS, Android, Chrome, Firefox og Edge"],
-              ["100%", "open source", "Koden kan læses og efterprøves"],
-            ].map(([value, label, body]) => (
-              <div key={label} className="bg-white px-7 py-7 min-[720px]:py-8">
-                <div className="flex items-baseline gap-2.5">
-                  <strong className="text-[32px] leading-none font-extrabold tracking-[-0.035em] tabular-nums">
-                    {value}
-                  </strong>
-                  <span className="font-mono text-[10px] font-bold tracking-[0.06em] text-ink-muted uppercase">
-                    {label}
-                  </span>
-                </div>
-                <p className="mt-3 text-sm leading-[1.5] text-pretty text-ink-muted">
-                  {body}
-                </p>
-              </div>
-            ))}
+        <section className={cn(siteContainerClass, "pb-8 min-[720px]:pb-12")}>
+          <div className="flex flex-col gap-3 border-y border-line py-5 text-sm leading-[1.6] text-ink-muted min-[760px]:flex-row min-[760px]:items-start min-[760px]:justify-between min-[760px]:gap-10">
+            <p className="max-w-[68ch] text-pretty">
+              <strong className="text-ink">Om sammenligningen:</strong> Vi er
+              afsenderen bag BetterLectio og dermed ikke neutrale. Oplysninger om
+              Lectio+ kommer fra deres aktuelle App Store- og Google Play-lister;
+              vi har ikke haft adgang til deres betalte brugeroplevelse.
+            </p>
+            <Link
+              href="#metode"
+              className="inline-flex min-h-10 shrink-0 items-center gap-1.5 font-semibold text-ink underline decoration-line decoration-2 underline-offset-4 hover:decoration-ink"
+            >
+              Metode og kilder <ArrowRight className="size-4" />
+            </Link>
           </div>
         </section>
 
         <section
-          className={cn(siteContainerClass, "scroll-mt-8 py-16 min-[720px]:py-24")}
+          className={cn(siteContainerClass, "scroll-mt-8 py-12 min-[720px]:py-20")}
           id="sammenligning"
         >
-          <div className="grid gap-6 min-[900px]:grid-cols-[0.72fr_1.28fr] min-[900px]:items-end">
-            <div>
-              <span className={siteEyebrow()}>Punkt for punkt</span>
-              <h2 className="mt-3 text-[clamp(36px,5.3vw,66px)] leading-[0.98] font-extrabold tracking-[-0.05em] text-balance">
-                Forskellene, der faktisk betyder noget.
-              </h2>
-            </div>
-            <p className="max-w-[58ch] text-[17px] leading-[1.65] text-pretty text-ink-muted min-[900px]:justify-self-end">
-              Begge apps viser skema, lektier, opgaver, beskeder, fravær og
-              karakterer. Det afgørende er derfor ikke længden på en
-              funktionsliste, men pris, platforme, åbenhed og hvem produktet er
-              bygget til.
+          <div className="max-w-[720px]">
+            <span className={siteEyebrow()}>Overblik</span>
+            <h2 className="mt-3 text-[clamp(34px,4.8vw,58px)] leading-[1] font-extrabold tracking-[-0.045em] text-balance">
+              Sammenlignet på det, der ændrer hverdagen.
+            </h2>
+            <p className="mt-5 text-[17px] leading-[1.65] text-pretty text-ink-muted">
+              Begge dækker de grundlæggende Lectio-opgaver. Derfor fokuserer vi
+              på forskellene frem for at gøre fælles funktioner til kunstige
+              sejre.
             </p>
           </div>
 
-          <div className="mt-10 overflow-hidden rounded-[28px] border border-line bg-white min-[720px]:mt-14">
+          <div className="mt-9 overflow-hidden rounded-[24px] border border-line bg-white min-[720px]:mt-12">
             <div className="hidden grid-cols-[0.58fr_1fr_1fr] border-b border-line bg-grey px-6 py-4 font-mono text-[11px] font-bold tracking-[0.06em] text-ink-muted uppercase min-[760px]:grid min-[900px]:px-8">
-              <span>Det vigtigste</span>
+              <span>Sammenligningspunkt</span>
               <span>BetterLectio</span>
               <span>Lectio+</span>
             </div>
@@ -521,7 +494,6 @@ export default async function ComparisonPage() {
                   <h3 className="text-[17px] font-extrabold tracking-[-0.015em]">
                     {row.label}
                   </h3>
-                  <VerdictMark winner={row.better} />
                   <div className="mt-3 hidden flex-wrap gap-1.5 min-[760px]:flex">
                     {row.sources.map((source) => (
                       <SourceAnchor key={source.href + source.label} source={source} />
@@ -529,12 +501,7 @@ export default async function ComparisonPage() {
                   </div>
                 </div>
 
-                <div
-                  className={cn(
-                    "flex flex-col px-5 py-5 min-[760px]:border-l min-[760px]:border-line min-[760px]:px-6 min-[760px]:py-7 min-[900px]:px-8",
-                    row.better === "betterlectio" && "bg-grey/45",
-                  )}
-                >
+                <div className="flex flex-col px-5 py-5 min-[760px]:border-l min-[760px]:border-line min-[760px]:px-6 min-[760px]:py-7 min-[900px]:px-8">
                   <span className="mb-2 font-mono text-[10px] font-bold tracking-[0.06em] text-ink-muted uppercase min-[760px]:hidden">
                     BetterLectio
                   </span>
@@ -543,12 +510,7 @@ export default async function ComparisonPage() {
                   </div>
                 </div>
 
-                <div
-                  className={cn(
-                    "flex flex-col border-t border-line px-5 py-5 min-[760px]:border-t-0 min-[760px]:border-l min-[760px]:px-6 min-[760px]:py-7 min-[900px]:px-8",
-                    row.better === "lectio-plus" && "bg-brand-soft/45",
-                  )}
-                >
+                <div className="flex flex-col border-t border-line px-5 py-5 min-[760px]:border-t-0 min-[760px]:border-l min-[760px]:px-6 min-[760px]:py-7 min-[900px]:px-8">
                   <span className="mb-2 font-mono text-[10px] font-bold tracking-[0.06em] text-ink-muted uppercase min-[760px]:hidden">
                     Lectio+
                   </span>
@@ -570,273 +532,178 @@ export default async function ComparisonPage() {
           </p>
         </section>
 
-        <section className={cn(siteContainerClass, "pb-16 min-[720px]:pb-24")}>
-          <div className="grid gap-5 min-[900px]:grid-cols-12">
-            <article className="overflow-hidden rounded-[30px] bg-ink p-7 text-white min-[720px]:p-10 min-[900px]:col-span-7">
-              <span className={siteEyebrow("white")}>Den største forskel</span>
-              <p className="mt-5 text-[clamp(70px,11vw,132px)] leading-[0.8] font-extrabold tracking-[-0.065em] tabular-nums">
-                0 kr.
-              </p>
-              <h2 className="mt-8 max-w-[13ch] text-[clamp(30px,4vw,48px)] leading-[1.02] font-extrabold tracking-[-0.045em] text-balance">
-                Gratis er ikke en prøveperiode.
-              </h2>
-              <p className="mt-5 max-w-[51ch] text-[17px] leading-[1.65] text-pretty text-white/68">
-                Hele BetterLectio er gratis. Der er ingen betalingsmur efter
-                installationen, ingen premium-funktioner og ingen årlig regning.
-                Lectio+ kan hentes gratis, men abonnementer og medlemskab sælges
-                gennem køb i appen.
-              </p>
-              <a
-                href={SOURCES.lectioPlusIos}
-                target="_blank"
-                rel="noreferrer noopener"
-                className="mt-7 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-white/80 underline decoration-white/30 underline-offset-4 transition-colors duration-150 hover:text-white hover:decoration-white"
-              >
-                Se priserne i App Store <ArrowUpRight className="size-4" />
-              </a>
-            </article>
-
-            <article className="overflow-hidden rounded-[30px] border border-line bg-white p-7 min-[720px]:p-10 min-[900px]:col-span-5">
-              <span className={siteEyebrow()}>Dit skema, dine farver</span>
-              <h2 className="mt-4 max-w-[12ch] text-[clamp(29px,3.6vw,43px)] leading-[1.04] font-extrabold tracking-[-0.04em] text-balance">
-                Se faget, før du læser det.
-              </h2>
-              <p className="mt-4 text-[16px] leading-[1.6] text-pretty text-ink-muted">
-                Begge apps bruger farver. I BetterLectio kan du selv give hvert
-                fag en tydelig farve og lade valget følge med på tværs af dine
-                enheder.
-              </p>
-              <div className="mt-8 grid gap-2.5" aria-label="Eksempel på fagfarver">
-                {[
-                  ["Matematik", "oklch(0.68 0.14 258)", "MA"],
-                  ["Dansk", "oklch(0.7 0.14 145)", "DA"],
-                  ["Engelsk", "oklch(0.72 0.13 28)", "EN"],
-                  ["Historie", "oklch(0.7 0.13 80)", "HI"],
-                ].map(([subject, color, code]) => (
-                  <div
-                    key={subject}
-                    className="flex items-center justify-between gap-4 rounded-2xl bg-grey px-4 py-3"
-                  >
-                    <span className="flex items-center gap-3 font-bold">
-                      <span
-                        className="size-3 rounded-full shadow-[0_0_0_1px_oklch(0_0_0/0.08)]"
-                        style={{ backgroundColor: color }}
-                        aria-hidden="true"
-                      />
-                      {subject}
-                    </span>
-                    <span className="font-mono text-xs font-bold text-ink-muted">
-                      {code}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section className={cn(siteContainerClass, "py-16 min-[720px]:py-24")}>
-          <div className="mx-auto max-w-[720px] text-center">
-            <span className={siteEyebrow()}>Én oplevelse, overalt</span>
-            <h2 className="mt-3 text-[clamp(36px,5.4vw,66px)] leading-[0.98] font-extrabold tracking-[-0.05em] text-balance">
-              Lectio+ bor på mobilen. BetterLectio følger med dig.
+        <section className={cn(siteContainerClass, "py-12 min-[720px]:py-20")}>
+          <div className="max-w-[720px]">
+            <span className={siteEyebrow()}>Det afgørende</span>
+            <h2 className="mt-3 text-[clamp(34px,4.8vw,58px)] leading-[1] font-extrabold tracking-[-0.045em] text-balance">
+              Hvorfor vi ender med at anbefale BetterLectio til elever.
             </h2>
-            <p className="mx-auto mt-5 max-w-[58ch] text-[17px] leading-[1.65] text-pretty text-ink-muted">
-              Brug appen i bussen og den fulde browser-udvidelse ved computeren.
-              Fagfarver, indstillinger og færdige lektier kan følge med mellem
-              dine enheder.
-            </p>
           </div>
 
-          <div className="mt-12 grid items-stretch gap-5 min-[860px]:grid-cols-[1.25fr_0.75fr] min-[860px]:gap-6">
-            <figure className="overflow-hidden rounded-[30px] bg-grey p-5 min-[720px]:p-7">
-              <div className="mb-5 flex items-center justify-between gap-4">
-                <figcaption>
-                  <span className="flex items-center gap-2 text-lg font-extrabold">
-                    <Monitor className="size-5" /> I din browser
+          <div className="mt-10 border-t border-line">
+            <DecisionPoint number="01" title="Prisen er reelt forskellig.">
+              <p>
+                BetterLectio koster 0 kr. uden abonnement eller køb i appen.
+                Lectio+ kan installeres gratis, men App Store viser 12 kr. om
+                måneden, 99 kr. om året og et medlemskab til 249 kr. For en elev,
+                der blot vil have et bedre Lectio, er det en mærkbar forskel.
+              </p>
+              <div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-line">
+                <PriceFact product="BetterLectio" price="0 kr." detail="uden køb i appen" />
+                <PriceFact product="Lectio+" price="99 kr./år" detail="eller andre køb i appen" />
+              </div>
+            </DecisionPoint>
+
+            <DecisionPoint number="02" title="BetterLectio fortsætter på computeren.">
+              <p>
+                Lectio+ er en mobilapp. BetterLectio har både mobilapps og en
+                browser-udvidelse, som ændrer den Lectio-side, du allerede bruger
+                i Chrome, Firefox eller Edge. Det betyder én sammenhængende
+                oplevelse i stedet for kun et alternativ på telefonen.
+              </p>
+              <figure className="mt-7 rounded-[24px] bg-grey p-4 min-[720px]:p-6">
+                <figcaption className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                  <span className="flex items-center gap-2 font-bold">
+                    <Monitor className="size-5" /> Faktisk produktskærmbillede
                   </span>
-                  <span className="mt-1 block text-sm text-ink-muted">
+                  <span className="font-mono text-[10px] font-bold tracking-[0.05em] text-ink-muted uppercase">
                     Chrome · Firefox · Edge
                   </span>
                 </figcaption>
-                <span className="rounded-full bg-white px-3 py-1.5 font-mono text-[10px] font-bold tracking-[0.04em] uppercase">
-                  BetterLectio
-                </span>
-              </div>
-              <Image
-                src="/shots/web-skema.png"
-                alt="BetterLectios farvekodede ugeskema i en browser"
-                width={2560}
-                height={1600}
-                sizes="(max-width: 860px) 92vw, 700px"
-                className="block h-auto w-full rounded-[18px] outline -outline-offset-1 outline-black/10"
-              />
-            </figure>
-
-            <figure className="flex min-h-[520px] flex-col overflow-hidden rounded-[30px] bg-ink p-5 text-white min-[720px]:p-7">
-              <div className="mb-5 flex items-center justify-between gap-4">
-                <figcaption>
-                  <span className="flex items-center gap-2 text-lg font-extrabold">
-                    <Smartphone className="size-5" /> I din lomme
-                  </span>
-                  <span className="mt-1 block text-sm text-white/55">
-                    iPhone · iPad · Android
-                  </span>
-                </figcaption>
-              </div>
-              <div className="flex flex-1 items-end justify-center overflow-hidden rounded-[20px] bg-white/[0.07] px-8 pt-8">
                 <Image
-                  src="/shots/mobile-skema.png"
-                  alt="BetterLectios skema i mobilappen"
-                  width={1179}
-                  height={2556}
-                  sizes="(max-width: 860px) 65vw, 300px"
-                  className="block h-auto max-h-[500px] w-auto rounded-t-[26px] outline -outline-offset-1 outline-white/10"
+                  src="/shots/web-skema.png"
+                  alt="BetterLectios farvekodede ugeskema i en browser"
+                  width={2560}
+                  height={1600}
+                  sizes="(max-width: 900px) 90vw, 720px"
+                  className="block h-auto w-full rounded-[14px] outline -outline-offset-1 outline-black/10"
                 />
-              </div>
-            </figure>
-          </div>
-        </section>
+              </figure>
+            </DecisionPoint>
 
-        <section className={cn(siteContainerClass, "py-16 min-[720px]:py-24")}>
-          <div className="grid gap-5 min-[900px]:grid-cols-2">
-            <article className="rounded-[30px] bg-ink p-7 text-white min-[720px]:p-10">
-              <div className="flex size-12 items-center justify-center rounded-[14px] bg-white/10">
-                <GraduationCap className="size-6" />
-              </div>
-              <span className={cn(siteEyebrow("white"), "mt-8")}>
-                Vælg BetterLectio, hvis
-              </span>
-              <h2 className="mt-3 text-[clamp(30px,4vw,48px)] leading-[1.03] font-extrabold tracking-[-0.045em] text-balance">
-                du er elev og vil have mere for 0 kr.
-              </h2>
-              <ul className="mt-7 grid gap-4 text-[16px] leading-[1.55] text-white/72">
+            <DecisionPoint number="03" title="Tilpasningen følger med.">
+              <p>
+                Begge apps bruger farver i skemaet. I BetterLectio vælger du selv
+                farven for hvert fag, og fagfarver, indstillinger og færdige
+                lektier kan synkroniseres mellem app og browser. Det er en lille
+                detalje, men en man bruger hver dag.
+              </p>
+              <div className="mt-6 grid gap-3 min-[560px]:grid-cols-2">
                 {[
-                  "du vil bruge samme moderne oplevelse på mobil og computer",
-                  "du vil vælge og synkronisere farver for dine fag",
-                  "du foretrækker open source og et offentligt roadmap",
-                  "du bruger Android og vil prøve et nyere alternativ",
-                ].map((item) => (
-                  <li key={item} className="flex gap-3 text-pretty">
-                    <Check className="mt-0.5 size-5 shrink-0 text-white" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
-
-            <article className="rounded-[30px] border border-line bg-white p-7 min-[720px]:p-10">
-              <div className="flex size-12 items-center justify-center rounded-[14px] bg-brand-soft text-brand-deep">
-                <Shield className="size-6" />
-              </div>
-              <span className={cn(siteEyebrow(), "mt-8")}>
-                Vælg Lectio+, hvis
-              </span>
-              <h2 className="mt-3 text-[clamp(30px,4vw,48px)] leading-[1.03] font-extrabold tracking-[-0.045em] text-balance">
-                deres erfaring passer bedre til dit behov.
-              </h2>
-              <ul className="mt-7 grid gap-4 text-[16px] leading-[1.55] text-ink-muted">
-                {[
-                  "du er lærer og vil have funktioner målrettet lærerrollen",
-                  "du har en iPhone, der ikke kan opdateres til iOS 18.5",
-                  "du lægger mest vægt på mange års iOS-anmeldelser",
-                  "du kun har brug for Lectio på mobilen",
-                ].map((item) => (
-                  <li key={item} className="flex gap-3 text-pretty">
-                    <Check className="mt-0.5 size-5 shrink-0 text-brand-deep" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </article>
-          </div>
-        </section>
-
-        <section className={cn(siteContainerClass, "py-16 min-[720px]:py-24")}>
-          <div className="overflow-hidden rounded-[32px] border border-line bg-white">
-            <div className="grid min-[900px]:grid-cols-[1.08fr_0.92fr]">
-              <div className="p-7 min-[720px]:p-12 min-[1000px]:p-14">
-                <span className={siteEyebrow()}>Nyere, men ikke lille</span>
-                <h2 className="mt-4 max-w-[13ch] text-[clamp(38px,5.4vw,68px)] leading-[0.98] font-extrabold tracking-[-0.05em] text-balance">
-                  Vokset fra én elev til {number.format(stats.totalStudents)}.
-                </h2>
-                <p className="mt-5 max-w-[52ch] text-[17px] leading-[1.65] text-pretty text-ink-muted">
-                  BetterLectio begyndte i marts 2026 og bruges nu af elever på{" "}
-                  {number.format(stats.totalSchools)} skoler. Tallene kommer fra
-                  registrerede BetterLectio-profiler — ikke downloadestimater.
-                </p>
-                <Link
-                  href="/stats"
-                  className="mt-7 inline-flex min-h-11 items-center gap-2 font-bold underline decoration-line decoration-2 underline-offset-4 transition-colors duration-150 hover:decoration-ink"
-                >
-                  Se alle tal og metoden <ArrowRight className="size-5" />
-                </Link>
-              </div>
-              <div className="grid grid-cols-2 gap-px border-t border-line bg-line min-[900px]:border-t-0 min-[900px]:border-l">
-                {[
-                  [number.format(stats.totalStudents), "registrerede elevprofiler"],
-                  [number.format(stats.totalSchools), "skoler med mindst én elev"],
-                  [number.format(stats.totalFeedback), "idéer og fejlrapporter"],
-                  [stats.isFallback ? "Marts 2026" : "Live", "offentligt opdaterede tal"],
-                ].map(([value, label]) => (
-                  <div key={label} className="flex min-h-40 flex-col justify-between bg-grey p-6 min-[720px]:min-h-48 min-[720px]:p-8">
-                    <strong className="text-[clamp(30px,4vw,50px)] leading-none font-extrabold tracking-[-0.04em] tabular-nums">
-                      {value}
-                    </strong>
-                    <span className="mt-6 max-w-[16ch] text-sm leading-snug font-semibold text-ink-muted">
-                      {label}
-                    </span>
+                  ["Matematik", "oklch(0.68 0.14 258)"],
+                  ["Dansk", "oklch(0.7 0.14 145)"],
+                  ["Engelsk", "oklch(0.72 0.13 28)"],
+                  ["Historie", "oklch(0.7 0.13 80)"],
+                ].map(([subject, color]) => (
+                  <div key={subject} className="flex items-center gap-3 rounded-xl bg-grey px-4 py-3 text-sm font-semibold">
+                    <span className="size-3 rounded-full shadow-[0_0_0_1px_oklch(0_0_0/0.08)]" style={{ backgroundColor: color }} aria-hidden="true" />
+                    {subject}
                   </div>
                 ))}
               </div>
-            </div>
+            </DecisionPoint>
+
+            <DecisionPoint number="04" title="Åbenhed kan efterprøves.">
+              <p>
+                BetterLectios mobilapps er udviklet separat til deres platforme:
+                SwiftUI på iOS og Kotlin med Jetpack Compose på Android.
+                BetterLectio er open source, så koden kan læses og efterprøves
+                af andre. Lectio+ er closed source og udgives af Totus Labs ApS.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-2">
+                <SourceAnchor source={{ label: "Browserens kildekode", href: SOURCES.betterlectioGithub }} />
+                <SourceAnchor source={{ label: "Androids kildekode", href: SOURCES.betterlectioAndroidGithub }} />
+              </div>
+            </DecisionPoint>
           </div>
         </section>
 
-        <section className={cn(siteContainerClass, "py-16 min-[720px]:py-24")}>
-          <div className="grid gap-8 min-[900px]:grid-cols-[0.75fr_1.25fr]">
+        <section className={cn(siteContainerClass, "py-12 min-[720px]:py-20")}>
+          <div className="grid gap-8 min-[900px]:grid-cols-[0.72fr_1.28fr]">
             <div>
-              <span className={siteEyebrow()}>Butiksvurderinger</span>
+              <span className={siteEyebrow()}>Et vigtigt forbehold</span>
               <h2 className="mt-3 text-[clamp(34px,4.8vw,58px)] leading-[1] font-extrabold tracking-[-0.045em] text-balance">
-                Android fortæller én historie. iPhone en anden.
+                Anmeldelserne peger ikke samme vej.
               </h2>
               <p className="mt-5 max-w-[43ch] text-[16px] leading-[1.65] text-pretty text-ink-muted">
-                Stjerner uden antal er misvisende. Derfor viser vi begge dele —
-                også når Lectio+ står stærkest.
+                BetterLectio har høje karakterer, men meget få anmeldelser.
+                Lectio+ har langt stærkere dokumentation på iPhone og en markant
+                lavere vurdering på Android.
               </p>
             </div>
-            <div className="grid gap-4 min-[580px]:grid-cols-2">
-              <article className="rounded-[26px] bg-grey p-6 min-[720px]:p-8">
-                <p className="font-mono text-[11px] font-bold tracking-[0.05em] text-ink-muted uppercase">
-                  Google Play · Android
-                </p>
-                <div className="mt-7 grid grid-cols-2 gap-5">
-                  <Rating product="BetterLectio" score="5,0" count="5" />
-                  <Rating product="Lectio+" score="1,5" count="259" />
-                </div>
-                <p className="mt-7 text-xs leading-relaxed text-pretty text-ink-muted">
-                  BetterLectios stikprøve er endnu meget lille. Tallene er et
-                  øjebliksbillede fra Google Play den {LAST_REVIEWED}.
-                </p>
-              </article>
-              <article className="rounded-[26px] border border-line bg-white p-6 min-[720px]:p-8">
-                <p className="font-mono text-[11px] font-bold tracking-[0.05em] text-ink-muted uppercase">
-                  App Store · iPhone
-                </p>
-                <div className="mt-7 grid grid-cols-2 gap-5">
-                  <Rating product="BetterLectio" score="5,0" count="1" />
-                  <Rating product="Lectio+" score="4,4" count="11.617" />
-                </div>
-                <p className="mt-7 text-xs leading-relaxed text-pretty text-ink-muted">
-                  Her har Lectio+ den klart stærkeste dokumentation: mere end et
-                  årtis historik og langt flere bedømmelser.
-                </p>
-              </article>
+            <div className="overflow-hidden rounded-[24px] border border-line bg-white">
+              <div className="grid min-[580px]:grid-cols-2">
+                <article className="p-6 min-[720px]:p-8">
+                  <p className="font-mono text-[11px] font-bold tracking-[0.05em] text-ink-muted uppercase">
+                    Google Play · Android
+                  </p>
+                  <div className="mt-6 grid grid-cols-2 gap-5">
+                    <Rating product="BetterLectio" score="5,0" count="5" />
+                    <Rating product="Lectio+" score="1,5" count="259" />
+                  </div>
+                </article>
+                <article className="border-t border-line p-6 min-[580px]:border-t-0 min-[580px]:border-l min-[720px]:p-8">
+                  <p className="font-mono text-[11px] font-bold tracking-[0.05em] text-ink-muted uppercase">
+                    App Store · iPhone
+                  </p>
+                  <div className="mt-6 grid grid-cols-2 gap-5">
+                    <Rating product="BetterLectio" score="5,0" count="1" />
+                    <Rating product="Lectio+" score="4,4" count="11.617" />
+                  </div>
+                </article>
+              </div>
+              <p className="border-t border-line bg-grey px-6 py-4 text-xs leading-relaxed text-pretty text-ink-muted min-[720px]:px-8">
+                Butikstal kontrolleret {LAST_REVIEWED}. De kan ændre sig, og
+                BetterLectios stikprøver er for små til sikre konklusioner.
+              </p>
             </div>
           </div>
         </section>
 
-        <section className={cn(siteContainerClass, "py-16 min-[720px]:py-24")}>
+        <section className={cn(siteContainerClass, "py-12 min-[720px]:py-20")}>
+          <div className="max-w-[700px]">
+            <span className={siteEyebrow()}>Fordele og ulemper</span>
+            <h2 className="mt-3 text-[clamp(34px,4.8vw,58px)] leading-[1] font-extrabold tracking-[-0.045em] text-balance">
+              Det ærlige valg mellem dem.
+            </h2>
+          </div>
+          <div className="mt-9 grid overflow-hidden rounded-[24px] border border-line bg-line min-[800px]:grid-cols-2">
+            <ProductDecision
+              name="BetterLectio"
+              summary="Bedst egnet til elever, der vil have mobil og browser uden at betale."
+              strengths={[
+                "Gratis uden abonnement eller køb i appen",
+                "Mobilapps plus Chrome, Firefox og Edge",
+                "Egne fagfarver og synkronisering på tværs",
+                "Open source med offentligt tilgængelig kildekode",
+              ]}
+              limitations={[
+                "Kræver iOS 18.5 på iPhone og iPad",
+                "Nyt produkt med meget få butiksanmeldelser",
+                "Primært udviklet til elever, ikke lærere eller skoleaftaler",
+              ]}
+              footer={`Lanceret i 2026 · ${number.format(stats.totalStudents)} registrerede elevprofiler på ${number.format(stats.totalSchools)} skoler`}
+            />
+            <ProductDecision
+              name="Lectio+"
+              summary="Bedst egnet til lærere, ældre iPhones og dem, der vægter lang iOS-historik."
+              strengths={[
+                "Mere end et årtis historik på iPhone",
+                "Funktioner til både elever og lærere",
+                "Understøtter iPhones tilbage til iOS 16.7",
+                "4,4 stjerner fra 11.617 iOS-anmeldelser",
+              ]}
+              limitations={[
+                "Kræver abonnement eller medlemskab efter download",
+                "Ingen officiel browser-udvidelse fundet",
+                "1,5 stjerner fra 259 Android-anmeldelser ved kontrollen",
+              ]}
+              footer="Udgivet af Totus Labs ApS · butikstal kontrolleret 4. oktober 2026"
+            />
+          </div>
+        </section>
+
+        <section className={cn(siteContainerClass, "py-12 min-[720px]:py-20")}>
           <div className="mx-auto max-w-[780px] text-center">
             <span className={siteEyebrow()}>Spørgsmål og svar</span>
             <h2 className="mt-3 text-[clamp(34px,5vw,60px)] leading-[1] font-extrabold tracking-[-0.045em] text-balance">
@@ -856,7 +723,7 @@ export default async function ComparisonPage() {
         </section>
 
         <section
-          className={cn(siteContainerClass, "scroll-mt-8 py-16 min-[720px]:py-24")}
+          className={cn(siteContainerClass, "scroll-mt-8 py-12 min-[720px]:py-20")}
           id="metode"
         >
           <div className="rounded-[30px] bg-grey p-7 min-[720px]:p-10 min-[900px]:p-12">
@@ -870,9 +737,12 @@ export default async function ComparisonPage() {
               <div className="text-[15px] leading-[1.7] text-pretty text-ink-muted">
                 <p>
                   Denne side er skrevet og udgivet af BetterLectio. Det gør os
-                  ikke neutrale, og derfor linker vi direkte til kilden bag
-                  priser, kompatibilitet og konkurrentoplysninger. Sammenligningen
-                  bygger på offentlige produktsider og butikslister kontrolleret{" "}
+                  ikke neutrale. Vi har gennemgået BetterLectios egne produkter
+                  og kildekode, men har ikke haft adgang til Lectio+ bag deres
+                  betalingsadgang. Oplysninger om Lectio+ bygger derfor på deres
+                  offentlige butikslister. Vi har udeladt påstande, vi ikke kunne
+                  kontrollere, og markeret små anmeldelsesgrundlag. Alt er senest
+                  kontrolleret{" "}
                   <time dateTime={LAST_REVIEWED_ISO}>{LAST_REVIEWED}</time>.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
@@ -880,7 +750,8 @@ export default async function ComparisonPage() {
                     { label: "Lectio+ App Store", href: SOURCES.lectioPlusIos },
                     { label: "Lectio+ Google Play", href: SOURCES.lectioPlusAndroid },
                     { label: "BetterLectio statistik", href: SOURCES.betterlectioStats },
-                    { label: "BetterLectio kildekode", href: SOURCES.betterlectioGithub },
+                    { label: "Browser-kildekode", href: SOURCES.betterlectioGithub },
+                    { label: "Android-kildekode", href: SOURCES.betterlectioAndroidGithub },
                   ].map((source) => (
                     <SourceAnchor key={source.href} source={source} />
                   ))}
@@ -890,24 +761,22 @@ export default async function ComparisonPage() {
           </div>
         </section>
 
-        <section className={cn(siteContainerClass, "pt-14 pb-24 text-center min-[720px]:pt-20 min-[720px]:pb-32")}>
-          <span className={siteEyebrow()}>Prøv forskellen selv</span>
-          <h2 className="mx-auto mt-3 max-w-[15ch] text-[clamp(40px,6.4vw,78px)] leading-[0.96] font-extrabold tracking-[-0.055em] text-balance">
-            Den bedste sammenligning koster dig 0 kr.
-          </h2>
-          <p className="mx-auto mt-6 max-w-[560px] text-[18px] leading-[1.6] text-pretty text-ink-muted">
-            Installér BetterLectio på under et minut. Du bruger stadig dit
-            normale Lectio-login og kan altid gå tilbage.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Link href="/download" className={siteButton("primary")}>
+        <section className={cn(siteContainerClass, "pt-10 pb-24 min-[720px]:pt-14 min-[720px]:pb-28")}>
+          <div className="flex flex-col gap-6 rounded-[24px] bg-ink px-7 py-8 text-white min-[720px]:flex-row min-[720px]:items-center min-[720px]:justify-between min-[720px]:px-10 min-[720px]:py-9">
+            <div>
+              <span className={siteEyebrow("white")}>Prøv det selv</span>
+              <h2 className="mt-2 text-[clamp(26px,3vw,38px)] leading-[1.05] font-extrabold tracking-[-0.035em] text-balance">
+                BetterLectio koster 0 kr.
+              </h2>
+              <p className="mt-2 max-w-[58ch] text-sm leading-[1.6] text-pretty text-white/65">
+                Du bruger stadig dit normale Lectio-login og kan altid gå tilbage.
+              </p>
+            </div>
+            <Link href="/download" className={siteButton("secondary", "shrink-0")}>
               Hent BetterLectio gratis <ArrowRight />
             </Link>
-            <Link href="#metode" className={siteButton("secondary")}>
-              Se kilder og metode <ArrowRight />
-            </Link>
           </div>
-          <p className="mt-7 text-xs text-ink-muted">
+          <p className="mt-5 text-center text-xs text-ink-muted">
             BetterLectio er ikke tilknyttet Lectio+, Totus Labs ApS eller MaCom A/S.
           </p>
         </section>
@@ -915,6 +784,103 @@ export default async function ComparisonPage() {
 
       <SiteFooter />
     </div>
+  )
+}
+
+function DecisionPoint({
+  number,
+  title,
+  children,
+}: {
+  number: string
+  title: string
+  children: React.ReactNode
+}) {
+  return (
+    <article className="grid gap-5 border-b border-line py-9 last:border-b-0 min-[800px]:grid-cols-[0.62fr_1.38fr] min-[800px]:gap-12 min-[800px]:py-12">
+      <div>
+        <span className="font-mono text-xs font-bold text-ink-muted tabular-nums">
+          {number}
+        </span>
+        <h3 className="mt-2 max-w-[16ch] text-[clamp(25px,3vw,36px)] leading-[1.08] font-extrabold tracking-[-0.035em] text-balance">
+          {title}
+        </h3>
+      </div>
+      <div className="text-[16px] leading-[1.7] text-pretty text-ink-muted">
+        {children}
+      </div>
+    </article>
+  )
+}
+
+function PriceFact({
+  product,
+  price,
+  detail,
+}: {
+  product: string
+  price: string
+  detail: string
+}) {
+  return (
+    <div className="bg-grey p-5 min-[560px]:p-6">
+      <p className="font-mono text-[10px] font-bold tracking-[0.05em] text-ink-muted uppercase">
+        {product}
+      </p>
+      <p className="mt-2 text-[clamp(26px,3vw,38px)] leading-none font-extrabold tracking-[-0.04em] text-ink tabular-nums">
+        {price}
+      </p>
+      <p className="mt-2 text-xs text-ink-muted">{detail}</p>
+    </div>
+  )
+}
+
+function ProductDecision({
+  name,
+  summary,
+  strengths,
+  limitations,
+  footer,
+}: {
+  name: string
+  summary: string
+  strengths: string[]
+  limitations: string[]
+  footer: string
+}) {
+  return (
+    <article className="bg-white p-6 min-[720px]:p-9">
+      <p className="font-mono text-[11px] font-bold tracking-[0.05em] text-ink-muted uppercase">
+        {name}
+      </p>
+      <h3 className="mt-3 max-w-[20ch] text-[clamp(24px,3vw,34px)] leading-[1.12] font-extrabold tracking-[-0.03em] text-balance">
+        {summary}
+      </h3>
+
+      <h4 className="mt-8 text-sm font-bold">Styrker</h4>
+      <ul className="mt-3 grid gap-3 text-[15px] leading-[1.55] text-ink-muted">
+        {strengths.map((item) => (
+          <li key={item} className="flex gap-2.5 text-pretty">
+            <Check className="mt-0.5 size-[18px] shrink-0 text-ink" />
+            {item}
+          </li>
+        ))}
+      </ul>
+
+      <h4 className="mt-8 text-sm font-bold">Begrænsninger</h4>
+      <ul className="mt-3 grid gap-3 text-[15px] leading-[1.55] text-ink-muted">
+        {limitations.map((item) => (
+          <li key={item} className="flex gap-2.5 text-pretty">
+            <span className="shrink-0 text-ink-muted" aria-hidden="true">—</span>
+            {item}
+          </li>
+        ))}
+      </ul>
+
+      <p className="mt-8 border-t border-line pt-5 text-xs leading-[1.55] text-pretty text-ink-muted">
+        {footer}
+      </p>
+    </article>
   )
 }
 

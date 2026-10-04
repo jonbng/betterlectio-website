@@ -1,5 +1,8 @@
+import Link from "next/link"
+
 import { BeforeAfter } from "@/components/site/before-after"
 import { HeroCta } from "@/components/site/hero-cta"
+import { ArrowRight } from "@/components/site/icons"
 import { siteContainerClass, siteEyebrow } from "@/components/site/styles"
 import { cn } from "@/lib/utils"
 
@@ -24,7 +27,19 @@ export function Hero({ schoolCount }: { schoolCount: number }) {
 
         <HeroCta />
 
-        <div className="mt-11 flex items-center gap-3.5">
+        <div className="mt-2">
+          <Link
+            href="/betterlectio-vs-lectio-plus"
+            className="group inline-flex min-h-11 max-w-full items-center gap-2 rounded-lg text-sm font-medium text-pretty text-ink-muted no-underline transition-colors duration-150 hover:text-ink focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-brand"
+          >
+            <span>
+              Overvejer du Lectio+? Se, hvad du får gratis med BetterLectio.
+            </span>
+            <ArrowRight className="size-4 shrink-0 transition-transform duration-150 group-hover:translate-x-0.5" />
+          </Link>
+        </div>
+
+        <div className="mt-8 flex items-center gap-3.5">
           <div className="flex" aria-hidden="true">
             {["M", "I", "S", "A"].map((c, i) => (
               <span

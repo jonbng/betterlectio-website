@@ -3,7 +3,7 @@
 import Link from "next/link"
 
 import { BrowserFrame, PhoneFrame } from "@/components/site/device-frames"
-import { Apple, ArrowUpRight, GooglePlay } from "@/components/site/icons"
+import { Apple, ArrowRight, ArrowUpRight, GooglePlay } from "@/components/site/icons"
 import { siteContainerClass, siteEyebrow } from "@/components/site/styles"
 import { DOWNLOAD_LINKS } from "@/lib/download-links"
 import { deviceKind } from "@/lib/platform"
@@ -47,6 +47,17 @@ function MobilePanel({ reverse, isFirst }: { reverse: boolean; isFirst: boolean 
       eyebrow="BetterLectio Mobile"
       title={isFirst ? "En rigtig app i lommen." : "Og i lommen."}
       body="Ikke Lectios mobilside, der ser ud som om den giver op. Skema, beskeder, lektier og karakterer åbner med det samme, til både iPhone og Android."
+      note={
+        <Link
+          href="/betterlectio-vs-lectio-plus"
+          className="group inline-flex min-h-11 items-center gap-2 rounded-xl bg-grey px-4 text-sm font-semibold text-ink no-underline transition-colors duration-150 hover:bg-line/70 focus-visible:outline-[3px] focus-visible:outline-offset-2 focus-visible:outline-brand"
+        >
+          <span>
+            Et gratis alternativ til Lectio+. <span className="text-ink-muted">Sammenlign dem.</span>
+          </span>
+          <ArrowRight className="size-4 shrink-0 transition-transform duration-150 group-hover:translate-x-0.5" />
+        </Link>
+      }
       visual={
         <div className="flex items-end justify-center">
           <PhoneFrame
@@ -109,6 +120,7 @@ function Panel({
   eyebrow,
   title,
   body,
+  note,
   visual,
   actions,
   reverse,
@@ -116,6 +128,7 @@ function Panel({
   eyebrow: string
   title: string
   body: string
+  note?: React.ReactNode
   visual: React.ReactNode
   actions: React.ReactNode
   reverse: boolean
@@ -130,6 +143,7 @@ function Panel({
         <p className="max-w-[46ch] text-[17px] leading-[1.55] text-ink-muted">
           {body}
         </p>
+        {note ? <div className="mt-5">{note}</div> : null}
         <div className="mt-7 flex flex-wrap gap-3">{actions}</div>
       </div>
       <div className={cn("min-[860px]:px-2", reverse && "min-[860px]:order-1")}>

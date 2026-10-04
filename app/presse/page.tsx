@@ -507,8 +507,9 @@ export default async function PressePage() {
                 </h2>
                 <p className="mt-6 max-w-[45ch] text-[18px] leading-[1.6] text-pretty text-white/68">
                   Jonathan Bangert begyndte at udvikle BetterLectio, mens han
-                  selv brugte Lectio som gymnasieelev. Først som
-                  browserudvidelse, siden som mobilapp.
+                  gik på Sorø Akademi og selv brugte Lectio. I dag går han på
+                  UWC Red Cross Nordic i Norge, hvorfra han fortsat leder og
+                  vedligeholder projektet.
                 </p>
               </div>
 
@@ -517,7 +518,7 @@ export default async function PressePage() {
                   [
                     "December 2025",
                     "Udviklingen begynder",
-                    "Jonathan bygger den første version af browserudvidelsen.",
+                    "Jonathan bygger den første version, mens han går på Sorø Akademi.",
                   ],
                   [
                     firstStudent,
@@ -911,9 +912,9 @@ export default async function PressePage() {
                 Jonathan Bangert
               </h2>
               <p className="mt-6 max-w-[52ch] text-[17px] leading-[1.6] text-pretty text-ink-muted">
-                Jonathan er gymnasieelev på UWC Red Cross Nordic i Norge og
-                udvikler BetterLectio. Han byggede den første version, mens han
-                selv brugte Lectio i sin skolehverdag.
+                Jonathan skabte BetterLectio, mens han gik på Sorø Akademi. I
+                dag er han elev på UWC Red Cross Nordic i Norge, hvorfra han
+                fortsat leder og vedligeholder projektet.
               </p>
               <p className="mt-4 max-w-[52ch] text-[17px] leading-[1.6] text-pretty text-ink-muted">
                 Han kan interviewes om produktets udvikling, brugernes feedback
