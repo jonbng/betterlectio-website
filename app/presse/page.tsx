@@ -25,6 +25,13 @@ export const metadata: Metadata = {
     title: "Presse og medier · BetterLectio",
     description: "Fakta, baggrund, billeder og pressekontakt for BetterLectio.",
     url: "/presse",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Presse og medier · BetterLectio",
+    description: "Fakta, baggrund, billeder og pressekontakt for BetterLectio.",
+    images: ["/twitter-image"],
   },
 }
 
@@ -373,14 +380,15 @@ export default async function PressePage() {
             <div>
               <span className={siteEyebrow()}>Presse</span>
               <h1 className="mt-4 max-w-[920px] text-[clamp(48px,7.7vw,100px)] leading-[0.94] font-extrabold tracking-[-0.06em] text-balance">
-                BetterLectio er en uafhængig brugerflade til Lectio.
+                BetterLectio. Kort fortalt.
               </h1>
             </div>
 
             <div className="pb-1">
               <p className="max-w-[48ch] text-[clamp(18px,2vw,22px)] leading-[1.5] font-medium text-pretty text-ink-muted">
-                Gratis, bygget af elever og ledet af gymnasieelev Jonathan
-                Bangert. Her er fakta, baggrund, billeder og direkte kontakt.
+                En gratis, uafhængig brugerflade til Lectio, bygget af elever og
+                ledet af gymnasieelev Jonathan Bangert. Her er fakta, baggrund,
+                billeder og direkte kontakt.
               </p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <ProtectedPressEmail />

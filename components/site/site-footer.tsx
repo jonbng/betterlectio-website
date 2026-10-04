@@ -88,6 +88,11 @@ export function SiteFooter() {
                 </Link>
               </li>
               <li className="mb-3">
+                <Link href="/skoler" className={FOOTER_LINK_CLASS}>
+                  Skoler
+                </Link>
+              </li>
+              <li className="mb-3">
                 <Link href="/privatliv" className={FOOTER_LINK_CLASS}>
                   Privatliv
                 </Link>

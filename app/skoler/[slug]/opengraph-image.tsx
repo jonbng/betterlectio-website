@@ -5,9 +5,8 @@ export const alt = "BetterLectio"
 export const size = OG_SIZE
 export const contentType = OG_CONTENT_TYPE
 
-// Match the page: fully static, only the pre-generated school slugs.
+// Cache generated school cards while allowing each valid slug to render.
 export const dynamic = "force-static"
-export const dynamicParams = false
 
 export default async function Image({
   params,

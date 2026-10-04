@@ -236,7 +236,10 @@ const comparisonRows: ComparisonRow[] = [
       </>
     ),
     sources: [
-      { label: "BetterLectio i App Store", href: "https://apps.apple.com/dk/app/betterlectio/id6761808963" },
+      {
+        label: "BetterLectio i App Store",
+        href: "https://apps.apple.com/dk/app/betterlectio/id6761808963",
+      },
       { label: "Lectio+ i App Store", href: SOURCES.lectioPlusIos },
     ],
   },
@@ -395,7 +398,7 @@ export default async function ComparisonPage() {
         <section
           className={cn(
             siteContainerClass,
-            "pt-10 pb-14 min-[720px]:pt-16 min-[720px]:pb-20",
+            "pt-10 pb-14 min-[720px]:pt-16 min-[720px]:pb-20"
           )}
         >
           <div className="max-w-[900px]">
@@ -449,9 +452,10 @@ export default async function ComparisonPage() {
           <div className="flex flex-col gap-3 border-y border-line py-5 text-sm leading-[1.6] text-ink-muted min-[760px]:flex-row min-[760px]:items-start min-[760px]:justify-between min-[760px]:gap-10">
             <p className="max-w-[68ch] text-pretty">
               <strong className="text-ink">Om sammenligningen:</strong> Vi er
-              afsenderen bag BetterLectio og dermed ikke neutrale. Oplysninger om
-              Lectio+ kommer fra deres aktuelle App Store- og Google Play-lister;
-              vi har ikke haft adgang til deres betalte brugeroplevelse.
+              afsenderen bag BetterLectio og dermed ikke neutrale. Oplysninger
+              om Lectio+ kommer fra deres aktuelle App Store- og Google
+              Play-lister; vi har ikke haft adgang til deres betalte
+              brugeroplevelse.
             </p>
             <Link
               href="#metode"
@@ -463,7 +467,10 @@ export default async function ComparisonPage() {
         </section>
 
         <section
-          className={cn(siteContainerClass, "scroll-mt-8 py-12 min-[720px]:py-20")}
+          className={cn(
+            siteContainerClass,
+            "scroll-mt-8 py-12 min-[720px]:py-20"
+          )}
           id="sammenligning"
         >
           <div className="max-w-[720px]">
@@ -496,7 +503,10 @@ export default async function ComparisonPage() {
                   </h3>
                   <div className="mt-3 hidden flex-wrap gap-1.5 min-[760px]:flex">
                     {row.sources.map((source) => (
-                      <SourceAnchor key={source.href + source.label} source={source} />
+                      <SourceAnchor
+                        key={source.href + source.label}
+                        source={source}
+                      />
                     ))}
                   </div>
                 </div>
@@ -519,7 +529,10 @@ export default async function ComparisonPage() {
                   </div>
                   <div className="mt-4 flex flex-wrap gap-1.5 min-[760px]:hidden">
                     {row.sources.map((source) => (
-                      <SourceAnchor key={source.href + source.label} source={source} />
+                      <SourceAnchor
+                        key={source.href + source.label}
+                        source={source}
+                      />
                     ))}
                   </div>
                 </div>
@@ -545,21 +558,34 @@ export default async function ComparisonPage() {
               <p>
                 BetterLectio koster 0 kr. uden abonnement eller køb i appen.
                 Lectio+ kan installeres gratis, men App Store viser 12 kr. om
-                måneden, 99 kr. om året og et medlemskab til 249 kr. For en elev,
-                der blot vil have et bedre Lectio, er det en mærkbar forskel.
+                måneden, 99 kr. om året og et medlemskab til 249 kr. For en
+                elev, der blot vil have et bedre Lectio, er det en mærkbar
+                forskel.
               </p>
               <div className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-line">
-                <PriceFact product="BetterLectio" price="0 kr." detail="uden køb i appen" />
-                <PriceFact product="Lectio+" price="99 kr./år" detail="eller andre køb i appen" />
+                <PriceFact
+                  product="BetterLectio"
+                  price="0 kr."
+                  detail="uden køb i appen"
+                />
+                <PriceFact
+                  product="Lectio+"
+                  price="99 kr./år"
+                  detail="eller andre køb i appen"
+                />
               </div>
             </DecisionPoint>
 
-            <DecisionPoint number="02" title="BetterLectio fortsætter på computeren.">
+            <DecisionPoint
+              number="02"
+              title="BetterLectio fortsætter på computeren."
+            >
               <p>
                 Lectio+ er en mobilapp. BetterLectio har både mobilapps og en
-                browser-udvidelse, som ændrer den Lectio-side, du allerede bruger
-                i Chrome, Firefox eller Edge. Det betyder én sammenhængende
-                oplevelse i stedet for kun et alternativ på telefonen.
+                browser-udvidelse, som ændrer den Lectio-side, du allerede
+                bruger i Chrome, Firefox eller Edge. Det betyder én
+                sammenhængende oplevelse i stedet for kun et alternativ på
+                telefonen.
               </p>
               <figure className="mt-7 rounded-[24px] bg-grey p-4 min-[720px]:p-6">
                 <figcaption className="mb-4 flex flex-wrap items-center justify-between gap-3">
@@ -583,10 +609,10 @@ export default async function ComparisonPage() {
 
             <DecisionPoint number="03" title="Tilpasningen følger med.">
               <p>
-                Begge apps bruger farver i skemaet. I BetterLectio vælger du selv
-                farven for hvert fag, og fagfarver, indstillinger og færdige
-                lektier kan synkroniseres mellem app og browser. Det er en lille
-                detalje, men en man bruger hver dag.
+                Begge apps bruger farver i skemaet. I BetterLectio vælger du
+                selv farven for hvert fag, og fagfarver, indstillinger og
+                færdige lektier kan synkroniseres mellem app og browser. Det er
+                en lille detalje, men en man bruger hver dag.
               </p>
               <div className="mt-6 grid gap-3 min-[560px]:grid-cols-2">
                 {[
@@ -595,8 +621,15 @@ export default async function ComparisonPage() {
                   ["Engelsk", "oklch(0.72 0.13 28)"],
                   ["Historie", "oklch(0.7 0.13 80)"],
                 ].map(([subject, color]) => (
-                  <div key={subject} className="flex items-center gap-3 rounded-xl bg-grey px-4 py-3 text-sm font-semibold">
-                    <span className="size-3 rounded-full shadow-[0_0_0_1px_oklch(0_0_0/0.08)]" style={{ backgroundColor: color }} aria-hidden="true" />
+                  <div
+                    key={subject}
+                    className="flex items-center gap-3 rounded-xl bg-grey px-4 py-3 text-sm font-semibold"
+                  >
+                    <span
+                      className="size-3 rounded-full shadow-[0_0_0_1px_oklch(0_0_0/0.08)]"
+                      style={{ backgroundColor: color }}
+                      aria-hidden="true"
+                    />
                     {subject}
                   </div>
                 ))}
@@ -611,8 +644,18 @@ export default async function ComparisonPage() {
                 af andre. Lectio+ er closed source og udgives af Totus Labs ApS.
               </p>
               <div className="mt-5 flex flex-wrap gap-2">
-                <SourceAnchor source={{ label: "Browserens kildekode", href: SOURCES.betterlectioGithub }} />
-                <SourceAnchor source={{ label: "Androids kildekode", href: SOURCES.betterlectioAndroidGithub }} />
+                <SourceAnchor
+                  source={{
+                    label: "Browserens kildekode",
+                    href: SOURCES.betterlectioGithub,
+                  }}
+                />
+                <SourceAnchor
+                  source={{
+                    label: "Androids kildekode",
+                    href: SOURCES.betterlectioAndroidGithub,
+                  }}
+                />
               </div>
             </DecisionPoint>
           </div>
@@ -723,7 +766,10 @@ export default async function ComparisonPage() {
         </section>
 
         <section
-          className={cn(siteContainerClass, "scroll-mt-8 py-12 min-[720px]:py-20")}
+          className={cn(
+            siteContainerClass,
+            "scroll-mt-8 py-12 min-[720px]:py-20"
+          )}
           id="metode"
         >
           <div className="rounded-[30px] bg-grey p-7 min-[720px]:p-10 min-[900px]:p-12">
@@ -740,18 +786,30 @@ export default async function ComparisonPage() {
                   ikke neutrale. Vi har gennemgået BetterLectios egne produkter
                   og kildekode, men har ikke haft adgang til Lectio+ bag deres
                   betalingsadgang. Oplysninger om Lectio+ bygger derfor på deres
-                  offentlige butikslister. Vi har udeladt påstande, vi ikke kunne
-                  kontrollere, og markeret små anmeldelsesgrundlag. Alt er senest
-                  kontrolleret{" "}
+                  offentlige butikslister. Vi har udeladt påstande, vi ikke
+                  kunne kontrollere, og markeret små anmeldelsesgrundlag. Alt er
+                  senest kontrolleret{" "}
                   <time dateTime={LAST_REVIEWED_ISO}>{LAST_REVIEWED}</time>.
                 </p>
                 <div className="mt-6 flex flex-wrap gap-2">
                   {[
                     { label: "Lectio+ App Store", href: SOURCES.lectioPlusIos },
-                    { label: "Lectio+ Google Play", href: SOURCES.lectioPlusAndroid },
-                    { label: "BetterLectio statistik", href: SOURCES.betterlectioStats },
-                    { label: "Browser-kildekode", href: SOURCES.betterlectioGithub },
-                    { label: "Android-kildekode", href: SOURCES.betterlectioAndroidGithub },
+                    {
+                      label: "Lectio+ Google Play",
+                      href: SOURCES.lectioPlusAndroid,
+                    },
+                    {
+                      label: "BetterLectio statistik",
+                      href: SOURCES.betterlectioStats,
+                    },
+                    {
+                      label: "Browser-kildekode",
+                      href: SOURCES.betterlectioGithub,
+                    },
+                    {
+                      label: "Android-kildekode",
+                      href: SOURCES.betterlectioAndroidGithub,
+                    },
                   ].map((source) => (
                     <SourceAnchor key={source.href} source={source} />
                   ))}
@@ -761,7 +819,12 @@ export default async function ComparisonPage() {
           </div>
         </section>
 
-        <section className={cn(siteContainerClass, "pt-10 pb-24 min-[720px]:pt-14 min-[720px]:pb-28")}>
+        <section
+          className={cn(
+            siteContainerClass,
+            "pt-10 pb-24 min-[720px]:pt-14 min-[720px]:pb-28"
+          )}
+        >
           <div className="flex flex-col gap-6 rounded-[24px] bg-ink px-7 py-8 text-white min-[720px]:flex-row min-[720px]:items-center min-[720px]:justify-between min-[720px]:px-10 min-[720px]:py-9">
             <div>
               <span className={siteEyebrow("white")}>Prøv det selv</span>
@@ -769,15 +832,20 @@ export default async function ComparisonPage() {
                 BetterLectio koster 0 kr.
               </h2>
               <p className="mt-2 max-w-[58ch] text-sm leading-[1.6] text-pretty text-white/65">
-                Du bruger stadig dit normale Lectio-login og kan altid gå tilbage.
+                Du bruger stadig dit normale Lectio-login og kan altid gå
+                tilbage.
               </p>
             </div>
-            <Link href="/download" className={siteButton("secondary", "shrink-0")}>
+            <Link
+              href="/download"
+              className={siteButton("secondary", "shrink-0")}
+            >
               Hent BetterLectio gratis <ArrowRight />
             </Link>
           </div>
           <p className="mt-5 text-center text-xs text-ink-muted">
-            BetterLectio er ikke tilknyttet Lectio+, Totus Labs ApS eller MaCom A/S.
+            BetterLectio er ikke tilknyttet Lectio+, Totus Labs ApS eller MaCom
+            A/S.
           </p>
         </section>
       </main>
@@ -871,7 +939,9 @@ function ProductDecision({
       <ul className="mt-3 grid gap-3 text-[15px] leading-[1.55] text-ink-muted">
         {limitations.map((item) => (
           <li key={item} className="flex gap-2.5 text-pretty">
-            <span className="shrink-0 text-ink-muted" aria-hidden="true">—</span>
+            <span className="shrink-0 text-ink-muted" aria-hidden="true">
+              ·
+            </span>
             {item}
           </li>
         ))}

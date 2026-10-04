@@ -1,8 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { useSearchParams } from "next/navigation"
-import { Suspense } from "react"
+import { useEffect, useState } from "react"
 
 import { SiteFooter } from "@/components/site/site-footer"
 import { SiteNav } from "@/components/site/site-nav"
@@ -76,23 +75,27 @@ const platforms: Platform[] = [
 ]
 
 export default function DownloadPage() {
-  return (
-    <Suspense fallback={null}>
-      <DownloadPageInner />
-    </Suspense>
-  )
-}
-
-function DownloadPageInner() {
   const detected = usePlatform()
-  const searchParams = useSearchParams()
-  const wasReferred = searchParams.get("ref") === "1"
-  const blRef = searchParams.get("bl_ref")
+  const [referral, setReferral] = useState<{
+    wasReferred: boolean
+    blRef: string | null
+  }>({ wasReferred: false, blRef: null })
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search)
+    // Referral details are progressive enhancement. Keeping them out of the
+    // initial render lets crawlers and no-JS clients receive the full page.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setReferral({
+      wasReferred: searchParams.get("ref") === "1",
+      blRef: searchParams.get("bl_ref"),
+    })
+  }, [])
+
+  const { wasReferred, blRef } = referral
 
   const resolvedPlatforms = platforms.map((p) =>
-    p.key === "android"
-      ? { ...p, href: androidPlayUrlWithReferrer(blRef) }
-      : p,
+    p.key === "android" ? { ...p, href: androidPlayUrlWithReferrer(blRef) } : p
   )
 
   const sortedPlatforms =
@@ -115,22 +118,22 @@ function DownloadPageInner() {
               role="status"
               aria-live="polite"
             >
-              <span className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-ink">
+              <span className="font-mono text-[11px] font-bold tracking-[0.14em] text-ink uppercase">
                 Personlig invitation
               </span>
               <span className="text-[19px] font-extrabold tracking-[-0.01em]">
                 Du blev inviteret af en klassekammerat.
               </span>
               <span className="max-w-[60ch] text-sm text-ink-muted">
-                Installér BetterLectio nedenfor, så knyttes invitationen automatisk
-                til den klassekammerat, der delte linket.
+                Installér BetterLectio nedenfor, så knyttes invitationen
+                automatisk til den klassekammerat, der delte linket.
               </span>
             </div>
           )}
 
           <div className="text-center">
             <span className={siteEyebrow()}>Gratis · ingen ny konto</span>
-            <h1 className="mt-3.5 mb-4 text-[clamp(44px,7vw,80px)] font-extrabold leading-none tracking-[-0.04em]">
+            <h1 className="mt-3.5 mb-4 text-[clamp(44px,7vw,80px)] leading-none font-extrabold tracking-[-0.04em]">
               Hent BetterLectio
             </h1>
             <p className="text-[19px] font-medium text-ink-muted">
@@ -146,14 +149,14 @@ function DownloadPageInner() {
               const inner = (
                 <>
                   {isPrimary && (
-                    <div className="absolute right-5 top-5 rounded-full bg-white/[0.22] px-2.5 py-[5px] font-mono text-[11px] font-bold uppercase tracking-[0.08em] text-white">
+                    <div className="absolute top-5 right-5 rounded-full bg-white/[0.22] px-2.5 py-[5px] font-mono text-[11px] font-bold tracking-[0.08em] text-white uppercase">
                       Anbefalet
                     </div>
                   )}
                   <div
                     className={cn(
                       "font-extrabold tracking-[-0.02em]",
-                      isPrimary ? "text-[34px]" : "text-[26px]",
+                      isPrimary ? "text-[34px]" : "text-[26px]"
                     )}
                   >
                     {platform.name}
@@ -161,15 +164,17 @@ function DownloadPageInner() {
                   <div
                     className={cn(
                       "flex-1",
-                      isPrimary ? "text-base text-white/85" : "text-sm text-ink-muted",
+                      isPrimary
+                        ? "text-base text-white/85"
+                        : "text-sm text-ink-muted"
                     )}
                   >
                     {platform.description}
                   </div>
                   <div
                     className={cn(
-                      "mt-1.5 inline-flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-[0.06em] [&_svg]:size-3.5",
-                      isPrimary ? "text-white" : "text-ink",
+                      "mt-1.5 inline-flex items-center gap-2 font-mono text-xs font-bold tracking-[0.06em] uppercase [&_svg]:size-3.5",
+                      isPrimary ? "text-white" : "text-ink"
                     )}
                   >
                     {platform.cta}
@@ -190,7 +195,7 @@ function DownloadPageInner() {
               const className = cn(
                 "relative flex flex-col gap-2 rounded-[24px] border border-line bg-white p-7 text-ink no-underline shadow-[0_10px_30px_-18px_rgba(0,0,0,0.25)] transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_24px_44px_-22px_rgba(0,0,0,0.32)]",
                 isPrimary &&
-                  "col-span-full border-transparent bg-ink text-white shadow-[0_30px_60px_-26px_rgba(0,0,0,0.5)] hover:shadow-[0_40px_70px_-28px_rgba(0,0,0,0.55)]",
+                  "col-span-full border-transparent bg-ink text-white shadow-[0_30px_60px_-26px_rgba(0,0,0,0.5)] hover:shadow-[0_40px_70px_-28px_rgba(0,0,0,0.55)]"
               )
               const isExternal = platform.href.startsWith("http")
               const onClick = () =>

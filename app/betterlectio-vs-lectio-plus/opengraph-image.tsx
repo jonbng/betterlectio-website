@@ -8,6 +8,6 @@ export default function Image() {
   return renderOgImage({
     eyebrow: "Sammenligning · 2026",
     title: "BetterLectio vs. Lectio+",
-    subtitle: "Pris, platforme og funktioner — dokumenteret punkt for punkt.",
+    subtitle: "Pris, platforme og funktioner, dokumenteret punkt for punkt.",
   })
 }

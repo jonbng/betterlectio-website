@@ -13,10 +13,7 @@ import {
   siteMainClass,
 } from "@/components/site/styles"
 import { getRoadmap, getVotedIds } from "@/lib/roadmap"
-import {
-  getLinkedStudent,
-  getWebsiteSession,
-} from "@/lib/supabase-auth"
+import { getLinkedStudent, getWebsiteSession } from "@/lib/supabase-auth"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
@@ -24,6 +21,20 @@ export const metadata: Metadata = {
   description:
     "Se hvad vi planlægger, arbejder på og har færdiggjort i BetterLectio, og stem på det, du vil have mest.",
   alternates: { canonical: "/roadmap" },
+  openGraph: {
+    title: "Roadmap · BetterLectio",
+    description:
+      "Se hvad vi planlægger, arbejder på og har færdiggjort i BetterLectio.",
+    url: "/roadmap",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Roadmap · BetterLectio",
+    description:
+      "Se hvad vi planlægger, arbejder på og har færdiggjort i BetterLectio.",
+    images: ["/twitter-image"],
+  },
 }
 
 // Votes bust the "roadmap" cache tag; keep the page dynamic so voter state and
@@ -69,10 +80,10 @@ export default async function RoadmapPage({
             <Sparkles />
           </span>
           <span className={siteEyebrow()}>Roadmap</span>
-          <h1 className="mt-4 mb-5 text-[clamp(36px,5vw,60px)] font-extrabold leading-[1.02] tracking-[-0.045em]">
+          <h1 className="mt-4 mb-5 text-[clamp(36px,5vw,60px)] leading-[1.02] font-extrabold tracking-[-0.045em]">
             Hvad der er på vej.
           </h1>
-          <p className="mx-auto max-w-[54ch] text-[clamp(17px,2vw,20px)] font-medium leading-[1.5] text-ink-muted">
+          <p className="mx-auto max-w-[54ch] text-[clamp(17px,2vw,20px)] leading-[1.5] font-medium text-ink-muted">
             Vi bygger i det åbne. Følg med i, hvad der er planlagt, i gang og
             færdigt. Stem på det, du synes er vigtigst.
           </p>

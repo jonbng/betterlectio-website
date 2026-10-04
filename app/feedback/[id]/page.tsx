@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound, redirect } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
@@ -13,6 +14,11 @@ import {
   getMyFeedbackThread,
 } from "@/lib/feedback"
 import { getWebsiteSession } from "@/lib/supabase-auth"
+
+export const metadata: Metadata = {
+  title: "Feedback",
+  robots: { index: false, follow: false },
+}
 
 export const dynamic = "force-dynamic"
 

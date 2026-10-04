@@ -15,6 +15,20 @@ export const metadata: Metadata = {
   description:
     "Dine data er dine. Sådan behandler BetterLectio dine oplysninger, på almindeligt dansk, uden juristsnak.",
   alternates: { canonical: "/privatliv" },
+  openGraph: {
+    title: "Privatliv · BetterLectio",
+    description:
+      "Sådan behandler BetterLectio dine oplysninger, på almindeligt dansk.",
+    url: "/privatliv",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privatliv · BetterLectio",
+    description:
+      "Sådan behandler BetterLectio dine oplysninger, på almindeligt dansk.",
+    images: ["/twitter-image"],
+  },
 }
 
 const LAST_UPDATED = "26. august 2026"
@@ -139,10 +153,11 @@ export default function PrivatlivPage() {
         {/* Hero ---------------------------------------------------------- */}
         <section className="mx-auto max-w-[780px] pt-5 pb-2 text-center">
           <span className={siteEyebrow()}>Privatliv, på almindeligt dansk</span>
-          <h1 className="mt-4 mb-5 text-[clamp(44px,6.4vw,76px)] font-extrabold leading-none tracking-[-0.045em]">
-            Dine data er <mark className="bg-transparent text-ink-muted">dine.</mark>
+          <h1 className="mt-4 mb-5 text-[clamp(44px,6.4vw,76px)] leading-none font-extrabold tracking-[-0.045em]">
+            Dine data er{" "}
+            <mark className="bg-transparent text-ink-muted">dine.</mark>
           </h1>
-          <p className="mx-auto max-w-[58ch] text-[clamp(18px,2.2vw,21px)] font-medium leading-[1.5] text-ink-muted">
+          <p className="mx-auto max-w-[58ch] text-[clamp(18px,2.2vw,21px)] leading-[1.5] font-medium text-ink-muted">
             BetterLectio er lavet af elever, der selv bruger Lectio hver dag. Vi
             bygger det, vi selv ville stole på, så her er præcis, hvad der sker
             med dine data. Uden juristsnak.
@@ -163,7 +178,7 @@ export default function PrivatlivPage() {
             ))}
           </div>
 
-          <p className="mt-[26px] font-mono text-xs uppercase tracking-[0.04em] text-ink-muted">
+          <p className="mt-[26px] font-mono text-xs tracking-[0.04em] text-ink-muted uppercase">
             Sidst opdateret {LAST_UPDATED}
           </p>
         </section>
@@ -181,7 +196,9 @@ export default function PrivatlivPage() {
               <h3 className="mb-2.5 text-[21px] font-extrabold tracking-[-0.02em] text-ink">
                 {p.title}
               </h3>
-              <p className="text-[15px] leading-[1.55] text-ink-muted">{p.body}</p>
+              <p className="text-[15px] leading-[1.55] text-ink-muted">
+                {p.body}
+              </p>
             </article>
           ))}
         </section>
@@ -211,7 +228,7 @@ export default function PrivatlivPage() {
               {DO.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-[11px] text-[15px] font-medium leading-[1.45] text-[#3a3a3c] [&_svg]:mt-px [&_svg]:size-[18px] [&_svg]:shrink-0 [&_svg]:text-ink"
+                  className="flex items-start gap-[11px] text-[15px] leading-[1.45] font-medium text-[#3a3a3c] [&_svg]:mt-px [&_svg]:size-[18px] [&_svg]:shrink-0 [&_svg]:text-ink"
                 >
                   <Check />
                   {item}
@@ -233,7 +250,7 @@ export default function PrivatlivPage() {
               {DONT.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-[11px] text-[15px] font-medium leading-[1.45] text-[#3a3a3c] [&_svg]:mt-px [&_svg]:size-[18px] [&_svg]:shrink-0 [&_svg]:text-ink-muted"
+                  className="flex items-start gap-[11px] text-[15px] leading-[1.45] font-medium text-[#3a3a3c] [&_svg]:mt-px [&_svg]:size-[18px] [&_svg]:shrink-0 [&_svg]:text-ink-muted"
                 >
                   <Cross />
                   {item}
@@ -286,8 +303,10 @@ export default function PrivatlivPage() {
               <span className="min-w-[96px] text-lg font-extrabold tracking-[-0.01em] text-ink">
                 {s.name}
               </span>
-              <p className="text-[15px] leading-[1.5] text-ink-muted">{s.desc}</p>
-              <span className="justify-self-start whitespace-nowrap rounded-full bg-grey px-3 py-1.5 text-center font-mono text-[11px] font-bold uppercase tracking-[0.04em] text-ink">
+              <p className="text-[15px] leading-[1.5] text-ink-muted">
+                {s.desc}
+              </p>
+              <span className="justify-self-start rounded-full bg-grey px-3 py-1.5 text-center font-mono text-[11px] font-bold tracking-[0.04em] whitespace-nowrap text-ink uppercase">
                 {s.tag}
               </span>
             </article>
@@ -312,17 +331,17 @@ export default function PrivatlivPage() {
               <ul>
                 <li>
                   <span>
-                    <strong>Lectio-sider:</strong> Udvidelsen kører på
-                    lectio.dk for at forbedre brugerfladen og tilføje
-                    BetterLectios funktioner.
+                    <strong>Lectio-sider:</strong> Udvidelsen kører på lectio.dk
+                    for at forbedre brugerfladen og tilføje BetterLectios
+                    funktioner.
                   </span>
                 </li>
                 <li>
                   <span>
-                    <strong>Lokal lagring:</strong> Vi bruger din browsers lokale
-                    lager til at gemme indstillinger og cachede data. Det bliver i
-                    din browser, medmindre en funktion udtrykkeligt afhænger af en
-                    ekstern tjeneste.
+                    <strong>Lokal lagring:</strong> Vi bruger din browsers
+                    lokale lager til at gemme indstillinger og cachede data. Det
+                    bliver i din browser, medmindre en funktion udtrykkeligt
+                    afhænger af en ekstern tjeneste.
                   </span>
                 </li>
               </ul>
@@ -330,7 +349,9 @@ export default function PrivatlivPage() {
           </details>
 
           <details className="site-detail">
-            <summary>Hvilke data kan blive sendt til eksterne tjenester?</summary>
+            <summary>
+              Hvilke data kan blive sendt til eksterne tjenester?
+            </summary>
             <div className="site-detail__body">
               <ul>
                 <li>
@@ -350,38 +371,40 @@ export default function PrivatlivPage() {
                 </li>
                 <li>
                   <span>
-                    <strong>Frivillige testsessioner:</strong> For et lille antal
-                    personer, som udtrykkeligt har sagt ja, opbevarer vi
+                    <strong>Frivillige testsessioner:</strong> For et lille
+                    antal personer, som udtrykkeligt har sagt ja, opbevarer vi
                     Lectio-sessionscookies krypteret. De bruges til udvikling og
                     drift af Lectio-integrationen, holdes aktive med periodiske
                     forespørgsler til Lectio og slettes straks, når samtykket
-                    trækkes tilbage. Vi indsamler aldrig brugernavn eller password.
+                    trækkes tilbage. Vi indsamler aldrig brugernavn eller
+                    password.
                   </span>
                 </li>
                 <li>
                   <span>
-                    <strong>Til invitationer:</strong> Når du åbner et personligt
-                    invitationslink, gemmer vi invitationens afsender, tidspunkt,
-                    browseroplysninger, henvisende side, grov geografisk placering
-                    og en dagligt roteret hash af IP-adressen. Selve IP-adressen
-                    gemmes ikke. Oplysninger om klik uden en gennemført invitation
-                    slettes senest efter 180 dage.
+                    <strong>Til invitationer:</strong> Når du åbner et
+                    personligt invitationslink, gemmer vi invitationens
+                    afsender, tidspunkt, browseroplysninger, henvisende side,
+                    grov geografisk placering og en dagligt roteret hash af
+                    IP-adressen. Selve IP-adressen gemmes ikke. Oplysninger om
+                    klik uden en gennemført invitation slettes senest efter 180
+                    dage.
                   </span>
                 </li>
                 <li>
                   <span>
-                    <strong>Til profilbilleder:</strong> Et billede, du selv sender,
-                    opbevares privat, mens en moderator gennemgår det. Metadata
-                    fjernes, og kun en normaliseret kopi offentliggøres ved
-                    godkendelse. Den private original slettes efter afgørelsen;
-                    fejlede uploads slettes efter højst syv dage.
+                    <strong>Til profilbilleder:</strong> Et billede, du selv
+                    sender, opbevares privat, mens en moderator gennemgår det.
+                    Metadata fjernes, og kun en normaliseret kopi offentliggøres
+                    ved godkendelse. Den private original slettes efter
+                    afgørelsen; fejlede uploads slettes efter højst syv dage.
                   </span>
                 </li>
                 <li>
                   <span>
-                    <strong>Til fejlfinding:</strong> Teknisk information om crashes
-                    og fejl, plus den kontekst om konto og skole, der skal til for
-                    at forstå og løse problemet.
+                    <strong>Til fejlfinding:</strong> Teknisk information om
+                    crashes og fejl, plus den kontekst om konto og skole, der
+                    skal til for at forstå og løse problemet.
                   </span>
                 </li>
               </ul>
@@ -406,8 +429,8 @@ export default function PrivatlivPage() {
                 <li>
                   <span>
                     <strong>Netværksadgang til BetterLectios tjenester:</strong>{" "}
-                    Bruges kun, når en funktion har brug for Supabase, eller når en
-                    begrænset fejlrapport sendes til PostHog.
+                    Bruges kun, når en funktion har brug for Supabase, eller når
+                    en begrænset fejlrapport sendes til PostHog.
                   </span>
                 </li>
               </ul>
@@ -422,17 +445,17 @@ export default function PrivatlivPage() {
                 nettet. Et personligt invitationslink bruger dog en nødvendig,
                 HttpOnly invitationscookie i op til 180 dage, så en første
                 installation kan krediteres den rigtige klassekammerat. Cookien
-                bruges ikke til annoncering og slettes, når invitationen afgøres.
-                PostHog modtager kun få udtrykkelige hændelser (fx
-                download, gennemført onboarding, login og feedback) samt en
-                et begrænset antal fejl. Automatisk sidevisning, skærmvisning,
+                bruges ikke til annoncering og slettes, når invitationen
+                afgøres. PostHog modtager kun få udtrykkelige hændelser (fx
+                download, gennemført onboarding, login og feedback) samt en et
+                begrænset antal fejl. Automatisk sidevisning, skærmvisning,
                 klikregistrering og sessionsoptagelse er slået fra.
               </p>
               <p>
                 Hvis du vælger &quot;Log ind med BetterLectio&quot; på
                 roadmappet, sætter vi en valgfri login-session-cookie, så du kan
-                sende feedback. Den bruges ikke til at spore dig på andre
-                sider, og du kan logge ud når som helst.
+                sende feedback. Den bruges ikke til at spore dig på andre sider,
+                og du kan logge ud når som helst.
               </p>
             </div>
           </details>
@@ -452,8 +475,8 @@ export default function PrivatlivPage() {
                 .
               </p>
               <p>
-                Ændrer vi denne politik, opdaterer vi datoen for
-                &ldquo;Sidst opdateret&rdquo; øverst på siden. BetterLectio er ikke
+                Ændrer vi denne politik, opdaterer vi datoen for &ldquo;Sidst
+                opdateret&rdquo; øverst på siden. BetterLectio er ikke
                 tilknyttet MaCom A/S, der står bag Lectio.
               </p>
             </div>

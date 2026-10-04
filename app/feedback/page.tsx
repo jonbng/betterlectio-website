@@ -21,6 +21,8 @@ import { getWebsiteSession } from "@/lib/supabase-auth"
 export const metadata: Metadata = {
   title: "Min feedback",
   description: "Følg dine beskeder til BetterLectio.",
+  alternates: { canonical: "/feedback" },
+  robots: { index: false, follow: false },
 }
 export const dynamic = "force-dynamic"
 

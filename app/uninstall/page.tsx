@@ -18,6 +18,7 @@ export const metadata: Metadata = {
   title: "Afinstalleret",
   description:
     "BetterLectio er afinstalleret. Fortæl os hvorfor, det hjælper os med at gøre det bedre.",
+  alternates: { canonical: "/uninstall" },
   robots: { index: false, follow: false },
 }
 
@@ -54,13 +55,13 @@ export default async function UninstallPage({
       <main className={cn(siteMainClass, siteContainerClass, sitePageClass)}>
         <article className="mx-auto max-w-[760px]">
           <span className={siteEyebrow()}>Farvel for nu</span>
-          <h1 className="mt-3.5 mb-5 text-[clamp(40px,6vw,68px)] font-extrabold leading-[1.02] tracking-[-0.04em]">
+          <h1 className="mt-3.5 mb-5 text-[clamp(40px,6vw,68px)] leading-[1.02] font-extrabold tracking-[-0.04em]">
             Tak fordi du prøvede det.
           </h1>
 
-          <p className="max-w-[60ch] text-xl font-medium leading-[1.5] text-ink-muted">
-            BetterLectio er afinstalleret. Hvis du har lyst, så fortæl os hvorfor , 
-            det hjælper os med at gøre det bedre for de næste.
+          <p className="max-w-[60ch] text-xl leading-[1.5] font-medium text-ink-muted">
+            BetterLectio er afinstalleret. Hvis du har lyst, så fortæl os
+            hvorfor , det hjælper os med at gøre det bedre for de næste.
           </p>
 
           <UninstallForm studentId={validStudentId} />

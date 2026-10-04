@@ -25,6 +25,18 @@ export const metadata: Metadata = {
   description:
     "Aktuelle tal om BetterLectios elever, skoler, vækst og feedback.",
   alternates: { canonical: "/stats" },
+  openGraph: {
+    title: "BetterLectio i tal",
+    description: "Aktuelle tal om BetterLectios elever, skoler og vækst.",
+    url: "/stats",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630 }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "BetterLectio i tal",
+    description: "Aktuelle tal om BetterLectios elever, skoler og vækst.",
+    images: ["/twitter-image"],
+  },
 }
 
 const number = new Intl.NumberFormat("da-DK")
