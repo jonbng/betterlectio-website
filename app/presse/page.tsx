@@ -14,6 +14,7 @@ import {
   siteMainClass,
 } from "@/components/site/styles"
 import { getPublicStats } from "@/lib/public-stats"
+import { SOCIAL_LINKS } from "@/lib/social-links"
 import { cn } from "@/lib/utils"
 
 export const metadata: Metadata = {
@@ -357,7 +358,11 @@ export default async function PressePage() {
         "https://x.com/jonbng",
       ],
     },
-    sameAs: ["https://github.com/jonbng/betterlectio"],
+    sameAs: [
+      "https://github.com/jonbng/betterlectio",
+      SOCIAL_LINKS.instagram,
+      SOCIAL_LINKS.tiktok,
+    ],
   }
 
   return (

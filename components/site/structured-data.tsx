@@ -1,4 +1,5 @@
 import { DOWNLOAD_LINKS } from "@/lib/download-links"
+import { SOCIAL_LINKS } from "@/lib/social-links"
 
 const SITE_URL = "https://betterlectio.dk"
 
@@ -25,6 +26,7 @@ export function siteJsonLd(): object {
     name: "BetterLectio",
     url: SITE_URL,
     logo: `${SITE_URL}/icon.png`,
+    sameAs: [SOCIAL_LINKS.instagram, SOCIAL_LINKS.tiktok],
   }
 
   const website = {
@@ -92,7 +94,12 @@ export function schoolJsonLd({
   const breadcrumb = {
     "@type": "BreadcrumbList",
     itemListElement: [
-      { "@type": "ListItem", position: 1, name: "BetterLectio", item: SITE_URL },
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "BetterLectio",
+        item: SITE_URL,
+      },
       {
         "@type": "ListItem",
         position: 2,

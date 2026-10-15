@@ -1,8 +1,10 @@
 import Link from "next/link"
 
+import { Instagram, TikTok } from "@/components/site/icons"
 import { SiteLogoMark } from "@/components/site/site-logo"
 import { siteContainerClass } from "@/components/site/styles"
 import { DOWNLOAD_LINKS } from "@/lib/download-links"
+import { SOCIAL_LINKS } from "@/lib/social-links"
 
 const FOOTER_LINK_CLASS =
   "font-semibold text-white no-underline opacity-80 transition-[opacity,padding-left] hover:pl-1.5 hover:opacity-100"
@@ -24,6 +26,29 @@ export function SiteFooter() {
               En moderne brugerflade til Lectio. Bygget af elever, for elever,
               så skema, lektier og karakterer faktisk er til at bruge.
             </p>
+            <div
+              className="mt-6 flex flex-wrap gap-2"
+              aria-label="Sociale medier"
+            >
+              <a
+                href={SOCIAL_LINKS.instagram}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 text-sm font-bold text-white no-underline transition-[background-color,border-color,transform] duration-150 hover:border-white/30 hover:bg-white/10 focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-white active:scale-[0.96] motion-reduce:transition-none motion-reduce:active:scale-100"
+              >
+                <Instagram className="size-[18px]" />
+                Instagram
+              </a>
+              <a
+                href={SOCIAL_LINKS.tiktok}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 text-sm font-bold text-white no-underline transition-[background-color,border-color,transform] duration-150 hover:border-white/30 hover:bg-white/10 focus-visible:outline-[3px] focus-visible:outline-offset-3 focus-visible:outline-white active:scale-[0.96] motion-reduce:transition-none motion-reduce:active:scale-100"
+              >
+                <TikTok className="size-[18px]" />
+                TikTok
+              </a>
+            </div>
           </div>
 
           <div>
