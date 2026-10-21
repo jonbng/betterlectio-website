@@ -5,6 +5,8 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils";
 
+import { Analytics } from "@vercel/analytics/next"
+
 // Geist is the extension's typeface, match it so the site and product read as one.
 const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
 
@@ -98,6 +100,7 @@ export default function RootLayout({
       suppressHydrationWarning
       className={cn("antialiased", fontMono.variable, "font-sans", geist.variable)}
     >
+      <Analytics/>
       <body>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
