@@ -94,11 +94,15 @@ export default async function StardancePage() {
             <p>
               I started changing the pages with a browser extension, mostly for
               myself. A few friends wanted it too, so I kept working on it.
+              Later, we also made iOS and Android apps.
             </p>
             <p className="mt-4">
-              The difficult part is that BetterLectio still has to use Lectio
-              underneath. It changes the interface, not the school&apos;s system or
-              its data. Later, we also made iOS and Android apps.
+              The extension is built in TypeScript with Preact and WXT. It runs
+              inside Lectio, reads the HTML each page returns, and replaces
+              parts with its own interface while keeping Lectio&apos;s login,
+              links, and forms working. Because Lectio is an older ASP.NET
+              system and pages can differ between schools, a lot of the work is
+              handling edge cases without breaking the original site.
             </p>
             <a
               href={DOWNLOAD_LINKS.chrome}
